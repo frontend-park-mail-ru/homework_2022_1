@@ -53,4 +53,17 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters('от топота копыт', false), 'а копыт');
 		assert.strictEqual(letters('hello world', false), 'he world');
 	});
+
+	QUnit.test('Работает с объектом String', function (assert) {
+		assert.strictEqual(letters(new String()), '');
+		assert.strictEqual(letters(new String('1234')), '1234');
+		assert.strictEqual(letters(new String('wWw'), true), 'wW');
+		assert.strictEqual(letters(new String('wWw'), false), 'Ww');
+	});
+
+	QUnit.test('Выбрасывает исключение в случае неправильных аргументов', function (assert) {
+		assert.throws(() => letters(null), 'The first argument must be string');
+		assert.throws(() => letters('1234', null), 'The second argument must be optional boolean');
+		assert.throws(() => letters(), 'The first argument must be string');
+	});
 });
