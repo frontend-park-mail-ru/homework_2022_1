@@ -74,4 +74,22 @@ QUnit.module('Тестируем функцию zip', function () {
 		};
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
+
+	QUnit.test('Функция работает с пустым списком параметров', function (assert) {
+		assert.deepEqual(zip(), {});
+	});
+
+	QUnit.test('Функция копирует дескрипторы полей', function (assert) {
+        const obj = {};
+        Object.defineProperty(obj, "name", {
+            value: "Lex"
+        });
+
+        const copy = zip(obj);
+
+		assert.throws(
+            () => obj.name = 'Saumon',
+            new TypeError("Cannot assign to read only property 'name' of object '#<Object>'")
+        );
+	});
 });
