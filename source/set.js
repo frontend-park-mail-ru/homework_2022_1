@@ -1,10 +1,16 @@
 'use strict';
-/*
-Куликов Николай вариант 14
-Задание:
-Напишите функцию set, которая получает путь к вложенному свойству объекта и устанавливает значение в это свойство
+/**
+ * Changes the attribute of the object
+ * @function set
+ * @param {object} object - object for modifying.
+ * @param {string} path - the path to attribute of the object.
+ * @param {object} value - the value of the attribute to set.
+ * @returns {object}
+ * @example set({foo: 'bar'},'.foo','baz');
+ * returns {foo: 'baz'}
+ * @example set({}, '.deep.nested.field', null);
+ * returns { deep: { nested: { field: null }}}
  */
-
 const set = (object, path, value) => {
     let result = object
     path.split(".").slice(1).forEach((key, index, arr) => {
