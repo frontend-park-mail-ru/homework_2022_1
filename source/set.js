@@ -12,18 +12,22 @@
  * returns { deep: { nested: { field: null }}}
  */
 const set = (object, path, value) => {
-    let result = object
-    path.split(".").slice(1).forEach((key, index, arr) => {
+    if(!object)
+        object = {};
+    let buff = object;
+    if (typeof path !== 'string')
+        return object;
+    path.split('.').slice(1).forEach((key, index, arr) => {
         if (index === arr.length - 1){ // last element exit loop
-            result[key] = value
+            buff[key] = value
             return object
         }
-        if (!result[key]){ // doesn't exists - create new object & switch pointer
-            result[key] = {}
-            result = result[key]
+        if (!buff.hasOwnProperty(key)){ // doesn't exist - create new object & switch pointer
+            buff[key] = {}
+            buff = buff[key]
         }
-        if (typeof result[key] == 'object'){ // check
-            result = result[key]
+        if (typeof buff[key] === 'object'){ // check if attribute is pointer
+            buff = buff[key]
         }
     })
     return object

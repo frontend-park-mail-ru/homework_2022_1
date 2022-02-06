@@ -31,7 +31,6 @@ QUnit.module('Тестируем функцию set', function () {
 		};
 		assert.deepEqual(set({foo: 'bar'}, '.foo', 'baz'), {foo: 'baz'});
 		assert.deepEqual(set(object, '.deep.hested.field', 42), object2);
-
 		assert.deepEqual(set(object, '.deep.hested', {foo: 'bar'}), object3);
 		assert.deepEqual(set(object, '.deep', null), object4);
 	});
@@ -123,6 +122,15 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set(object, '.deep.nested.field', false), object1);
 		assert.deepEqual(set(object, '.deep.field', null), object2);
 
+
+	});
+
+	QUnit.test('set работает правильно c невалидными данными', function (assert) {
+		const object = {
+			foo: 1
+		}
+		assert.deepEqual(set(undefined, '.foo', 1),object);
+		assert.deepEqual(set(undefined, 4, 1),{});
 	});
 
 });
