@@ -19,16 +19,13 @@ const set = (object, path, value) => {
         return object;
     path.split('.').slice(1).forEach((key, index, arr) => {
         if (index === arr.length - 1){ // last element exit loop
-            buff[key] = value
-            return object
+            buff[key] = value;
+            return object;
         }
         if (!buff.hasOwnProperty(key)){ // doesn't exist - create new object & switch pointer
-            buff[key] = {}
-            buff = buff[key]
+            buff[key] = {};
         }
-        if (typeof buff[key] === 'object'){ // check if attribute is pointer
-            buff = buff[key]
-        }
+        buff = buff[key];
     })
     return object
 }
