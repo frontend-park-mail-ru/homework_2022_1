@@ -2,7 +2,8 @@
 
 /**
     * Merges specified objects into one
-    * with saving property descriptors
+    * @params
+    * objs - objects to merge
     * @example
     * // returns { name: 'a', age: '5' }
     * zip({ name: 'a', age: 5 });
@@ -15,15 +16,6 @@
     * @example
     * // returns { question: 'why?' }
     * zip(question: 'why?', question: 'who?');
-    * @ returns Returns merged object
+    * @returns Returns merged object
 */
-function zip(...objs) {
-    return objs.reduceRight(
-        (acc, cur) =>
-            Object.defineProperties(
-                acc,
-                Object.getOwnPropertyDescriptors(cur),
-            ),
-        {},
-    );
-}
+const zip = (...objs) => objs.reduce((acc, cur) => ({ ...cur, ...acc }), {});

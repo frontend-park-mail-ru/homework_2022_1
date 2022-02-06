@@ -79,17 +79,13 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip(), {});
 	});
 
-	QUnit.test('Функция копирует дескрипторы полей', function (assert) {
-        const obj = {};
-        Object.defineProperty(obj, "name", {
-            value: "Lex"
-        });
+	QUnit.test('Функция копирует временную объектную обёртку примитивных типов', function (assert) {
+		assert.deepEqual(zip('1234', 'zzzz5'), {0: '1', 1: '2', 2: '3', 3: '4', 4: '5'}, 'Результат слияния строк - array-like объект символов');
+		assert.deepEqual(zip(1), {}, 'Результат копирования целого числа - пустой объект');
+		assert.deepEqual(zip(1.1), {}, 'Результат копирования вещественного числа - пустой объект');
+	});
 
-        const copy = zip(obj);
-
-		assert.throws(
-            () => obj.name = 'Saumon',
-            new TypeError("Cannot assign to read only property 'name' of object '#<Object>'")
-        );
+	QUnit.test('Функция копирует объектное представление массива', function (assert) {
+		assert.deepEqual(zip([1, 2, 3, 4], ['z', 'z', 'z', 'z', 5]), {0: 1, 1: 2, 2: 3, 3: 4, 4: 5}, 'Результат слияния массивов - array-like объект');
 	});
 });
