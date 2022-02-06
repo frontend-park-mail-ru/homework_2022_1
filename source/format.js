@@ -33,7 +33,7 @@ let format = (numbers, columns) => {
         for (let j = 0; j < columns; j++) {
             let width = 0;
             for (let i = 0; i < totalRows; i++) {
-                const currentNumberWidth = (numbers[columns * i + j] ?? "").toString().length;
+                const currentNumberWidth = (numbers[columns * i + j] ?? ``).toString().length;
                 width = Math.max(width, currentNumberWidth);
                 if (0 !== currentNumberWidth && 0 !== j) {
                     width++;
