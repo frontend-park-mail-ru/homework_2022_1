@@ -21,27 +21,9 @@
  *           3 4;
  */
 
-let format = (numbers, columns) => {
-    if (isNaN(+columns)) {
+const format = (numbers, columns) => {
+    if (Number.isNaN(+columns)) {
         return undefined;
-    }
-
-    // подсчет ширины каждой колонки по наиболее длинному числу
-    const countWidthsEveryColumn = (numbers, columns) => {
-        const totalRows = Math.max(1, Math.round(numbers.length / columns));
-        let widths = Array()
-        for (let j = 0; j < columns; j++) {
-            let width = 0;
-            for (let i = 0; i < totalRows; i++) {
-                const currentNumberWidth = (numbers[columns * i + j] ?? ``).toString().length;
-                width = Math.max(width, currentNumberWidth);
-                if (0 !== currentNumberWidth && 0 !== j) {
-                    width++;
-                }
-            }
-            widths.push(width);
-        }
-        return widths;
     }
 
     // форматирование
@@ -72,6 +54,13 @@ let format = (numbers, columns) => {
         return result;
     }
 
-    const widths = countWidthsEveryColumn(numbers, columns);
+    // подсчет ширины каждой колонки по наиболее длинному числу
+    const widths = new Array(columns).fill(0);
+    numbers.reduce(function (prevValue, currentValue, currentValueIndex) {
+        let currentWidth = (currentValue ?? "").toString().length + 1;
+        widths[currentValueIndex % columns] = Math.max(currentWidth, widths[currentValueIndex % columns]);
+        return currentValue;
+    })
+    widths[0] = (numbers[0].toString().length > widths[0]) ? numbers[0].toString().length : --widths[0];
     return toFormat(numbers, columns, widths);
 }
