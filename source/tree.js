@@ -1,5 +1,22 @@
 'use strict';
 
+/**
+ * Print tree.
+ * @function tree
+ * @param {number} height - input tree height.
+ * 
+ * @returns {string} returns tree.
+ * 
+ * @example tree(5);
+ * returns 
+ * '  *   
+ *   ***  
+ *  ***** 
+ * *******
+ *    |
+ *`
+ */
+
 function isFloat(num) {
     return num % 1 !== 0;
 }
