@@ -28,4 +28,13 @@ QUnit.module('Тестируем функцию euclid', function () {
 		const temp = [ 80325, 55275, 8746650, 3000000, 45672375, 225, 54675 ];
 		assert.strictEqual(euclid(...[ ...temp, ...temp, ...temp, ...temp, ...temp ]), euclid(...temp));
 	});
+
+	QUnit.test('Функция должна выбрасывать исключения при неправильных аргументах', function (assert) {
+		assert.throws(() => euclid(), 'There are no arguments');
+		assert.throws(() => euclid(null), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(1, 2, null), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(2, "str", 1), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(4, 1, -1), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(23, 6, 2.5 ,7), 'The arguments must be natural numbers');
+	});
 });
