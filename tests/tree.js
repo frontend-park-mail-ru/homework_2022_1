@@ -53,4 +53,35 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(8), expected);
 		assert.strictEqual(tree('8'), expected);
 	});
+
+	QUnit.test('Ёлочка высотой NaN', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree(NaN), expected);
+		assert.strictEqual(tree("nya"), expected);
+	});
+
+	QUnit.test('Ёлочка высотой null', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree(null), expected);
+	});
+
+	QUnit.test('Ёлочка высотой undefined', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree(undefined), expected);
+	});
+
+
+	QUnit.test('Ёлочка высотой float', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree(4.4), expected);
+		assert.strictEqual(tree('4.4'), expected);
+	});
+
+	QUnit.test('Ёлочка высотой infinity', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree(1 / 0), expected);
+		assert.strictEqual(tree(-1 / 0), expected);
+	});
+
+
 });

@@ -2,6 +2,17 @@
 
 function tree(height) {
 
+    if(isNaN(height))
+        return null;
+
+    if(height % 1 !== 0) {
+        return null;
+    }
+
+    height = parseInt(height);
+    if(isNaN(height))
+        return null;
+
     if(height < 3)
         return null;
 
