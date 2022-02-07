@@ -5,69 +5,69 @@ let final_string = ''
 
 /**
  * @function Высчитывает нужное количество пробелов по номеру строки и добавляет в результат.
- * @param {number} line_number - номер строки, для которой рассчитывается нужное количество пробелов.
- * @param {number} tree_size - размер ASCII-дерева.
+ * @param {number} lineNumber - номер строки, для которой рассчитывается нужное количество пробелов.
+ * @param {number} treeSize - размер ASCII-дерева.
  */
-function drawSpaces(line_number, tree_size)  {
-    let max_count_spaces = tree_size - 1;
-    final_string += ' '.repeat(max_count_spaces - line_number);
+function drawSpaces(lineNumber, treeSize)  {
+    let max_count_spaces = treeSize - 1;
+    final_string += ' '.repeat(max_count_spaces - lineNumber);
 }
 
 
 /**
  * @function Высчитывает нужное количество символов '*' по номеру строки и добавляет в результат.
- * @param {number} line_number - номер строки, для которой рассчитывается нужное количество символов '*'.
+ * @param {number} lineNumber - номер строки, для которой рассчитывается нужное количество символов '*'.
  */
-function drawStars(line_number) {
-    final_string += '*'.repeat(line_number * 2 - 1);
+function drawStars(lineNumber) {
+    final_string += '*'.repeat(lineNumber * 2 - 1);
 }
 
 
 /**
  * @function Отрисовывает ASCII-дерево по горизонтальным линиям.
- * @param {number} line_number - номер отрисовываемой строки.
- * @param {number} tree_size - размер ASCII-дерева.
+ * @param {number} lineNumber - номер отрисовываемой строки.
+ * @param {number} treeSize - размер ASCII-дерева.
  */
-function drawLine(line_number, tree_size) {
-    drawSpaces(line_number, tree_size);
-    drawStars(line_number);
-    drawSpaces(line_number, tree_size);
+function drawLine(lineNumber, treeSize) {
+    drawSpaces(lineNumber, treeSize);
+    drawStars(lineNumber);
+    drawSpaces(lineNumber, treeSize);
     final_string += '\n';
 }
 
 
 /**
  * @function Отрисовывает корень дерева (представленный символом '|') с учетом пробелов справа и слева.
- * @param {number} tree_size - размер ASCII-дерева.
+ * @param {number} treeSize - размер ASCII-дерева.
  */
-function drawRoot(tree_size) {
-    drawSpaces(1, tree_size);
+function drawRoot(treeSize) {
+    drawSpaces(1, treeSize);
     final_string += '|';
-    drawSpaces(1, tree_size);
+    drawSpaces(1, treeSize);
     final_string += '\n';
 }
 
 
 /**
  * @function Отрисовывает полностью ASCII-дерево с учетом "листьев" и "корня".
- * @param {number} tree_size - размер ASCII-дерева.
+ * @param {number} treeSize - размер ASCII-дерева.
  */
-function drawTree(tree_size) {
+function drawTree(treeSize) {
     final_string = '';
 
-    for (let i = 1; i < tree_size; ++i) {
-        drawLine(i, tree_size);
+    for (let i = 1; i < treeSize; ++i) {
+        drawLine(i, treeSize);
     }
 
-    drawRoot(tree_size);
+    drawRoot(treeSize);
 
     return final_string;
 }
 
-const tree = (tree_size) => {
-    if (tree_size < 3 || tree_size === undefined || !(tree_size % 1 === 0)) {
+const tree = (treeSize) => {
+    if (treeSize < 3 || treeSize === undefined || !(treeSize % 1 === 0)) {
         return null;
     }
 
-    return drawTree(tree_size);
+    return drawTree(treeSize);
 };
