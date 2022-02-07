@@ -1,35 +1,49 @@
 'use strict';
 
+function isFloat(num) {
+    return num % 1 !== 0;
+}
+
+function validateInput(height) {
+    if( isNaN(height) || 
+        isFloat(height) ||
+        isNaN(parseInt(height)) ||
+        height < 3
+    ) {
+        return false;
+    }
+
+    return true;        
+}
+
+function getWidth(height) {
+    return height * 2 - 3;
+}
+
+function getTrunk(width) {
+    return ' '.repeat((width - 1) / 2) + '|' + ' '.repeat((width - 1) / 2) + '\n';
+}
+
+function getRow(gap, length) {
+    return ' '.repeat(gap) + '*'.repeat(length) + ' '.repeat(gap) + '\n';
+}
+
 function tree(height) {
 
-    if(isNaN(height))
+    if(!validateInput(height))
         return null;
 
-    if(height % 1 !== 0) {
-        return null;
-    }
-
-    height = parseInt(height);
-    if(isNaN(height))
-        return null;
-
-    if(height < 3)
-        return null;
-
-    let width = 1;
-    for(let i = 1; i < height - 1; i++) {
-        width += 2;
-    }
-
+    const width = getWidth(height);  
     let tree = "";
     let length = 1;
     let gap = (width - length) / 2;
+
     for(let i = 0; i < height - 1; ++i) {
-        tree += ' '.repeat(gap) + '*'.repeat(length) + ' '.repeat(gap) + '\n';
+        tree += getRow(gap, length);
         length += 2;
         gap = (width - length) / 2;
     }
-    tree += ' '.repeat((width - 1) / 2) + '|' + ' '.repeat((width - 1) / 2) + '\n';
+    tree += getTrunk(width);
 
     return tree;
 };
