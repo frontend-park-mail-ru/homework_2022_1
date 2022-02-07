@@ -40,6 +40,18 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('5'), expected);
 	});
 
+	QUnit.test('Ёлочка высотой 6', function (assert) {
+		const expected =
+			'    *    \n' +
+			'   ***   \n' +
+			'  *****  \n' +
+			' ******* \n' +
+			'*********\n' +
+			'    |    \n';
+		assert.strictEqual(tree(6), expected);
+		assert.strictEqual(tree('6'), expected);
+	});
+
 	QUnit.test('Ёлочка высотой 8', function (assert) {
 		const expected =
 			'      *      \n' +
@@ -54,10 +66,25 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('8'), expected);
 	});
 
+	QUnit.test('Ёлочка высотой 10', function (assert) {
+		const expected =
+			'        *        \n' +
+			'       ***       \n' +
+			'      *****      \n' +
+			'     *******     \n' +
+			'    *********    \n' +
+			'   ***********   \n' +
+			'  *************  \n' +
+			' *************** \n' +
+			'*****************\n' +
+			'        |        \n';
+		assert.strictEqual(tree(10), expected);
+		assert.strictEqual(tree('10'), expected);
+	});
+
 	QUnit.test('Ёлочка высотой NaN', function (assert) {
 		const expected = null;
 		assert.strictEqual(tree(NaN), expected);
-		assert.strictEqual(tree("nya"), expected);
 	});
 
 	QUnit.test('Ёлочка высотой null', function (assert) {
@@ -83,5 +110,9 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree(-1 / 0), expected);
 	});
 
+	QUnit.test('Ёлочка высотой string', function (assert) {
+		const expected = null;
+		assert.strictEqual(tree("nya"), expected);
+	});
 
 });
