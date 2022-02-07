@@ -12,20 +12,18 @@
  * returns { deep: { nested: { field: null }}}
  */
 const set = (object, path, value) => {
-    if(!object)
+    if(!object){
         object = {};
-    let buff = object;
-    if (typeof path !== 'string')
+    }
+    if (typeof path !== 'string'){
         return object;
-    path.split('.').slice(1).forEach((key, index, arr) => {
-        if (index === arr.length - 1){ // last element exit loop
-            buff[key] = value;
-            return object;
-        }
-        if (!buff.hasOwnProperty(key)){ // doesn't exist - create new object & switch pointer
-            buff[key] = {};
-        }
-        buff = buff[key];
-    })
+    }
+    const keys = path.split('.');
+    const buffObject = keys.slice(1,-1).reduce((accumulator,key) => {
+        accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
+        return accumulator[key];
+    }, object);
+    buffObject[keys.at(-1)] = value;
+
     return object
 }
