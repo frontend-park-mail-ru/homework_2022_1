@@ -33,4 +33,16 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -5), [ 1, 2, 3, 4, 5 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], -15), [ 1, 2, 3, 4, 5 ]);
 	});
+
+	QUnit.test('Функция не обрабатывает большое количество данных', function (assert) {
+		let arr = [];
+		const numOfElements = 1500;
+		for (let i = 0; i < numOfElements; i++) arr.push(i);
+		let newArr = inverse(arr, arr.length);
+		
+		for (let i = 0; i < numOfElements; i++) {
+			assert.deepEqual(newArr[i], i);
+		}
+
+	});
 });
