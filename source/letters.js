@@ -1,17 +1,20 @@
 'use strict';
 
+const ARGUMENT_IS_NOT_STRING_ERROR = 'The first argument must be string';
+const ARGUMENT_IS_NOT_OPTIONAL_BOOLEAN_ERROR = 'The second argument must be optional boolean';
+
 /**
  * @function Удаляет повторяющиеся символы из строки.
  * @param {string} inputString Строка, из которой удаляем символы.
- * @param {boolean} isFirstSymbolRepeated true оставляем первый повторяющийся символ, false оставляем последний повторяющийся символ.
+ * @param {boolean} [isFirstSymbolRepeated] true оставляем первый повторяющийся символ, false оставляем последний повторяющийся символ.
  * @return {string} Новая строка без повторяющихся символов.
  */
 const letters = (inputString, isFirstSymbolRepeated) => {
   if (typeof inputString !== 'string' && !(inputString instanceof String)) {
-    throw Error('The first argument must be string');
+    throw TypeError(ARGUMENT_IS_NOT_STRING_ERROR);
   }
   if (typeof isFirstSymbolRepeated !== 'boolean' && isFirstSymbolRepeated !== undefined) {
-    throw Error('The second argument must be optional boolean');
+    throw TypeError(ARGUMENT_IS_NOT_OPTIONAL_BOOLEAN_ERROR);
   }
 
   return inputString

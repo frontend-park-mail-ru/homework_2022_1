@@ -59,11 +59,24 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters(new String('1234')), '1234');
 		assert.strictEqual(letters(new String('wWw'), true), 'wW');
 		assert.strictEqual(letters(new String('wWw'), false), 'Ww');
+
+		assert.strictEqual(letters(new String('привет, мир')), 'пвет, м');
+		assert.strictEqual(letters(new String('hello, world')), 'he, wrd');
+		assert.strictEqual(letters(new String('мама мыла раму')), 'ылру');
+		assert.strictEqual(letters(new String('"Кукареку!", сказал Петух')), 'Кр!,сзлПтх');
+
+		assert.strictEqual(letters(new String('мама мыла раму'), true), 'ма ылру');
+		assert.strictEqual(letters(new String('от топота копыт'), true), 'от пакы');
+		assert.strictEqual(letters(new String('hello world'), true), 'helo wrd');
+
+		assert.strictEqual(letters(new String('мама мыла раму'), false), 'ыл раму');
+		assert.strictEqual(letters(new String('от топота копыт'), false), 'а копыт');
+		assert.strictEqual(letters(new String('hello world'), false), 'he world');
 	});
 
 	QUnit.test('Выбрасывает исключение в случае неправильных аргументов', function (assert) {
-		assert.throws(() => letters(null), 'The first argument must be string');
-		assert.throws(() => letters('1234', null), 'The second argument must be optional boolean');
-		assert.throws(() => letters(), 'The first argument must be string');
+		assert.throws(() => letters(null), ARGUMENT_IS_NOT_STRING_ERROR);
+		assert.throws(() => letters('1234', null), ARGUMENT_IS_NOT_OPTIONAL_BOOLEAN_ERROR);
+		assert.throws(() => letters(), ARGUMENT_IS_NOT_STRING_ERROR);
 	});
 });
