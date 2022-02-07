@@ -55,10 +55,6 @@ function drawRoot(tree_size) {
 function drawTree(tree_size) {
     final_string = '';
 
-    if (tree_size < 3 || tree_size === undefined || !(tree_size % 1 === 0)) {
-        return null;
-    }
-
     for (let i = 1; i < tree_size; ++i) {
         drawLine(i, tree_size);
     }
@@ -68,4 +64,10 @@ function drawTree(tree_size) {
     return final_string;
 }
 
-const tree = tree_size => drawTree(tree_size);
+const tree = (tree_size) => {
+    if (tree_size < 3 || tree_size === undefined || !(tree_size % 1 === 0)) {
+        return null;
+    }
+
+    return drawTree(tree_size);
+};
