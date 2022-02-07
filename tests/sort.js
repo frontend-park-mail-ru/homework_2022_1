@@ -45,4 +45,9 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('Б'), 'Б', 'Изначально заглавная русская буква');
 		assert.strictEqual(sort('B'), 'B', 'Изначально заглавная английская буква');
 	});
+
+	QUnit.test('Функция корректно не ломается на невалидных данных', function(assert) {
+		assert.strictEqual(sort(23), '', 'Число вместо строки');
+		assert.strictEqual(sort({}), '', 'Пустой объект');
+	});
 });
