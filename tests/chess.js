@@ -65,4 +65,12 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess(0), null);
 		assert.strictEqual(chess('0'), null);
 	});
+
+	QUnit.test('Невалидные данные для построения шахматной доски', function(assert) {
+		assert.strictEqual(chess('Девять'), null);
+	});
+
+	QUnit.test('Невалидные данные для построения шахматной доски', function(assert) {
+		assert.strictEqual(chess('*'), null);
+	});
 });
