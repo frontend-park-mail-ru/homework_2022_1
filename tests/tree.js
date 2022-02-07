@@ -15,6 +15,11 @@ QUnit.module('Тестируем функцию tree', function () {
         assert.strictEqual(tree('undefined'), null);
     });
 
+	QUnit.test('Ёлочек с высотой типа null не бывает', function (assert) {
+		assert.strictEqual(tree(null), null);
+		assert.strictEqual(tree('null'), null);
+	});
+
     QUnit.test('Ёлочек с высотой нецелого типа не бывает', function (assert) {
         assert.strictEqual(tree(1.1), null);
         assert.strictEqual(tree(2.2), null);
