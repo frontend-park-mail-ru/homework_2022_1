@@ -56,9 +56,9 @@ QUnit.module('Тестируем функцию format', function () {
 		const input1 = "";
 		const input2 = ["i'm", "not", "correct", "data"];
 		const input3 = [ 0, 1, 2, 10, 100, 1, 1000, 10000, -10000 ];
-		const input4 = [ 0, 1, 2, 10, 100, 1, 1000, "asd", "asdasd", "asda123123", -10000 ];
+		const input4 = [ "asd", 1, 2, 10, 100, 1, 1000, "asd", "asdasd", "asda123123", -10000 ];
 
-		const expected1 = "";
+		const expected1 = undefined;
 		const expected2 = undefined;
 		const expected3 = undefined;
 		const expected4 = undefined;
