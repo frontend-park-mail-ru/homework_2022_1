@@ -10,9 +10,7 @@ let final_string = ''
  */
 function drawSpaces(line_number, tree_size)  {
     let max_count_spaces = tree_size - 1;
-    for (let i = 0; i < max_count_spaces - line_number; ++i) {
-         final_string += ' ';
-    }
+    final_string += ' '.repeat(max_count_spaces - line_number);
 }
 
 
@@ -21,9 +19,7 @@ function drawSpaces(line_number, tree_size)  {
  * @param {number} line_number - номер строки, для которой рассчитывается нужное количество символов '*'.
  */
 function drawStars(line_number) {
-    for (let i = 0; i < line_number * 2 - 1; ++i) {
-        final_string += '*';
-    }
+    final_string += '*'.repeat(line_number * 2 - 1);
 }
 
 
