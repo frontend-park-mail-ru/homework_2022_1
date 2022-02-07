@@ -5,7 +5,7 @@ QUnit.module('Тестируем функцию sort', function () {
 		assert.strictEqual(sort('яяя'), 'Яяя', 'Работает с русским алфавитом');
 		assert.strictEqual(sort('Бббббб'), 'Бббббб');
 		assert.strictEqual(sort('zzzzzz'), 'Zzzzzz', 'Работает с английским алфавитом');
-		assert.strictEqual(sort('Rrrrrrrr'), 'rrrrrrrr');
+		assert.strictEqual(sort('Rrrrrrrr'), 'Rrrrrrrr'); 
 	});
 
 	QUnit.test('Функция делает все буквы, кроме первой, строчными', function (assert) {
@@ -34,8 +34,23 @@ QUnit.module('Тестируем функцию sort', function () {
 
 	QUnit.test('Функция работает правильно', function (assert) {
 		assert.strictEqual(sort('мама мыла раму'), 'Аамм Алмы Амру');
-		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Aн Еиийккмоссч Еилтт');
+		assert.strictEqual(sort('космический корабль летит на марс'), 'Абклорь Амрс Ан Еиийккмоссч Еилтт');
 		assert.strictEqual(sort('i love frontend'), 'Defnnort Elov I');
 		assert.strictEqual(sort('hello world'), 'Dlorw Ehllo');
 	});
+
+	QUnit.test('Функция верно обрабатывает одну букву', function(assert) {
+		assert.strictEqual(sort('ё'), 'Ё', 'Работает с русским алфавитом');
+		assert.strictEqual(sort('x'), 'X', 'Работает с английским алфавитом');
+		assert.strictEqual(sort('Ё'), 'Ё', 'Изначально заглавная русская буква');
+		assert.strictEqual(sort('X'), 'X', 'Изначально заглавная английская буква');
+	});
+
+	QUnit.test('Выбрасывает исключение при неправильном аргументе', function (assert) {
+		assert.throws(() => sort(null), 'The argument must be string');
+		assert.throws(() => sort(), 'The argument must be string');
+		assert.throws(() => sort(123), 'The argument must be string');
+		assert.throws(() => sort(undefined), 'The argument must be string');
+	});
+
 });
