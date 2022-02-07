@@ -30,7 +30,7 @@ function drawLine(line_number, tree_size) {
 }
 
 function drawTree(tree_size) {
-    if (tree_size < 3) {
+    if (tree_size < 3 || tree_size === undefined || !(tree_size % 1 === 0)) {
         return null;
     }
 

@@ -10,6 +10,20 @@ QUnit.module('Тестируем функцию tree', function () {
 		assert.strictEqual(tree('2'), null);
 	});
 
+    QUnit.test('Ёлочек с высотой типа undefined не бывает', function (assert) {
+        assert.strictEqual(tree(undefined), null);
+        assert.strictEqual(tree('undefined'), null);
+    });
+
+    QUnit.test('Ёлочек с высотой нецелого типа не бывает', function (assert) {
+        assert.strictEqual(tree(1.1), null);
+        assert.strictEqual(tree(2.2), null);
+        assert.strictEqual(tree(3.3), null);
+        assert.strictEqual(tree('1.1'), null);
+        assert.strictEqual(tree('2.2'), null);
+        assert.strictEqual(tree('3.3'), null);
+    });
+
 	QUnit.test('Ёлочка высотой 3', function (assert) {
 		const expected =
 			' * \n' +
