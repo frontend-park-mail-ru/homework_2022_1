@@ -83,6 +83,13 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip('1234', 'zzzz5'), {0: '1', 1: '2', 2: '3', 3: '4', 4: '5'}, 'Результат слияния строк - array-like объект символов');
 		assert.deepEqual(zip(1), {}, 'Результат копирования целого числа - пустой объект');
 		assert.deepEqual(zip(1.1), {}, 'Результат копирования вещественного числа - пустой объект');
+		assert.deepEqual(zip(NaN), {}, 'Результат копирования NaN - пустой объект');
+		assert.deepEqual(zip(Infinity), {}, 'Результат копирования Infinity - пустой объект');
+	});
+
+	QUnit.test('Функция интерпретирует null или undefined как пустые объекты', function (assert) {
+		assert.deepEqual(zip(null), {}, 'Результат копирования null - пустой объект');
+		assert.deepEqual(zip(undefined), {}, 'Результат копирования undefined - пустой объект');
 	});
 
 	QUnit.test('Функция копирует объектное представление массива', function (assert) {

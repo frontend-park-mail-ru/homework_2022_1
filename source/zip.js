@@ -2,20 +2,21 @@
 
 /**
     * Merges specified objects into one
-    * @params
+    * @param {...Object}
     * objs - objects to merge
+    * @returns {Object}
+    * Returns merged object
     * @example
+    * zip({ name: 'a'}, {age: 5 });
     * // returns { name: 'a', age: '5' }
-    * zip({ name: 'a', age: 5 });
     * @example
-    * // returns {}
     * zip({});
+    * // returns {}
     * @example
-    * // returns { question: 'why?' }
     * zip({}, question: 'why?');
-    * @example
     * // returns { question: 'why?' }
+    * @example
     * zip(question: 'why?', question: 'who?');
-    * @returns Returns merged object
+    * // returns { question: 'why?' }
 */
 const zip = (...objs) => objs.reduce((acc, cur) => ({ ...cur, ...acc }), {});
