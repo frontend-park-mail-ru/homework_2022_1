@@ -1,6 +1,6 @@
 'use strict';
 
-const collator = new Intl.Collator('ru');
+const COLLATOR = new Intl.Collator('ru');
 
 /**
  * Comparison of two strings in the 'ru' locale
@@ -9,7 +9,7 @@ const collator = new Intl.Collator('ru');
  * @returns {number} the result of the comparison in the form of a number (< 0 if value1 < value2, 0 if value1 == value2, > 0 else)
  */
 const compare = (value1, value2) => {
-    return collator.compare(value1, value2);
+    return COLLATOR.compare(value1, value2);
 }
 
 /**
