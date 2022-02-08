@@ -36,7 +36,7 @@ const format = (numbers, columns) => {
                 return Math.max(maxWidth, currentWidth);
             }
              return maxWidth;
-        }, numbers[0].toString().length);
+        }, (numbers[index] ?? '').toString().length);
     });
 
     return setFormat(numbers, columns, widthArray);
