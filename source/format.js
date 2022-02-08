@@ -42,7 +42,27 @@ const format = (numbers, columns) => {
     return setFormat(numbers, columns, widthArray);
 }
 
-// форматирование
+/**
+ * Set format to array.
+ * @function setFormat
+ * @param {object} numbers - input numerical array.
+ * @param {number} columns - number of columns in the table.
+ * @param {object} widths - array where each element is width of each column.
+ * @returns {string}
+ * @example format([1, 2, 3], 1);
+ * returns 1
+ *         2
+ *         3;
+ * @example format([1, 2, 3], 2);
+ * returns 1 2
+ *         3;
+ * @example format([-1, 2, 3], 2);
+ * returns -1 2
+ *          3;
+ * @example format([100, 2, 3, 4], 2);
+ * returns 100 2
+ *           3 4;
+ */
 const setFormat = (numbers, columns, widths) => {
     let result = '';
     let formattedRow = '';
