@@ -41,8 +41,8 @@ const format = (numbers, columns) => {
 
 // форматирование
 const setFormat = (numbers, columns, widths) => {
-    let result = ``;
-    let formattedRow = ``;
+    let result = '';
+    let formattedRow = '';
     let countNumbersInRow = 0;
     numbers.map((currentNumber) => {
         if (countNumbersInRow < columns) {
@@ -52,10 +52,10 @@ const setFormat = (numbers, columns, widths) => {
         }
         if (countNumbersInRow === columns) {
             result += formattedRow;
-            formattedRow = ``;
+            formattedRow = '';
             countNumbersInRow = 0;
-            if (number !== lastNumber) {
-                result += `\n`;
+            if (currentNumber !== numbers[numbers.length - 1]) {
+                result += '\n';
             }
         }
     });
