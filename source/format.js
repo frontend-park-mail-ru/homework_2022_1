@@ -49,39 +49,15 @@ const format = (numbers, columns) => {
  * @param {number} columns - number of columns in the table.
  * @param {object} widths - array where each element is width of each column.
  * @returns {string}
- * @example format([1, 2, 3], 1);
- * returns 1
- *         2
- *         3;
- * @example format([1, 2, 3], 2);
- * returns 1 2
- *         3;
- * @example format([-1, 2, 3], 2);
- * returns -1 2
- *          3;
- * @example format([100, 2, 3, 4], 2);
- * returns 100 2
- *           3 4;
  */
 const setFormat = (numbers, columns, widths) => {
-    let result = '';
-    let formattedRow = '';
-    let countNumbersInRow = 0;
-    numbers.map((currentNumber) => {
-        if (countNumbersInRow < columns) {
-            const numberStr = currentNumber.toString();
-            let formattedNumber = ' '.repeat(widths[countNumbersInRow++] - numberStr.length) + numberStr;
-            formattedRow += formattedNumber;
+    return numbers.map((currentNumber, currentIndex) => {
+        const currentColumn = currentIndex % columns;
+        const numberStr = currentNumber.toString();
+        let format = ' '.repeat(widths[currentColumn] - numberStr.length) + numberStr;
+        if (currentColumn === columns - 1 && currentIndex !== numbers.length - 1) {
+            format += '\n';
         }
-        if (countNumbersInRow === columns) {
-            result += formattedRow;
-            formattedRow = '';
-            countNumbersInRow = 0;
-            if (currentNumber !== numbers[numbers.length - 1]) {
-                result += '\n';
-            }
-        }
-    });
-    result += formattedRow;
-    return result;
+        return format;
+    }).join('');
 }
