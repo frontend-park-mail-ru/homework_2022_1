@@ -137,37 +137,44 @@ QUnit.module('Тестируем функцию set', function () {
         assert.throws(
             function () {
                 set(class1, '.foo12', 1)
-            });
+            },
+			Error("it is not an object!"));
 
         assert.throws(
             function () {
                 set(func1, '.foo', 1)
-            });
+            },
+			Error("it is not an object!"));
 
         assert.throws(
             function () {
                 set(func2, '.foo', 1)
-            });
+            },
+			Error("it is not an object!"));
 
         assert.throws(
             function () {
                 set(4, '.foo', 1)
-            });
+            },
+			Error("it is not an object!"));
 
         assert.throws(
             function () {
                 set(undefined, 'foo.', 1)
-            });
+            },
+			Error("it is not an object!"));
 
         assert.throws(
             function () {
                 set({}, 4, 1);
 
-            });
+            },
+			Error("wrong path type!"));
 
         assert.throws(
             function () {
                 set({}, 'foo', 1)
-            });
+            },
+			Error("invalid path!"));
     });
 });
