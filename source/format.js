@@ -28,13 +28,16 @@ const format = (numbers, columns) => {
     }
 
     // подсчет ширины каждой колонки по наиболее длинному числу
-    const widthArray = new Array(columns).fill(0);
-    numbers.reduce((_, currentNumber, index) => {
-        const currentColumn = index % columns;
-        const width = Math.max(currentNumber.toString().length, widthArray[currentColumn]);
-        widthArray[currentColumn] = (currentColumn === 0) ? width : width + 1;
-        return currentNumber;
-    }, numbers[0]);
+    const widthArray = new Array(columns).fill(0).map((value, index) => {
+        return numbers.reduce((maxWidth, currentNumber, numberIndex) => {
+             if (numberIndex % columns === index) {
+                let currentWidth = currentNumber.toString().length;
+                currentWidth = (index === 0) ? currentWidth : currentWidth + 1;
+                return Math.max(maxWidth, currentWidth);
+            }
+             return maxWidth;
+        }, numbers[0].toString().length);
+    });
 
     return setFormat(numbers, columns, widthArray);
 }
