@@ -1,37 +1,38 @@
-'use strict'
+'use strict';
 
+/**
+ * Generates chess table with *
+ * @param {number | string} inputSize
+ * @returns {string | null}
+ */
 const chess = (inputSize) => {
-    let size = +inputSize;
-    if(size <= 1){
+    inputSize = +inputSize;
+    if (inputSize <= 1) {
         return null;
     }
 
     let strWithBegin = "";
-    for(let i = 0; i < size; i++){
-        if(!(i % 2)){
-            strWithBegin += "*";
-        }else {
-            strWithBegin += " ";
-        }
-    }
-    strWithBegin +="\n";
-
     let strWithoutBegin = "";
-    for(let i = 0; i < size; i++){
-        if(i % 2){
+
+    for (let i = 0; i < inputSize; i++) {
+        if (i % 2) {
             strWithoutBegin += "*";
-        }else {
+            strWithBegin += " ";
+        } else {
             strWithoutBegin += " ";
+            strWithBegin += "*";
         }
     }
-    strWithoutBegin +="\n";
+
+    strWithBegin += "\n";
+    strWithoutBegin += "\n";
 
     let outputStr = "";
-    for(let i = 0; i < size; i++){
-        if(i % 2){
-            outputStr+=strWithoutBegin;
-        }else {
-            outputStr+=strWithBegin;
+    for (let i = 0; i < inputSize; i++) {
+        if (i % 2) {
+            outputStr += strWithoutBegin;
+        } else {
+            outputStr += strWithBegin;
         }
     }
 
