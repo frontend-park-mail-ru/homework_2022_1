@@ -9,21 +9,25 @@
  * @example set({foo: 'bar'},'.foo','baz');
  * returns {foo: 'baz'}
  * @example set({}, '.deep.nested.field', null);
- * returns { deep: { nested: { field: null }}}
+ * returns { deep: { nested: { field: null }}};
+ * @example set({foo: 'bar'}, 4, null);
+ * returns Error;
  */
 const set = (object, path, value) => {
     if(!object){
         object = {};
     }
     if (typeof path !== 'string'){
-        return object;
+        throw new Error('wrong path!');
     }
     const keys = path.split('.');
+    if (keys.at(-1) === '' || keys.length === 1){
+        throw new Error('invalid dots in path!');
+    }
     const buffObject = keys.slice(1,-1).reduce((accumulator,key) => {
         accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
         return accumulator[key];
     }, object);
     buffObject[keys.at(-1)] = value;
-
     return object
 }

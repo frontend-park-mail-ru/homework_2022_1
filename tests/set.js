@@ -130,7 +130,21 @@ QUnit.module('Тестируем функцию set', function () {
 			foo: 1
 		}
 		assert.deepEqual(set(undefined, '.foo', 1),object);
-		assert.deepEqual(set(undefined, 4, 1),{});
+		assert.throws(
+			function() {
+				set(undefined, 4, 1);
+			}
+		);
+		assert.throws(
+			function() {
+				set(undefined, 'foo', 1)
+			}
+			);
+		assert.throws(
+			function() {
+				assert.deepEqual(set(undefined, 'foo.', 1),object);
+			}
+			);
 	});
 
 });
