@@ -24,8 +24,8 @@ const set = (object, path, value) => {
     }
 
     const keys = path.split('.');
-
     const lastKey = keys.at(-1);
+
     if ( lastKey === '' || keys.length === 1){
         throw new Error('invalid path!');
     }
