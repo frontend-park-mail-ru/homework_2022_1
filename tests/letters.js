@@ -39,6 +39,13 @@ QUnit.module('Тестируем функцию letters', function () {
 		assert.strictEqual(letters(' 0 ', false), '0 ');
 	});
 
+	QUnit.test('Удаляет все повторяющие буквы', function (assert) {
+		assert.strictEqual(letters('121'), '2');
+		assert.strictEqual(letters('wWw'), 'W');
+		assert.strictEqual(letters('.-.'), '-');
+		assert.strictEqual(letters(' 0 '), '0');
+	});
+
 	QUnit.test('Удаляет повторяющиеся буквы в разных словах', function (assert) {
 		assert.strictEqual(letters('привет, мир'), 'пвет, м');
 		assert.strictEqual(letters('hello, world'), 'he, wrd');
