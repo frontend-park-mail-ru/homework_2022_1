@@ -19,15 +19,9 @@ const sort = (str) => {
         return '';
     }
 
-    let words = str.split(' ');
-    const new_words = [];
-
-    words.forEach((word) => {
-        let new_word = word.toLowerCase().split('').sort(compare).join('');
-        new_words.push(new_word[0].toUpperCase() + new_word.slice(1));
-    });
-
-    return new_words.sort(compare).reduce((prev, current, ind) => {
-        return prev + current + (ind === new_words.length - 1 ? '' : ' ');
-    }, '');
+    return str.split(' ').reduce((prev, current, ind) => {
+        let new_word = current.toLowerCase().split('').sort(compare).join('');
+        prev.push(new_word[0].toUpperCase() + new_word.slice(1));
+        return prev;
+    }, []).sort(compare).join(' ');
 }
