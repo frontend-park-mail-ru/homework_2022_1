@@ -25,7 +25,8 @@ const set = (object, path, value) => {
 
     const keys = path.split('.');
 
-    if (keys.at(-1) === '' || keys.length === 1){
+    let lastKey = keys.at(-1);
+    if ( lastKey === '' || keys.length === 1){
         throw new Error('invalid path!');
     }
 
@@ -34,7 +35,7 @@ const set = (object, path, value) => {
         return accumulator[key];
     }, object);
 
-    buffObject[keys.at(-1)] = value;
+    buffObject[lastKey] = value;
 
     return object
 }
