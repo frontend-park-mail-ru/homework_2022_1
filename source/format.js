@@ -44,11 +44,10 @@ const setFormat = (numbers, columns, widths) => {
     let result = ``;
     let formattedRow = ``;
     let countNumbersInRow = 0;
-    let lastNumber = numbers[numbers.length - 1];
-    for (let number of numbers) {
+    numbers.map((currentNumber) => {
         if (countNumbersInRow < columns) {
-            const numberStr = number.toString();
-            let formattedNumber = ` `.repeat(widths[countNumbersInRow++] - numberStr.length) + numberStr;
+            const numberStr = currentNumber.toString();
+            let formattedNumber = ' '.repeat(widths[countNumbersInRow++] - numberStr.length) + numberStr;
             formattedRow += formattedNumber;
         }
         if (countNumbersInRow === columns) {
@@ -59,7 +58,7 @@ const setFormat = (numbers, columns, widths) => {
                 result += `\n`;
             }
         }
-    }
+    });
     result += formattedRow;
     return result;
 }
