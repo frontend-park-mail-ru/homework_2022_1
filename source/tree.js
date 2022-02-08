@@ -1,11 +1,11 @@
 'use strict';
 
 /**
- * @function Отрисовывает полностью ASCII-дерево с учетом "листьев" и "корня".
+ * @function Создает ASCII-дерево требуемого размера с учетом "листьев" и "корня".
  * @param {number} treeSize - размер ASCII-дерева.
- * @returns {string} Строка для вывода ASCII-дерева.
+ * @returns {string} Строка, содержащая требуемое ASCII-дерево.
  */
-const drawTree = (treeSize) => {
+const createTree = (treeSize) => {
     let finalString = '';
 
     /**
@@ -26,7 +26,7 @@ const drawTree = (treeSize) => {
     }
 
     /**
-     * @function Отрисовывает ASCII-дерево по горизонтальным линиям.
+     * @function Добавляет новую горизонтальную линию ASCII-дерева.
      * @param {number} lineNumber - номер отрисовываемой строки.
      */
     const addLine = (lineNumber) => {
@@ -69,5 +69,5 @@ const tree = (treeSize) => {
         return null;
     }
 
-    return drawTree(treeSize);
+    return createTree(treeSize);
 };
