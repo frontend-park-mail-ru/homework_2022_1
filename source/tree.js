@@ -6,58 +6,61 @@
  * @param {number} treeSize - размер ASCII-дерева.
  */
 function drawTree(treeSize) {
-    let final_string = '';
+    let finalString = '';
 
     /**
      * @function Отрисовывает ASCII-дерево по горизонтальным линиям.
      * @param {number} lineNumber - номер отрисовываемой строки.
      */
-    function drawLine(lineNumber) {
+    function addLine(lineNumber) {
 
         /**
          * @function Высчитывает нужное количество символов '*' по номеру строки и добавляет в результат.
          */
-        function drawStars() {
-            final_string += '*'.repeat(lineNumber * 2 - 1);
+        function addStarsToLine() {
+            finalString += '*'.repeat(lineNumber * 2 - 1);
         }
 
         /**
          * @function Высчитывает нужное количество пробелов по номеру строки и добавляет в результат.
          */
-        function drawSpaces()  {
+        function addSpacesToLine()  {
             let max_count_spaces = treeSize - 1;
-            final_string += ' '.repeat(max_count_spaces - lineNumber);
+            finalString += ' '.repeat(max_count_spaces - lineNumber);
         }
 
-        drawSpaces();
-        drawStars();
-        drawSpaces();
+        addSpacesToLine();
+        addStarsToLine();
+        addSpacesToLine();
 
-        final_string += '\n';
+        finalString += '\n';
     }
 
     /**
      * @function Отрисовывает корень дерева (представленный символом '|') с учетом пробелов справа и слева.
      */
-    function drawRoot() {
+    function addRoot() {
         let spaces = ' '.repeat(treeSize - 2);
-        final_string += spaces + '|' + spaces + '\n';
+        finalString += spaces + '|' + spaces + '\n';
     }
-
-    final_string = '';
 
     for (let i = 1; i < treeSize; ++i) {
-        drawLine(i);
+        addLine(i);
     }
 
-    drawRoot();
+    addRoot();
 
-    return final_string;
+    return finalString;
 }
 
 
+/**
+ * @function Возвращает ASCII-дерево высоты treeSize. В случае введения невалидных данных возвращает null
+ * @param treeSize - требуемая высота ASCII-дерева.
+ */
 const tree = (treeSize) => {
-    if (treeSize < 3 || treeSize === undefined || !(treeSize % 1 === 0)) {
+    if (treeSize < 3 || treeSize === undefined ||
+                !(treeSize % 1 === 0) || !treeSize) {
         return null;
     }
 
