@@ -28,7 +28,7 @@ const format = (numbers, columns) => {
     }
 
     // подсчет ширины каждой колонки по наиболее длинному числу
-    const widthArray = new Array(columns).fill(0).map((value, index) => {
+    const widthArray = new Array(columns).fill(0).map((width, index) => {
         return numbers.reduce((maxWidth, currentNumber, numberIndex) => {
              if (numberIndex % columns === index) {
                 let currentWidth = currentNumber.toString().length;
@@ -36,7 +36,7 @@ const format = (numbers, columns) => {
                 return Math.max(maxWidth, currentWidth);
             }
              return maxWidth;
-        }, (numbers[index] ?? '').toString().length);
+        }, width);
     });
 
     return setFormat(numbers, columns, widthArray);
