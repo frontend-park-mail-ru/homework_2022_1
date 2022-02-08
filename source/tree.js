@@ -5,26 +5,26 @@
  * @function Отрисовывает полностью ASCII-дерево с учетом "листьев" и "корня".
  * @param {number} treeSize - размер ASCII-дерева.
  */
-function drawTree(treeSize) {
+let drawTree = (treeSize) => {
     let finalString = '';
 
     /**
      * @function Отрисовывает ASCII-дерево по горизонтальным линиям.
      * @param {number} lineNumber - номер отрисовываемой строки.
      */
-    function addLine(lineNumber) {
+    let addLine = (lineNumber) => {
 
         /**
          * @function Высчитывает нужное количество символов '*' по номеру строки и добавляет в результат.
          */
-        function addStarsToLine() {
+        let addStarsToLine = ()  => {
             finalString += '*'.repeat(lineNumber * 2 - 1);
         }
 
         /**
          * @function Высчитывает нужное количество пробелов по номеру строки и добавляет в результат.
          */
-        function addSpacesToLine()  {
+        let addSpacesToLine = () => {
             let max_count_spaces = treeSize - 1;
             finalString += ' '.repeat(max_count_spaces - lineNumber);
         }
@@ -39,7 +39,7 @@ function drawTree(treeSize) {
     /**
      * @function Отрисовывает корень дерева (представленный символом '|') с учетом пробелов справа и слева.
      */
-    function addRoot() {
+    let addRoot = () => {
         let spaces = ' '.repeat(treeSize - 2);
         finalString += spaces + '|' + spaces + '\n';
     }
@@ -55,7 +55,7 @@ function drawTree(treeSize) {
 
 
 /**
- * @function Возвращает ASCII-дерево высоты treeSize. В случае введения невалидных данных возвращает null
+ * @function Возвращает ASCII-дерево высоты treeSize. В случае введения невалидных данных возвращает null.
  * @param treeSize - требуемая высота ASCII-дерева.
  */
 const tree = (treeSize) => {
