@@ -14,8 +14,9 @@
  * returns Error;
  */
 const set = (object, path, value) => {
-    if(!object){
-        object = {};
+
+    if( object.constructor.name !== 'Object'){
+        throw new Error('it is not an object!');
     }
 
     if (typeof path !== 'string'){
