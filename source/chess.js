@@ -6,7 +6,10 @@
  * @returns {string} Шахматная доска из звёздочек
  */
 const chess = (size) => {
-    if (size == 1 || size == 0 || !isFinite(size)) {
+    if (size == 1 || 
+        size == 0 || 
+        !isFinite(size) || 
+        !Number.isInteger(Number(size))) {
         return null;
     }
 

@@ -68,9 +68,18 @@ QUnit.module('Тестируем функцию chess', function () {
 
 	QUnit.test('Невалидные данные для построения шахматной доски', function(assert) {
 		assert.strictEqual(chess('Девять'), null);
-	});
-
-	QUnit.test('Невалидные данные для построения шахматной доски', function(assert) {
+		assert.strictEqual(chess('Nine'), null);
 		assert.strictEqual(chess('*'), null);
+		assert.strictEqual(chess('#'), null);
+		assert.strictEqual(chess('.'), null);
+		assert.strictEqual(chess('!'), null);
+		assert.strictEqual(chess('&'), null);
+		assert.strictEqual(chess('?'), null);
+		assert.strictEqual(chess(''), null);
+		assert.strictEqual(chess(1 / 2), null);
+		assert.strictEqual(chess('1 / 2'), null);
+		assert.strictEqual(chess('12$'), null);
+		assert.strictEqual(chess('5.2'), null);
+		assert.strictEqual(chess(5.2), null);
 	});
 });
