@@ -18,7 +18,7 @@ const set = (object, path, value) => {
         object = {};
     }
     if (typeof path !== 'string'){
-        throw new Error('wrong path!');
+        throw new Error('wrong path type!');
     }
     const keys = path.split('.');
     if (keys.at(-1) === '' || keys.length === 1){
