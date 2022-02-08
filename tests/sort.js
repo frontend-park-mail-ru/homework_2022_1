@@ -47,10 +47,10 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Выбрасывает исключение при неправильном аргументе', function (assert) {
-		assert.throws(() => sort(null), 'The argument must be string');
-		assert.throws(() => sort(), 'The argument must be string');
-		assert.throws(() => sort(123), 'The argument must be string');
-		assert.throws(() => sort(undefined), 'The argument must be string');
+		assert.throws(() => sort(null), ARG_IS_NOT_STRING_ERROR_MSG);
+		assert.throws(() => sort(), ARG_IS_NOT_STRING_ERROR_MSG);
+		assert.throws(() => sort(123), ARG_IS_NOT_STRING_ERROR_MSG);
+		assert.throws(() => sort(undefined), ARG_IS_NOT_STRING_ERROR_MSG);
 	});
 
 });
