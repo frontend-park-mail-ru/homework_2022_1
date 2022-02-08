@@ -28,24 +28,15 @@ const format = (numbers, columns) => {
     }
 
     // подсчет ширины каждой колонки по наиболее длинному числу
-    const widths = new Array(columns).fill(0);
-    let okStatus = true;
-    numbers.reduce(function (prevNumber, currentNumber, currentNumberIndex) {
-        // alert(`check values: ${prevNumber} - ${currentNumber}`);
-        if (Number.isNaN(+prevNumber) || Number.isNaN(+currentNumber)) {
-            okStatus = false;
-            return undefined;
-        }
-        const currentColumn = currentNumberIndex % columns;
-        const width = (currentNumber ?? ``).toString().length + 1;
-        widths[currentColumn] = Math.max(width, widths[currentColumn]);
-        okStatus = true;
+    const widthArray = new Array(columns).fill(0);
+    numbers.reduce((_, currentNumber, index) => {
+        const currentColumn = index % columns;
+        const width = Math.max(currentNumber.toString().length, widthArray[currentColumn]);
+        widthArray[currentColumn] = (currentColumn === 0) ? width : width + 1;
         return currentNumber;
-    });
-    const firstNumber = numbers[0].toString() ?? ``;
-    widths[0] = (firstNumber.length > widths[0]) ? firstNumber.length : --widths[0];
+    }, numbers[0]);
 
-    return (okStatus) ? setFormat(numbers, columns, widths) : undefined;
+    return setFormat(numbers, columns, widthArray);
 }
 
 // форматирование
