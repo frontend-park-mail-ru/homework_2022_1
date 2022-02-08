@@ -23,8 +23,8 @@ const set = (object, path, value) => {
         throw new Error('wrong path type!');
     }
 
-    const keys = path.split('.');
-    const lastKey = keys.at(-1);
+    const keys = path.split('.'),
+          lastKey = keys.at(-1);
 
     if ( lastKey === '' || keys.length === 1){
         throw new Error('invalid path!');
