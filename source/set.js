@@ -22,7 +22,7 @@ const set = (object, path, value) => {
     }
     const keys = path.split('.');
     if (keys.at(-1) === '' || keys.length === 1){
-        throw new Error('invalid dots in path!');
+        throw new Error('invalid path!');
     }
     const buffObject = keys.slice(1,-1).reduce((accumulator,key) => {
         accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
