@@ -47,7 +47,7 @@ QUnit.module('Тестируем функцию sort', function () {
 	});
 
 	QUnit.test('Функция корректно не ломается на невалидных данных', function(assert) {
-		assert.strictEqual(sort(23), '', 'Число вместо строки');
-		assert.strictEqual(sort({}), '', 'Пустой объект');
+		assert.throws(() => sort(23), 'The argument can only be a string');
+		assert.throws(() => sort({}), 'The argument can only be a string');
 	});
 });

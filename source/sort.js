@@ -2,6 +2,12 @@
 
 const collator = new Intl.Collator('ru');
 
+/**
+ * Comparison of two strings in the 'ru' locale
+ * @param {string} value1
+ * @param {string} value2
+ * @returns {number} the result of the comparison in the form of a number (< 0 if value1 < value2, 0 if value1 == value2, > 0 else)
+ */
 const compare = (value1, value2) => {
     return collator.compare(value1, value2);
 }
@@ -16,11 +22,11 @@ const compare = (value1, value2) => {
  */
 const sort = (str) => {
     if (typeof str != 'string') {
-        return '';
+        throw Error('The argument can only be a string');
     }
 
     return str.split(' ').reduce((prev, current, ind) => {
-        let new_word = current.toLowerCase().split('').sort(compare).join('');
+        const new_word = current.toLowerCase().split('').sort(compare).join('');
         prev.push(new_word[0].toUpperCase() + new_word.slice(1));
         return prev;
     }, []).sort(compare).join(' ');
