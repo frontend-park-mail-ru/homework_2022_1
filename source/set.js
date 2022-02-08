@@ -17,17 +17,23 @@ const set = (object, path, value) => {
     if(!object){
         object = {};
     }
+
     if (typeof path !== 'string'){
         throw new Error('wrong path type!');
     }
+
     const keys = path.split('.');
+
     if (keys.at(-1) === '' || keys.length === 1){
         throw new Error('invalid path!');
     }
+
     const buffObject = keys.slice(1,-1).reduce((accumulator,key) => {
         accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
         return accumulator[key];
     }, object);
+
     buffObject[keys.at(-1)] = value;
+
     return object
 }
