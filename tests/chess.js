@@ -81,5 +81,11 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('12$'), null);
 		assert.strictEqual(chess('5.2'), null);
 		assert.strictEqual(chess(5.2), null);
+		assert.strictEqual(chess(null), null);
+		assert.strictEqual(chess(Object), null);
+		assert.strictEqual(chess(-5), null);
+		assert.strictEqual(chess('-5'), null);
+		assert.strictEqual(chess(-10), null);
+		assert.strictEqual(chess('-10'), null);
 	});
 });
