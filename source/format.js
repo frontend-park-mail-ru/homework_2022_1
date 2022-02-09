@@ -36,5 +36,6 @@ const format = (numbers, columnNumbers) => {
         if ((i + columnNumbers) < numbers.length)
             output += '\n';
     }
+    
     return (output);
 }
