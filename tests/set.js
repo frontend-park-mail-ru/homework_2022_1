@@ -129,11 +129,11 @@ QUnit.module('Тестируем функцию set', function () {
     QUnit.test('set работает правильно c невалидными данными', function (assert) {
 
         const class1 = new class{},
-         	func1 = () => {return true},
+			func1 = () => {return true},
 			func2 = function () {},
-		    error1 = Error("it is not an object!"),
-		    error2 = Error("wrong path type!"),
-		    error3 = Error("invalid path!")
+			error1 = Error("it is not an object!"),
+			error2 = Error("wrong path type!"),
+			error3 = Error("invalid path!")
 
 		assert.throws(
             function () {
