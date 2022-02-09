@@ -10,6 +10,7 @@
  * @returns {string}
  * */
 
+
 let letters = (str, mode) => {
     let arr = str.split('');
 
