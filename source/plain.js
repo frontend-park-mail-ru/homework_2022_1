@@ -29,4 +29,4 @@ const plain = arr => {
     }
 
     return arrMerg;
-}
+};
