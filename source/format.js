@@ -25,7 +25,7 @@ const format = (numbers, columns) => {
     if (typeof (numbers) !== 'object' ||
         Number.isNaN(+columns) ||
         !numbers.every(number => typeof number === 'number')) {
-        throw new SyntaxError('Данные некорректны');
+        throw new Error('Данные некорректны');
     }
 
     // подсчет ширины каждой колонки по наиболее длинному числу

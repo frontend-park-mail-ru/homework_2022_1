@@ -58,10 +58,10 @@ QUnit.module('Тестируем функцию format', function () {
 		const input3 = [ 0, 1, 2, 10, 100, 1, 1000, 10000, -10000 ];
 		const input4 = [ 'asd', 1, 2, 10, 100, 1, 1000, 'asd', 'asdasd', 'asda123123', -10000 ];
 
-		const expected1 = new SyntaxError('Данные некорректны');
-		const expected2 = new SyntaxError('Данные некорректны');
-		const expected3 = new SyntaxError('Данные некорректны');
-		const expected4 = new SyntaxError('Данные некорректны');
+		const expected1 = new Error('Данные некорректны');
+		const expected2 = new Error('Данные некорректны');
+		const expected3 = new Error('Данные некорректны');
+		const expected4 = new Error('Данные некорректны');
 
 		assert.throws(() => format(input1, 200), expected1);
 		assert.throws(() => format(input2, 200), expected2);
