@@ -4,7 +4,7 @@
  * Check if is integer
  * @function isInt
  * @param {number} data - input data.
- * @returns {(number|null)} returns true if data is int.
+ * @returns {boolean} returns true if data is int.
  */
 function isInt(data) {
     return Number(data) === parseInt(data);
