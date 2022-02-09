@@ -128,7 +128,7 @@ QUnit.module('Тестируем функцию set', function () {
 
     QUnit.test('set работает правильно c невалидными данными', function (assert) {
 
-        const class1 = new class{};
+		const class1 = new class{};
 		const func1 = () => {return true};
 		const func2 = function () {};
 		const error1 = Error("it is not an object!");
