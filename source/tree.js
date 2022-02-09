@@ -6,7 +6,7 @@
  * @param {number} data - input data.
  * @returns {boolean} returns true if data is int.
  */
-const isInt = data => {
+const isInt = (data) => {
     return Number(data) === parseInt(data);
 }
 
@@ -16,7 +16,7 @@ const isInt = data => {
  * @param {number} height - input height.
  * @returns {number} returns width.
  */
-const countWidth = height => {
+const countWidth = (height) => {
     return height * 2 - 3;
 }
 
