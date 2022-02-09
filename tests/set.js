@@ -163,7 +163,7 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.throws(
 			function () {
 				set({}, 4, 1);
-				}, error2);
+			}, error2);
 
 		assert.throws(
 			function () {
