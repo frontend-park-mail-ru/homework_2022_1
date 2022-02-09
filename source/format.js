@@ -23,9 +23,9 @@
 
 const format = (numbers, columns) => {
     if (
-      typeof (numbers) !== 'object' ||
+      !Array.isArray(numbers) ||
       Number.isNaN(+columns) ||
-      !numbers.every(number => typeof number === 'number')
+      !numbers.every(number => !Number.isNaN(+number))
     ) {
         throw new Error('Данные некорректны');
     }
