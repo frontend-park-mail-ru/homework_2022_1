@@ -57,7 +57,7 @@ function getRow(gap, length) {
  */
 const tree = height => {
 
-    if(!isInt(height) || height < 3) {
+    if (!isInt(height) || height < 3) {
         return null;
     }
 
