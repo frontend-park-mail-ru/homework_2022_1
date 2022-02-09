@@ -16,6 +16,20 @@ const ARG_IS_NOT_STRING_ERROR_MSG = 'The argument must be string';
 const collator = new Intl.Collator('ru');
 
 /**
+ * @function assertString
+ * @description it throws exceptions if at least for one argument, its type is not 'string' and it is not instance of String.
+ * @param {...*} obj objects to check.
+ * @throws {InvalidArgumentException}
+ */
+const assertString = (...args) => {
+    for (let arg of args) {
+        if (typeof arg !== 'string' && !(arg instanceof String)) {
+            throw InvalidArgumentException(ARG_IS_NOT_STRING_ERROR_MSG);
+        }
+    }
+}
+
+/**
  * @function compare
  * @description it compares two strings in Russian or English .
  * @param {string} val1 first string to compare. 
@@ -25,24 +39,20 @@ const collator = new Intl.Collator('ru');
  * @throws {InvalidArgumentException}
  */
 const compare = (val1, val2) => {
-    if (typeof val1 !== 'string' && !(val1 instanceof String) || typeof val2 !== 'string' && !(val2 instanceof String)) {
-        throw InvalidArgumentException(ARG_IS_NOT_STRING_ERROR_MSG);
-    }
+    assertString(val1, val2);
     return collator.compare(val1, val2);
 }
 
 /**
  * @function sortLetters
- * @description it sorts the letters in words alphabetically and makes the first letter of each word uppercase and the rest lowercase.
+ * @description it sorts the letters in words alphabetically and makes the first letter of word uppercase and the rest lowercase.
  * @param {string} str input word to sort letters.
  * @returns {string} word with sorted letters within words, whith uppercase first letter .
  * @example sort('frONTend') => 'Defnnort'
  */
 const sortLetters = word => {
-    if (typeof word !== 'string' && !(word instanceof String)) {
-        throw InvalidArgumentException(ARG_IS_NOT_STRING_ERROR_MSG);
-    }
-    const sorted = word.split('').sort(compare).join('');
+    assertString(word);
+    const sorted = word.toLowerCase().split('').sort(compare).join('');
     return sorted[0].toUpperCase() + sorted.slice(1)
 }
 
@@ -57,11 +67,8 @@ const sortLetters = word => {
  * @example sort('i love frontend') => 'Defnnort Elov I'
  */
 const sort = (str) => {
-    if (typeof str !== 'string' && !(str instanceof String)) {
-        throw InvalidArgumentException(ARG_IS_NOT_STRING_ERROR_MSG);
-    }
-
-    return str.toLowerCase().split(' ')
+    assertString(str);
+    return str.split(' ')
         .map(sortLetters)
         .sort(compare).join(' ');
 }
