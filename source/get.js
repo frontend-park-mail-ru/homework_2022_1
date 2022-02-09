@@ -9,15 +9,22 @@
  */
 
 const get = (obj, pathToProperty) => {
-    if (!obj || typeof pathToProperty != 'string')
+    if (!obj || typeof pathToProperty !== 'string'){
         return;
+    }
+
+    let tempObj = {...obj};
 
     const listOfProperties = pathToProperty.split('.');
 
     listOfProperties.forEach(property => {
-        if (obj != undefined && property)
-            obj = obj[property];
+        if (tempObj !== undefined && property){
+            tempObj = tempObj[property];
+        }
+        else{
+            return;
+        }
     })
 
-    return obj;
+    return tempObj;
 }
