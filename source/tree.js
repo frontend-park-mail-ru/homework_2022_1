@@ -6,7 +6,7 @@
  * @param {number} data - input data.
  * @returns {boolean} returns true if data is int.
  */
-function isInt(data) {
+const isInt = data => {
     return Number(data) === parseInt(data);
 }
 
@@ -16,7 +16,7 @@ function isInt(data) {
  * @param {number} height - input height.
  * @returns {number} returns width.
  */
-function countWidth(height) {
+const countWidth = height => {
     return height * 2 - 3;
 }
 
@@ -26,7 +26,7 @@ function countWidth(height) {
  * @param {number} height - input height.
  * @returns {number} returns width.
  */
-function getTrunk(width) {
+const getTrunk = (width) => {
     return ' '.repeat((width - 1) / 2) + '|' + ' '.repeat((width - 1) / 2) + '\n';
 }
 
@@ -37,7 +37,7 @@ function getTrunk(width) {
  * @param {number} length - tree '*' count.
  * @returns {number} returns width.
  */
-function getRow(gap, length) {
+const getRow = (gap, length) => {
     return ' '.repeat(gap) + '*'.repeat(length) + ' '.repeat(gap) + '\n';
 }
 
@@ -55,7 +55,7 @@ function getRow(gap, length) {
  *    |
  *`
  */
-const tree = height => {
+const tree = (height) => {
 
     if (!isInt(height) || height < 3) {
         return null;
