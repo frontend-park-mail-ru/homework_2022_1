@@ -17,4 +17,20 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 		assert.deepEqual(anagram(input), output);
 	});
+
+	QUnit.test('Функция работает правильно с англ словами и предложениями', function (assert) {
+		const input = [
+			'аз есмь строка живу я мерой остр.', 'ракета',
+			'listen', 'за семь морей ростка я вижу рост.',
+			'silent', 'карета'
+		];
+
+		const output = [
+			[ 'listen', 'silent' ],
+			[ 'аз есмь строка живу я мерой остр.', 'за семь морей ростка я вижу рост.' ],
+			[ 'карета', 'ракета' ]
+		];
+
+		assert.deepEqual(anagram(input), output);
+	});
 });
