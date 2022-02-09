@@ -7,10 +7,7 @@
  * @returns {(number|null)} returns true if data is int.
  */
 function isInt(data) {
-    if (Number(data) === parseInt(data)) {
-        return data;
-    }
-    return null;
+    return Number(data) === parseInt(data);
 }
 
 /**
@@ -58,11 +55,9 @@ function getRow(gap, length) {
  *    |
  *`
  */
-function tree(height) {
+const tree = height => {
 
-    height = isInt(height) > 2 ? height : null;
-
-    if( !height ) {
+    if(!isInt(height) || height < 3) {
         return null;
     }
 
@@ -71,7 +66,7 @@ function tree(height) {
     let length = 1;
     let gap = (width - length) / 2;
 
-    for(let i = 0; i < height - 1; ++i) {
+    for (let i = 0; i < height - 1; ++i) {
         tree += getRow(gap, length);
         length += 2;
         gap = (width - length) / 2;
