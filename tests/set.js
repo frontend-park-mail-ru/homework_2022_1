@@ -95,4 +95,54 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.deepEqual(set({}, '.deep.nested.field', null), object);
 	});
+
+	QUnit.test('set работает правильно c неправильными путями', function (assert) {
+		const object = {
+			deep: {
+				hested: {
+					field: 'baz'
+				}
+			}
+		};
+
+		const object2 = {
+			deep: {
+				hested: {
+					field: 42
+				}
+			}
+		};
+
+		const object3 = {
+			deep: {
+				hested: {
+					foo: 'bar'
+				}
+			}
+		};
+
+		const object4 = {
+			deep: null
+		};
+
+		assert.throws(function () {
+				set(object, 1, 1)
+			}, 'bad path');
+
+		assert.throws(function () {
+				set(object2, 1, 1)
+			}, 'bad path');
+
+		assert.throws(function () {
+				set(object3, 1, 1)
+			}, 'bad path');
+
+		assert.throws(function () {
+				set(object4, 1, 1)
+			}, 'bad path');
+	});
+
+	
+
+
 });
