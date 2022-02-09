@@ -1,12 +1,31 @@
 'use strict';
 
 /**
+ * Validate input
+ * @function isInt
+ * @param {number} data - input data.
+ * @returns {(number|null)} returns true if data is int.
+ * 
+ * Count tree width
+ * @function countWidth
+ * @param {number} height - input height.
+ * @returns {number} returns width.
+ * 
+ * Returns every line of tree (not a trunk line)
+ * @function getRow
+ * @param {number} gap - tree ' ' in one side count.
+ * @param {number} length - tree '*' count.
+ * @returns {number} returns width.
+ * 
+ * Return trunk line
+ * @function getTrunk
+ * @param {number} height - input height.
+ * @returns {number} returns width.
+ * 
  * Print tree.
  * @function tree
- * @param {number} height - input tree height.
- * 
- * @returns {string} returns tree.
- * 
+ * @param {number} width - input tree width.
+ * @returns {string} return string with width length with '|' in middle.
  * @example tree(5);
  * returns 
  * '  *   
@@ -17,23 +36,14 @@
  *`
  */
 
-function isFloat(num) {
-    return num % 1 !== 0;
-}
-
-function validateInput(height) {
-    if( isNaN(height) || 
-        isFloat(height) ||
-        isNaN(parseInt(height)) ||
-        height < 3
-    ) {
-        return false;
+function isInt(data) {
+    if (Number(data) === parseInt(data)) {
+        return data;
     }
-
-    return true;        
+    return null;
 }
 
-function getWidth(height) {
+function countWidth(height) {
     return height * 2 - 3;
 }
 
@@ -47,11 +57,14 @@ function getRow(gap, length) {
 
 function tree(height) {
 
-    if(!validateInput(height))
-        return null;
+    height = isInt(height) > 2 ? height : null;
 
-    const width = getWidth(height);  
-    let tree = "";
+    if( !height ) {
+        return null;
+    }
+
+    const width = countWidth(height);  
+    let tree = '';
     let length = 1;
     let gap = (width - length) / 2;
 

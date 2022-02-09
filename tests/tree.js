@@ -112,8 +112,8 @@ QUnit.module('Тестируем функцию tree', function () {
 
 	QUnit.test('Ёлочка высотой string', function (assert) {
 		const expected = null;
-		assert.strictEqual(tree("nya"), expected);
-		assert.strictEqual(tree(" "), expected);
+		assert.strictEqual(tree('nya'), expected);
+		assert.strictEqual(tree(' '), expected);
 	});
 
 });
