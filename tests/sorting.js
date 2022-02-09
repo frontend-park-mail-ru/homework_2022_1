@@ -121,3 +121,62 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 });
+
+QUnit.module('Дополнительно тестируем функцию sorting', function () {
+	QUnit.test('sorting не испугается и строк и чиселок вперемешку', function (assert) {
+		const initial = [
+            {prop1: 30},
+            {prop1: '1000'},
+            {prop1: 4},
+            {prop1: '200'}
+          ];
+          const actual = sorting(initial, ['prop1']);
+      
+          const expected = [
+            {prop1: 4},
+            {prop1: 30},
+            {prop1: '1000'},
+            {prop1: '200'}
+          ];
+      
+          assert.deepEqual(actual, expected);
+	});
+
+    QUnit.test('sorting не испугается и строк и чиселок вперемешку с двумя фильтрами', function (assert) {
+		const initial = [
+            {prop1: 4, id: 0},
+            {prop1: '1000', id: 1},
+            {prop1: 4, id: 2},
+            {prop1: '200', id: 3}
+          ];
+          const actual = sorting(initial, ['prop1', 'id']);
+
+          const expected = [
+            {prop1: 4, id: 0},
+            {prop1: 4, id: 2},
+            {prop1: '1000', id: 1},
+            {prop1: '200', id: 3}
+          ];
+      
+          assert.deepEqual(actual, expected);
+	});
+
+    QUnit.test('sorting не испугается кириллицы в строках', function (assert) {
+		const initial = [
+            {prop1: 'зачтите'},
+            {prop1: 'позязя'},
+            {prop1: 'мое'},
+            {prop1: 'дэзэ'}
+          ];
+          const actual = sorting(initial, ['prop1']);
+      
+          const expected = [
+            {prop1: 'дэзэ'},
+            {prop1: 'зачтите'},
+            {prop1: 'мое'},
+            {prop1: 'позязя'}
+          ];
+      
+          assert.deepEqual(actual, expected);
+	});
+});
