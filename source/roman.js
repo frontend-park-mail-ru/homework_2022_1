@@ -1,25 +1,26 @@
 'use strict';
 
-function roman(input_number) {
-    if(typeof input_number === 'number') {
-        return(int_to_roman(input_number));
-    } else if(typeof input_number === 'string') {
-        if(isNumber(input_number)) {
-            return(int_to_roman(input_number));
-        }
-        return roman_to_int(input_number);
-    } else {
-        throw TypeError('type error');
-    }
+const TYPE_ERROR = 'Type Error';
 
+const roman = (inputNumber) => {
+    if(typeof inputNumber === 'number') {
+        return(int_to_roman(inputNumber));
+    } else if(typeof inputNumber === 'string' && inputNumber !== '') {
+        if(isNumber(inputNumber)) {
+            return(int_to_roman(inputNumber));
+        }
+        return roman_to_int(inputNumber);
+    } else {
+        throw TypeError(TYPE_ERROR);
+    }
 }
 
-function isNumber(n) {
+const isNumber = (n) => {
     return !isNaN(parseFloat(n)) && !isNaN(n - 0)
 }
 
-function int_to_roman(input_number) {
-    let int_to_roman = {
+const int_to_roman = (inputNumber) => {
+    const dictIntToRoman = {
         1000: 'M',
         900: 'CM',
         500: 'D',
@@ -36,11 +37,11 @@ function int_to_roman(input_number) {
     };
     let res = '';
 
-    while(input_number > 0) {
-        for(let i of Object.keys(int_to_roman).reverse()) {
-            if(input_number >= i) {
-                res += int_to_roman[i];
-                input_number -= i;
+    while(inputNumber > 0) {
+        for(let i of Object.keys(dictIntToRoman).reverse()) {
+            if(inputNumber >= i) {
+                res += dictIntToRoman[i];
+                inputNumber -= i;
                 break;
             }
         }
@@ -49,8 +50,8 @@ function int_to_roman(input_number) {
     return res;
 }
 
-function roman_to_int(input_number) {
-    let roman_to_int = {
+const roman_to_int = (inputNumber) => {
+    const dictRomanToInt = {
         M: 1000,
         CM: 900,
         D: 500,
@@ -65,16 +66,17 @@ function roman_to_int(input_number) {
         IV: 4,
         I: 1
     };
-    input_number = input_number.toUpperCase()
+    inputNumber = inputNumber.toUpperCase()
     let res = 0;
 
-    for (let i = 0; i < input_number.length - 1; ++i) {
-        if (roman_to_int[input_number[i]] < roman_to_int[input_number[i+1]])
-            res -= roman_to_int[input_number[i]];
-        else
-            res += roman_to_int[input_number[i]];
+    for (let i = 0; i < inputNumber.length - 1; ++i) {
+        if (dictRomanToInt[inputNumber[i]] < dictRomanToInt[inputNumber[i+1]]) {
+            res -= dictRomanToInt[inputNumber[i]];
+        } else {
+            res += dictRomanToInt[inputNumber[i]];
+        }
     }
 
-    res += roman_to_int[input_number[input_number.length - 1]];
+    res += dictRomanToInt[inputNumber[inputNumber.length - 1]];
     return res;
 }
