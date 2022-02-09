@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Formatting the given array (numbers) into several (columnNumbers) columns  
+ * @param {array} numbers - The numbers to be formatted.
+ * @param {number} columnNumbers - The ammount of columns for formatting.
+ * @returns {string} - The formated string.
+ */
 const format = (numbers, columnNumbers) => {
     let highestMultiIndent = [];
     let output = '';
