@@ -136,39 +136,38 @@ QUnit.module('Тестируем функцию set', function () {
 		const error3 = Error("invalid path!");
 
 		assert.throws(
-            function () {
-                set(class1, '.foo12', 1)
-            }, error1);
+			function () {
+				set(class1, '.foo12', 1)
+			}, error1);
 
-        assert.throws(
-            function () {
-                set(func1, '.foo', 1)
-            }, error1);
+		assert.throws(
+			function () {
+				set(func1, '.foo', 1)
+			}, error1);
 
-        assert.throws(
-            function () {
-                set(func2, '.foo', 1)
-            }, error1);
+		assert.throws(
+			function () {
+				set(func2, '.foo', 1)
+			}, error1);
 
-        assert.throws(
-            function () {
-                set(4, '.foo', 1)
-            }, error1);
+		assert.throws(
+			function () {
+				set(4, '.foo', 1)
+			}, error1);
 
-        assert.throws(
-            function () {
-                set(undefined, 'foo.', 1)
-            }, error1);
+		assert.throws(
+			function () {
+				set(undefined, 'foo.', 1)
+			}, error1);
 
-        assert.throws(
-            function () {
-                set({}, 4, 1);
+		assert.throws(
+			function () {
+				set({}, 4, 1);
+				}, error2);
 
-            }, error2);
-
-        assert.throws(
-            function () {
-                set({}, 'foo', 1)
-            }, error3);
-    });
+		assert.throws(
+			function () {
+				set({}, 'foo', 1)
+			}, error3);
+	});
 });
