@@ -128,53 +128,47 @@ QUnit.module('Тестируем функцию set', function () {
 
     QUnit.test('set работает правильно c невалидными данными', function (assert) {
 
-        let class1 = new class{};
+        const class1 = new class{},
+         	func1 = () => {return true},
+			func2 = function () {},
+		    error1 = Error("it is not an object!"),
+		    error2 = Error("wrong path type!"),
+		    error3 = Error("invalid path!")
 
-        let func1 = () => {return true};
-
-        let func2 = function () {}
-
-        assert.throws(
+		assert.throws(
             function () {
                 set(class1, '.foo12', 1)
-            },
-			Error("it is not an object!"));
+            }, error1);
 
         assert.throws(
             function () {
                 set(func1, '.foo', 1)
-            },
-			Error("it is not an object!"));
+            }, error1);
 
         assert.throws(
             function () {
                 set(func2, '.foo', 1)
-            },
-			Error("it is not an object!"));
+            }, error1);
 
         assert.throws(
             function () {
                 set(4, '.foo', 1)
-            },
-			Error("it is not an object!"));
+            }, error1);
 
         assert.throws(
             function () {
                 set(undefined, 'foo.', 1)
-            },
-			Error("it is not an object!"));
+            }, error1);
 
         assert.throws(
             function () {
                 set({}, 4, 1);
 
-            },
-			Error("wrong path type!"));
+            }, error2);
 
         assert.throws(
             function () {
                 set({}, 'foo', 1)
-            },
-			Error("invalid path!"));
+            }, error3);
     });
 });
