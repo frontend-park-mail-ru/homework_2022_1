@@ -32,4 +32,13 @@ QUnit.module('Тестируем функцию minmax', function () {
 	QUnit.test('minmax игнорирует обычный текст', function (assert) {
 		assert.deepEqual(minmax('1, -5.8 или 10, хотя 34 + -5.3 и 73'), [ -5.8, 73 ]);
 	});
+
+	QUnit.test('minmax игнорирует специальные символы', function (assert) {
+		assert.deepEqual(minmax(';$ 6 / 9 ### 10 #%'), [ 6, 10 ]);
+	});
+
+	QUnit.test('minmax игнорирует числа включенные в слово', function (assert) {
+		assert.deepEqual(minmax('привет я учусь на см5 а он на см12 4'), [ 4, 4 ]);
+	});
+
 });
