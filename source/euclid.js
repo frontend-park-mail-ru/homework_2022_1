@@ -6,14 +6,14 @@
  * @param {...number} numbers - input array of natural numbers.
  * @returns {number}
  * @example
- * euclid(2);
  * // returns 2
+ * euclid(2);
  * @example
- * euclid(7, 14, 21);
  * // returns 7
+ * euclid(7, 14, 21);
  * @example
- * euclid(13, 26, 5);
  * // returns 1
+ * euclid(13, 26, 5);
  */
 
 const euclid = (...numbers) => {
@@ -21,19 +21,20 @@ const euclid = (...numbers) => {
         throw Error('There are no arguments');
     }
 
-    if (!numbers.every(check => Number.isInteger(check) && check > 0)) {
+    if (!numbers.every(check => (Number.isInteger(check) || typeof check === 'bigint') && check > 0)) {
         throw Error('The arguments must be natural numbers');
     }
 
-    let result = numbers[0];
+    let nextNumbers;
+    let initialValue;
 
-    numbers.slice(1).forEach(number => {
-        while (result && number) {
-            result > number ? result %= number : number %= result;
+    [initialValue , ...nextNumbers] = numbers
+
+    return nextNumbers.reduce(function (accumulator, currentValue) {
+        while (accumulator && currentValue) {
+            accumulator > currentValue ? accumulator %= currentValue : currentValue %= accumulator;
         }
-
-        result += number;
-    });
-
-    return result;
+        console.log(currentValue, accumulator + currentValue);
+        return (accumulator + currentValue);
+    }, initialValue);
 }

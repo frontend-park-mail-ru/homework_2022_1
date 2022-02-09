@@ -32,9 +32,34 @@ QUnit.module('Тестируем функцию euclid', function () {
 	QUnit.test('Функция должна выбрасывать исключения при неправильных аргументах', function (assert) {
 		assert.throws(() => euclid(), 'There are no arguments');
 		assert.throws(() => euclid(null), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(undefined, 3), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(1, 2, null), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(2, "str", 1), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(4, 1, -1), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(23, 6, 2.5 ,7), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(Object.create({}, {p: { value: 5 }}), 1, 2, 3), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(2, 6, 4, Symbol("id")), 'The arguments must be natural numbers');
+	});
+
+	QUnit.test('Функция должна правильно находить НОД простых чисел', function (assert) {
+		assert.strictEqual(euclid(2, 3, 5), 1, 'euclid(2, 3, 5) === 1');
+		assert.strictEqual(euclid(41, 163, 193), 1, 'euclid(41, 163, 193) === 1');
+		assert.strictEqual(euclid(167, 23, 53, 107), 1, 'euclid(167, 23, 53, 107) === 1');
+		assert.strictEqual(euclid(199, 67), 1, 'euclid(199, 67) === 1');
+		assert.strictEqual(euclid(73, 79, 83, 89, 97, 101), 1, 'euclid(73, 79, 83, 89, 97, 101) === 1');
+	});
+
+	QUnit.test('Функция должна правильно находить НОД простых чисел', function (assert) {
+		assert.strictEqual(euclid(2, 3, 5), 1, 'euclid(2, 3, 5) === 1');
+		assert.strictEqual(euclid(41, 163, 193), 1, 'euclid(41, 163, 193) === 1');
+		assert.strictEqual(euclid(167, 23, 53, 107), 1, 'euclid(167, 23, 53, 107) === 1');
+		assert.strictEqual(euclid(199, 67), 1, 'euclid(199, 67) === 1');
+		assert.strictEqual(euclid(73, 79, 83, 89, 97, 101), 1, 'euclid(73, 79, 83, 89, 97, 101) === 1');
+	});
+
+	QUnit.test('Функция должна правильно находить НОД BigInt', function (assert) {
+		assert.strictEqual(euclid(BigInt(9007199254740990), BigInt(4503599627370495)), 4503599627370495n, 'euclid(BigInt(9007199254740990), BigInt(4503599627370495) === 4503599627370495n');
+		assert.strictEqual(euclid(BigInt(9007199254740990), 2n), 2n, 'euclid(BigInt(9007199254740990), 2n) === 2n');
+		assert.strictEqual(euclid(BigInt(900719925474099), 300239975158033n, 9007199254740990n), 300239975158033n, 'euclid(BigInt(900719925474099), 300239975158033n, 9007199254740990n) === 300239975158033n');
 	});
 });
