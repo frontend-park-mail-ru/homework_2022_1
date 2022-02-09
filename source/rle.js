@@ -39,7 +39,7 @@ function printCharacterAndLength(m, c) {
  * @returns {string} the transformed string. For example: 'AB2C4'
  */
 const rle = function (str) {
-  if (typeof str !== 'string') {
+  if (typeof str !== 'string' || arguments.length != 1) {
     return null;
   }
   str = str.replace(/(.)\1*/g, printCharacterAndLength);
