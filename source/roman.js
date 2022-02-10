@@ -2,6 +2,33 @@
 
 const TYPE_ERROR = 'Type Error';
 
+const DICT_ROMAN_TO_INT = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+};
+
+
+const objectFlip = (obj) => {
+    const ret = {};
+    Object.keys(obj).forEach(key => {
+        ret[obj[key]] = key;
+    });
+    return ret;
+}
+
+const DICT_INT_TO_ROMAN = objectFlip(DICT_ROMAN_TO_INT);
+
 /**
  * @function Конвертирует число из десятичной системы счисления в римскую или наоборот.
  * @param {number|string} inputNumber - число в римской или десятичной системе сичсления.
@@ -38,27 +65,13 @@ const convertIntToRoman = (inputNumber) => {
     if(typeof inputNumber !== 'number') {
         throw TypeError(TYPE_ERROR);
     }
-    const dictIntToRoman = {
-        1000: 'M',
-        900: 'CM',
-        500: 'D',
-        400: 'CD',
-        100: 'C',
-        90: 'XC',
-        50: 'L',
-        40: 'XL',
-        10: 'X',
-        9: 'IX',
-        5: 'V',
-        4: 'IV',
-        1: 'I'
-    };
+
     let res = '';
 
     while(inputNumber > 0) {
-        for(let i of Object.keys(dictIntToRoman).reverse()) {
+        for(let i of Object.keys(DICT_INT_TO_ROMAN).reverse()) {
             if(inputNumber >= i) {
-                res += dictIntToRoman[i];
+                res += DICT_INT_TO_ROMAN[i];
                 inputNumber -= i;
                 break;
             }
@@ -77,33 +90,18 @@ const convertRomanToInt = (inputNumber) => {
     if(typeof inputNumber !== 'string') {
         throw TypeError(TYPE_ERROR);
     }
-    const dictRomanToInt = {
-        M: 1000,
-        CM: 900,
-        D: 500,
-        CD: 400,
-        C: 100,
-        XC: 90,
-        L: 50,
-        XL: 40,
-        X: 10,
-        IX: 9,
-        V: 5,
-        IV: 4,
-        I: 1
-    };
 
     let buffInputNumber = inputNumber.toUpperCase();
     let res = 0;
 
     for (let i = 0; i < buffInputNumber.length - 1; ++i) {
-        if (dictRomanToInt[buffInputNumber[i]] < dictRomanToInt[buffInputNumber[i+1]]) {
-            res -= dictRomanToInt[buffInputNumber[i]];
+        if (DICT_ROMAN_TO_INT[buffInputNumber[i]] < DICT_ROMAN_TO_INT[buffInputNumber[i+1]]) {
+            res -= DICT_ROMAN_TO_INT[buffInputNumber[i]];
         } else {
-            res += dictRomanToInt[buffInputNumber[i]];
+            res += DICT_ROMAN_TO_INT[buffInputNumber[i]];
         }
     }
 
-    res += dictRomanToInt[buffInputNumber[buffInputNumber.length - 1]];
+    res += DICT_ROMAN_TO_INT[buffInputNumber[buffInputNumber.length - 1]];
     return res;
 }
