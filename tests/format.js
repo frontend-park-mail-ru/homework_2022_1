@@ -51,4 +51,14 @@ QUnit.module('Тестируем функцию format', function () {
 		assert.strictEqual(format(input, 2), expected2);
 		assert.strictEqual(format(input, 3), expected3);
 	});
+
+	QUnit.test('format работает правильно c пустыми данными при любом количестве столбцов', function (assert) {
+		const input = [];
+		const expected = '';
+
+		assert.strictEqual(format(input, 1), expected);
+		assert.strictEqual(format(input, 2), expected);
+		assert.strictEqual(format(input, 3), expected);
+	});
+
 });
