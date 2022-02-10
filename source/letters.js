@@ -16,26 +16,21 @@ let letters = (str, mode) => {
 
     if (mode !== undefined) {
         const indexMethod =  mode ? "indexOf" : "lastIndexOf";
-        arr = arr.filter((item, index) => arr[indexMethod](item) === index);
 
-        str = arr.join('');
-
-        return str;
+        return arr = arr.filter((item, index) => arr[indexMethod](item) === index).join('');
     }
 
     let counter = {};
 
-    for (let item of arr) {
-        (item in counter) ? counter[item]++ : counter[item] = 1;
-    }
+    arr.forEach((item) =>  (item in counter) ? counter[item]++ : counter[item] = 1);
 
     let result = [];
 
-    arr.map((item) => {
+    arr.reduce((prev, item) => {
         if (counter[item] === 1) {
             result.push(item);
         }
-    });
+    }, 0);
 
     str = result.join('');
 
