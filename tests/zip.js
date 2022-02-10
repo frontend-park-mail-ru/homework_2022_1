@@ -115,4 +115,31 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip({a: obj1}, {b: obj2}), {a: obj1, b: obj2});
 		assert.deepEqual(zip({a: obj2}, {b: obj2}), {a: obj2, b: obj2});
 	});
+	QUnit.test('Непредвиденные входные данные', function (assert) {
+		const samsaraObj = {
+			0:"S",
+			1:"a",
+			2:"m",
+			3:"s",
+			4:"a",
+			5:"r",
+			6:"a",
+			7:"'",
+			8:"s",
+			9:" ",
+			10:"s",
+			11:"e",
+			12:"c",
+			13:"r",
+			14:"e",
+			15:"t",
+		};
+		assert.deepEqual(zip("Samsara's secret"), samsaraObj, 'Результат - массив символов');
+		assert.deepEqual(zip(100), {}, 'Результат - пустой объект');
+		assert.deepEqual(zip(1.3), {}, 'Результат - пустой объект');
+		assert.deepEqual(zip(undefined), {}, 'Результат - пустой объект');
+		assert.deepEqual(zip(NaN), {}, 'Результат - пустой объект');
+		assert.deepEqual(zip(Infinity), {}, 'Результат - пустой объект');
+		assert.deepEqual(zip(null), {}, 'Результат - пустой объект');
+	});
 });
