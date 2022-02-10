@@ -9,8 +9,8 @@
 
 const inverse = (arr, arg = 0) => {
     /** input validation */
-    if (!Array.isArray(arr) || !Number.isInteger(arg)){
-        throw 'Error: incorrect arguments';
+    if (!Array.isArray(arr) || !Number.isInteger(arg) || Math.abs(arg) > arr.length) {
+        throw new Error("incorrect arguments :("); //Error: incorrect arguments';
     }
 
     /** find border of array for reverse */
