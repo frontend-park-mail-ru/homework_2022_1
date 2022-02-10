@@ -2,24 +2,42 @@
 
 const TYPE_ERROR = 'Type Error';
 
+/**
+ * @function Конвертирует число из десятичной системы счисления в римскую или наоборот.
+ * @param {number|string} inputNumber - число в римской или десятичной системе сичсления.
+ * @returns {number|string} Результат одной из двух конвертирующих функций.
+ */
 const roman = (inputNumber) => {
     if(typeof inputNumber === 'number') {
-        return(int_to_roman(inputNumber));
+        return(convertIntToRoman(inputNumber));
     } else if(typeof inputNumber === 'string' && inputNumber !== '') {
         if(isNumber(inputNumber)) {
-            return(int_to_roman(inputNumber));
+            return(convertIntToRoman(parseInt(inputNumber)));
         }
-        return roman_to_int(inputNumber);
+        return convertRomanToInt(inputNumber);
     } else {
         throw TypeError(TYPE_ERROR);
     }
 }
 
-const isNumber = (n) => {
-    return !isNaN(parseFloat(n)) && !isNaN(n - 0)
+/**
+ * @function Проверяет состоит ли строка из одних лишь чисел.
+ * @param {string} checkingString - строка которую проверяем на наличие чисел.
+ * @returns {boolean} Булевый результат проверки.
+ */
+const isNumber = (checkingString) => {
+    return !isNaN(parseFloat(checkingString)) && !isNaN(checkingString - 0)
 }
 
-const int_to_roman = (inputNumber) => {
+/**
+ * @function Переводит число из десятичной в римскую систему счисления.
+ * @param {number} inputNumber - число в десятичной системе счесления.
+ * @returns {string} Результат в римской системе счисления.
+ */
+const convertIntToRoman = (inputNumber) => {
+    if(typeof inputNumber !== 'number') {
+        throw TypeError(TYPE_ERROR);
+    }
     const dictIntToRoman = {
         1000: 'M',
         900: 'CM',
@@ -50,7 +68,15 @@ const int_to_roman = (inputNumber) => {
     return res;
 }
 
-const roman_to_int = (inputNumber) => {
+/**
+ * @function Переводит число из римской в десятичную систему счисления.
+ * @param {number} inputNumber - число в римской системе счесления.
+ * @returns {string} Результат в десятичной системе счисления.
+ */
+const convertRomanToInt = (inputNumber) => {
+    if(typeof inputNumber !== 'string') {
+        throw TypeError(TYPE_ERROR);
+    }
     const dictRomanToInt = {
         M: 1000,
         CM: 900,
@@ -66,17 +92,18 @@ const roman_to_int = (inputNumber) => {
         IV: 4,
         I: 1
     };
-    inputNumber = inputNumber.toUpperCase()
+
+    let buffInputNumber = inputNumber.toUpperCase();
     let res = 0;
 
-    for (let i = 0; i < inputNumber.length - 1; ++i) {
-        if (dictRomanToInt[inputNumber[i]] < dictRomanToInt[inputNumber[i+1]]) {
-            res -= dictRomanToInt[inputNumber[i]];
+    for (let i = 0; i < buffInputNumber.length - 1; ++i) {
+        if (dictRomanToInt[buffInputNumber[i]] < dictRomanToInt[buffInputNumber[i+1]]) {
+            res -= dictRomanToInt[buffInputNumber[i]];
         } else {
-            res += dictRomanToInt[inputNumber[i]];
+            res += dictRomanToInt[buffInputNumber[i]];
         }
     }
 
-    res += dictRomanToInt[inputNumber[inputNumber.length - 1]];
+    res += dictRomanToInt[buffInputNumber[buffInputNumber.length - 1]];
     return res;
 }
