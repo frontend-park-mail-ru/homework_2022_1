@@ -53,10 +53,13 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 	QUnit.test('Тест на неверные входные данные', function (assert) {
 		const input = 770;
+		const output = "The input is incorrect!"
 
-		const output = null;
-
-		assert.deepEqual(anagram(input), output);
+		try {
+			anagram(input)
+		} catch (error) {
+			assert.deepEqual(error, output);
+		}
 	});
 
 	QUnit.test('Функция работает правильно с англ словами', function (assert) {
@@ -74,7 +77,7 @@ QUnit.module('Тестируем функцию anagram', function () {
 
 		assert.deepEqual(anagram(input), output);
 	});
-	
+
 	QUnit.test('Функция работает правильно со словосочетаниями и предложениями', function (assert) {
 		const input = [
 			'eleven plus two.', 'elegant man', 'over fifty',
@@ -89,6 +92,14 @@ QUnit.module('Тестируем функцию anagram', function () {
 			[ 'forty five', 'over fifty' ],
 			[ 'school master', 'the classroom' ]
 		];
+
+		assert.deepEqual(anagram(input), output);
+	});
+
+	QUnit.test('Функция работает правильно если нет анаграмм', function (assert) {
+		const input = ['eleven plus two.', 'elegant man', 'over fifty'];
+
+		const output = [];
 
 		assert.deepEqual(anagram(input), output);
 	});
