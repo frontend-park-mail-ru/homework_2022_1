@@ -7,15 +7,11 @@
  */
 
 const euclid = function(...numbers){
-   let x = numbers[0];
-   let result = numbers.reduce(function(x, b) {
-        let y = b;
-        console.log(y);
+   let result = numbers.reduce(function(x, y) {
         while (x && y){
             x > y ? x %= y : y %= x;
         }
-        x += y;
-        return x;
+        return x + y;
    });
    return result;
 }
