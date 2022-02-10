@@ -14,30 +14,30 @@
 let letters = (str, mode) => {
     let arr = str.split('');
 
-    if (mode === undefined) {
-        let counter = {};
+    if (mode !== undefined) {
+        const indexMethod =  mode ? "indexOf" : "lastIndexOf";
+        arr = arr.filter((item, index) => arr[indexMethod](item) === index);
 
-        for (let item of arr) {
-            (item in counter) ? counter[item]++ : counter[item] = 1;
-        }
-
-        let result = [];
-
-        for (let item of arr) {
-            if (counter[item] === 1) {
-                result.push(item);
-            }
-        }
-
-        str = result.join('');
+        str = arr.join('');
 
         return str;
     }
 
-    arr = (mode) ? arr.filter((item, index) => arr.indexOf(item) === index) :
-        arr.filter((item, index) => arr.lastIndexOf(item) === index);
+    let counter = {};
 
-    str = arr.join('');
+    for (let item of arr) {
+        (item in counter) ? counter[item]++ : counter[item] = 1;
+    }
+
+    let result = [];
+
+    arr.map((item) => {
+        if (counter[item] === 1) {
+            result.push(item);
+        }
+    });
+
+    str = result.join('');
 
     return str;
 };
