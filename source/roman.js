@@ -18,7 +18,11 @@ const DICT_ROMAN_TO_INT = {
     I: 1
 };
 
-
+/**
+ * @function Меняет key и value в словаре.
+ * @param {object} obj - принимает словарь.
+ * @returns {object} Реверснутый словарь.
+ */
 const objectFlip = (obj) => {
     const ret = {};
     Object.keys(obj).forEach(key => {
