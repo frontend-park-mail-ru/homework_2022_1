@@ -2,7 +2,7 @@
 
 /**
  * Checking if input is correct (array of strings)
- * @param {*} words input data which requires validation for correct future usage
+ * @param {*} words - input data which requires validation for correct future usage
  * @returns {boolean} the result of validation (true if input is correct, false if input is incorrect)
  */
 const isValidInput = (words) => {
@@ -19,7 +19,7 @@ const isValidInput = (words) => {
 
 /**
  * Creating a key from the word
- * @param {string} word the word from which we are genereting the key 
+ * @param {string} word - the word from which we are genereting the key 
  * @returns {string} the key composed of sorted word characters
  * @example wordToKey('cadb');
  *          returns 'abcd'
@@ -28,8 +28,8 @@ const wordToKey = (word) => word.split('').sort().join('');
 
 /**
  * Finding anagrams in array of strings  
- * @param {string[]} words array of words(string) where we are searching anagrams
- * @returns {string[string[]]} sorted array of arrays with anagrams
+ * @param {Array} words - array of words(string) where we are searching anagrams
+ * @returns {Array} sorted array of arrays with anagrams
  * @example anagram(['cadb', 'bdac', 'edf', 'abc', 'def']);
  *          returns [['bdac', 'cadb'], ['def', 'edf']]
  */
