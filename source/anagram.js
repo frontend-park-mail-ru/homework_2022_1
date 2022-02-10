@@ -1,24 +1,54 @@
 'use strict';
 
-const anagram = function (words) {
+/**
+ * Finding pairs of anagramms in array of strings
+ * @function anagram
+ * @param {object} words 
+ * @returns {object} array of arrays with pairs of anagramms
+ */
+const anagram = (words) => {
+    if (!isValidInput(words)) {
+        return null;
+    }
     words.sort();
-
-    let wordsWithSortedLetters = []
-    for (let i = 0; i < words.length; i++) {
-        wordsWithSortedLetters.push(sortLettersInWord(words[i]));
-    }
     
+    let map = new Map();
     let result = [];
-    for (let i = 0; i < words.length; i++) {
-        for (let j = i + 1; j < words.length; j++) {
-            if (wordsWithSortedLetters[i] == wordsWithSortedLetters[j]) {
-                result.push([words[i], words[j]]);
+    
+    words.forEach((word) => {
+        if (map.has(wordToKey(word))) {
+            result.push([map.get(wordToKey(word)), word])
         }
-    }
-}
-    return result;
+        map.set(wordToKey(word), word);
+    })
+        
+    return result.sort();
 }
 
-function sortLettersInWord(word) {
-    return word.split('').sort().join('');
+/**
+ * Checking if input is correct (array of strings)
+ * @function isValidInput
+ * @param {object} words
+ * @returns {boolean} the result of validation (true if input is correct, false if input is incorrect)
+ */
+const isValidInput = (words) => {
+    if (typeof (words) != "object") {
+        return false;
+    }
+    words.forEach((word) => {
+        if (typeof (word) != "string") {
+            return false
+        }
+    })
+    return true;
 }
+
+/**
+ * Creating a key from the word
+ * @function wordToKey
+ * @param {string} word
+ * @returns {string} the key composed of sorted word characters
+ * @example wordToKey(cadb);
+ *          returns abcd
+ */
+const wordToKey = (word) => word.split('').sort().join('');
