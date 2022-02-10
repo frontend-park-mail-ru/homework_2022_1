@@ -51,8 +51,8 @@ QUnit.module('Тестируем функцию inverse', function () {
 		const err = new Error('incorrect arguments :(');
 
 		assert.throws(() => inverse(), err);
+		assert.throws(() => inverse(1), err);
 		assert.throws(() => inverse(1, 2), err);
 		assert.throws(() => inverse([1, 2, 3], 'x'), err);
-		assert.throws(() => inverse([1], 10), err);
 	});
 });

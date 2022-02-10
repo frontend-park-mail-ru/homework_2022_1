@@ -9,7 +9,7 @@
 
 const inverse = (arr, arg = 0) => {
     /** input validation */
-    if (!Array.isArray(arr) || !Number.isInteger(arg) || Math.abs(arg) > arr.length) {
+    if (!Array.isArray(arr) || !Number.isInteger(arg)) {
         throw new Error("incorrect arguments :("); //Error: incorrect arguments';
     }
 
@@ -19,10 +19,6 @@ const inverse = (arr, arg = 0) => {
 
     /** reverse array */
     return arr.map((item, index, arr) => {
-        if (left <= index && index < right) {
-            return arr[right + left - index - 1];
-        } else {
-            return item;
-        }
+        return (left <= index && index < right) ? arr[right + left - index - 1] : item;
     });
 }
