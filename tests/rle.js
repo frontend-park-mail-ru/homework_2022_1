@@ -14,6 +14,8 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle('AAAAAAAAAAAAAADAAAAAAAAAAAAAA'), 'A9A5DA9A5');
 		assert.strictEqual(rle('AAAAAAAAAAAAAAAAAA'), 'A9A9');
 		assert.strictEqual(rle('BACCCCCCCCCCCCCCCCCCCCSDD'), 'BAC9C9C2SD2');
+		assert.strictEqual(rle('AAAAAAAAAA'), 'A9A');
+		assert.strictEqual(rle('AAAAAAAAA'), 'A9');
 	});
 	QUnit.test('rle правильно обрабатывает невалидные данные', function (assert) {
 		assert.strictEqual(rle(5), null);

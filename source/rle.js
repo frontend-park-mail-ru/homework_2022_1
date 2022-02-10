@@ -1,36 +1,38 @@
 'use strict';
 
-/** @global
- *  @constant
- *  @type {string}
- *  @default
- */
-
 /**
  * The function prints the character and the number of repetitions,
  * if the length exceeds 9, the function will print several times "X9" and at the end,
  * if necessary, "XN", where N is the remainder of the sequence length divided by 9.
- * @param {string} m  Sequence of identical characters
- * @param {string} c  The symbol that makes up the sequence
+ * @param {string} charSequence  Sequence of identical characters
+ * @param {string} character  The symbol that makes up the sequence
  * @returns {string} A string that replaces the original sequence
  */
-function printCharacterAndLength(m, c) {
-  if (m.length > 1 && m.length < 10) {
-    return c + m.length;
+function printCharacterAndLength(charSequence, character) {
+  if (charSequence.length > 1 && charSequence.length < 10) {
+    return character + charSequence.length;
   }
-  if (m.length >= 10) {
-    let ninesCounter = (m.length - (m.length % 9)) / 9;
+
+  if (charSequence.length >= 10) {
+    let ninesCounter = (charSequence.length - (charSequence.length % 9)) / 9;
     let result = '';
+
     for (let i = 0; i < ninesCounter; ++i) {
-      result += c + '9';
+      result += character + '9';
     }
-    if (m.length % 9 != 0) {
-      result += c + String(m.length % 9);
+
+    if (charSequence.length % 9 > 1) {
+      result += character + String(charSequence.length % 9);
+      return result;
+    }
+
+    if(charSequence.length % 9 == 1){
+      result += character;
       return result;
     }
     return result;
   }
-  return c;
+  return character;
 }
 
 /**
