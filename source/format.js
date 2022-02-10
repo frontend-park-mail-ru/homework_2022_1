@@ -20,14 +20,8 @@ const format = (numbers, columnNumbers) => {
 
     for (let i = 0; i < numbers.length; i += columnNumbers) {
         for (let j = 0; j < columnNumbers; j++) {
-            if (j == 0) {
-                if (numbers[i + j] !== undefined) {
-                    output += (' '.repeat(highestMultiIndent[j]  - `${numbers[i + j]}`.length) + numbers[i + j]);
-                }
-            } else {
-                if (numbers[i + j] !== undefined) {
-                    output += (' '.repeat(highestMultiIndent[j] + 1 - `${numbers[i + j]}`.length) + numbers[i + j]);
-                }
+            if (numbers[i + j] !== undefined) {
+                output += ((j == 0)? (' '.repeat(highestMultiIndent[j]  - `${numbers[i + j]}`.length) + numbers[i + j]) : (' '.repeat(highestMultiIndent[j] + 1 - `${numbers[i + j]}`.length) + numbers[i + j]));
             }
         }
         if ((i + columnNumbers) < numbers.length) {
