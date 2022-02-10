@@ -1,10 +1,10 @@
 'use strict';
 
 /**
- * Finding pairs of anagramms in array of strings
+ * Finding anagrams in array of strings
  * @function anagram
  * @param {object} words 
- * @returns {object} array of arrays with pairs of anagramms
+ * @returns {object} array of arrays with anagrams
  */
 const anagram = (words) => {
     if (!isValidInput(words)) {
@@ -16,13 +16,19 @@ const anagram = (words) => {
     let result = [];
     
     words.forEach((word) => {
-        if (map.has(wordToKey(word))) {
-            result.push([map.get(wordToKey(word)), word])
+        if (!map.has(wordToKey(word))) {
+        map.set(wordToKey(word), new Array())
         }
-        map.set(wordToKey(word), word);
+        map.get(wordToKey(word)).push(word);
     })
-        
-    return result.sort();
+    
+    map.forEach((anagrams, key) => {
+        if (anagrams.length < 2) {
+            map.delete(key)
+        }
+    })
+
+    return Array.from(map.values());
 }
 
 /**
