@@ -41,4 +41,8 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax('привет я учусь на см5 а он на см12 4'), [ 4, 4 ]);
 	});
 
+	QUnit.test('minmax игнорирует массивы', function (assert) {
+		assert.deepEqual(minmax([123, 143, 5656]), [ undefined, undefined ]);
+	});
+
 });

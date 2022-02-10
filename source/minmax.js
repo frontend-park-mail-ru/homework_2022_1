@@ -3,26 +3,30 @@
 /**
  * find min and max value in string
  * @param {string} value
- * @returns {Array<number>}
+ * @returns {Array<number>[minValue, maxValue]}
  */
 const minmax = (value) => {
     let minmax = [undefined, undefined];
     if (value === '') {
         return minmax;
     }
-    const splitValue = value.split(' ');
+    if (Array.isArray(value)) {
+        return minmax;
+    }
 
-    splitValue.forEach((item) => {
-        const number = Number(item);
-        if (isNaN(number)) {
-            return;
+    const splitValue = value.split(' ');
+    let politeValue = splitValue.filter((item) => !isNaN(Number(item)));
+
+    minmax = politeValue.reduce(([min, max], current) => {
+        let numberCurrent = Number(current);
+        if (!min || numberCurrent === -Infinity || min > numberCurrent) {
+            min = numberCurrent;
         }
-        if (!minmax[0] || number === -Infinity || minmax[0] > number) {
-            minmax[0] = number;
+        if (!max || numberCurrent === Infinity || max < numberCurrent) {
+            max = numberCurrent;
         }
-        if (!minmax[1] || number === Infinity || minmax[1] < number) {
-            minmax[1] = number;
-        }
-    });
+        return [min, max];
+    }, [undefined, undefined])
+
     return minmax;
 }
