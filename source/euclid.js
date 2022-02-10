@@ -16,25 +16,28 @@
  * euclid(13, 26, 5);
  */
 
+const isValidType  = (element) => (Number.isInteger(element) || typeof element === 'bigint');
+const isAboveZero  = (element) => element > 0;
+
 const euclid = (...numbers) => {
     if (numbers.length === 0) {
-        throw Error('There are no arguments');
+        throw new TypeError('There are no arguments');
     }
 
-    if (!numbers.every(check => (Number.isInteger(check) || typeof check === 'bigint') && check > 0)) {
-        throw Error('The arguments must be natural numbers');
+    if (!numbers.every(isValidType)) {
+        throw new TypeError('The arguments must be natural numbers');
     }
 
-    let nextNumbers;
-    let initialValue;
+    if (!numbers.every(isAboveZero)) {
+        throw new RangeError('The arguments must be natural numbers');
+    }
 
-    [initialValue , ...nextNumbers] = numbers
+    const [initialValue , ...nextNumbers] = numbers
 
-    return nextNumbers.reduce(function (accumulator, currentValue) {
+    return nextNumbers.reduce((accumulator, currentValue) => {
         while (accumulator && currentValue) {
             accumulator > currentValue ? accumulator %= currentValue : currentValue %= accumulator;
         }
-        console.log(currentValue, accumulator + currentValue);
         return (accumulator + currentValue);
     }, initialValue);
 }

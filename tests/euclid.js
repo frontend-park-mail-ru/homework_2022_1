@@ -36,17 +36,10 @@ QUnit.module('Тестируем функцию euclid', function () {
 		assert.throws(() => euclid(1, 2, null), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(2, "str", 1), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(4, 1, -1), 'The arguments must be natural numbers');
+		assert.throws(() => euclid(-4, -1, -1), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(23, 6, 2.5 ,7), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(Object.create({}, {p: { value: 5 }}), 1, 2, 3), 'The arguments must be natural numbers');
 		assert.throws(() => euclid(2, 6, 4, Symbol("id")), 'The arguments must be natural numbers');
-	});
-
-	QUnit.test('Функция должна правильно находить НОД простых чисел', function (assert) {
-		assert.strictEqual(euclid(2, 3, 5), 1, 'euclid(2, 3, 5) === 1');
-		assert.strictEqual(euclid(41, 163, 193), 1, 'euclid(41, 163, 193) === 1');
-		assert.strictEqual(euclid(167, 23, 53, 107), 1, 'euclid(167, 23, 53, 107) === 1');
-		assert.strictEqual(euclid(199, 67), 1, 'euclid(199, 67) === 1');
-		assert.strictEqual(euclid(73, 79, 83, 89, 97, 101), 1, 'euclid(73, 79, 83, 89, 97, 101) === 1');
 	});
 
 	QUnit.test('Функция должна правильно находить НОД простых чисел', function (assert) {
