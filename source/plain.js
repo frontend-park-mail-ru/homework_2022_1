@@ -11,9 +11,5 @@
  *
  */
 const plain = arr => {
-
-    return (Array.isArray(arr)) ? arr.reduce(function (arrMerg, curr) {
-        return arrMerg.concat(plain(curr));
-    }, []) : arr;
-
+    return (Array.isArray(arr)) ? arr.reduce((arrMerg, curr) => arrMerg.concat(plain(curr)), []) : arr;
 };
