@@ -40,7 +40,6 @@ const anagram = (words) => {
     words.sort();
     
     let map = new Map();
-    let result = [];
     
     words.forEach((word) => {
         if (!map.has(wordToKey(word))) {
