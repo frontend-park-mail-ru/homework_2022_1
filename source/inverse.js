@@ -22,13 +22,13 @@ const inverse = (inputArray, offsetIndex = 0) => {
 
     if (offsetIndex > 0)
     {
-        let unchangalbeArrPart = inputArray.splice(0, offsetIndex);
+        const unchangalbeArrPart = inputArray.splice(0, offsetIndex);
         inputArray.reverse();
         return unchangalbeArrPart.concat(inputArray);
     }
     else
     {
-        let unchangalbeArrPart = inputArray.splice(offsetIndex);
+        const unchangalbeArrPart = inputArray.splice(offsetIndex);
         inputArray.reverse();
         return inputArray.concat(unchangalbeArrPart);
     }
