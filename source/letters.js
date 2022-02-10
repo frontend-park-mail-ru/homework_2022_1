@@ -30,7 +30,7 @@ let letters = (str, mode) => {
         if (counter[item] === 1) {
             result.push(item);
         }
-    }, 0);
+    }, []);
 
     str = result.join('');
 
