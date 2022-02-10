@@ -142,7 +142,25 @@ QUnit.module('Тестируем функцию set', function () {
 			}, 'bad path');
 	});
 
-	
+	QUnit.test('set работает правильно c плохими объектами', function (assert) {
+		const obj1 = 2;
+
+		const obj2 = 'string';
+
+		const obj3 = null;
+
+		assert.throws(function () {
+			set(obj1, 1, 1)
+		}, 'It s not an object');
+
+		assert.throws(function () {
+			set(obj2, 1, 1)
+		}, 'It s not an object');
+
+		assert.throws(function () {
+			set(obj3, 1, 1)
+		}, 'It s not an object');
+	});
 
 
 });
