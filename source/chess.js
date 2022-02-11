@@ -11,26 +11,10 @@ const chess = (inputSize) => {
         return null;
     }
 
-    let strWithBegin = "";
-    let strWithoutBegin = "";
+    let strWithBegin = '* '.repeat(size/2).concat((size % 2) ? '*\n' : '\n');
+    let strWithoutBegin = ' *'.repeat(size/2).concat((size % 2) ? ' \n' : '\n');
 
-    for (let i = 0; i < size; i++) {
-        if (i % 2) {
-            strWithoutBegin += "*";
-            strWithBegin += " ";
-        } else {
-            strWithoutBegin += " ";
-            strWithBegin += "*";
-        }
-    }
-
-    strWithBegin += "\n";
-    strWithoutBegin += "\n";
-
-    let outputStr = "";
-    Array.from(Array(size)).forEach((iter, index) => {
-        outputStr += (index % 2) ? strWithoutBegin : strWithBegin;
-    })
+    let outputStr = `${strWithBegin}${strWithoutBegin}`.repeat(size/2).concat((size % 2) ? strWithBegin : "");
 
     return outputStr;
 }
