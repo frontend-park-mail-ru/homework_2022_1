@@ -51,6 +51,6 @@ QUnit.module('Тестируем функцию minmax', function () {
 	});
 
 	QUnit.test('minmax не игнорирует строки через new', function (assert) {
-		assert.deepEqual(minmax(new String('12 hi 9')), [9, 12 ]);
+		assert.deepEqual(minmax(new String('12 hi 9')), [ 9, 12 ]);
 	});
 });
