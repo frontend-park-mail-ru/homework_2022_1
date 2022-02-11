@@ -24,9 +24,7 @@ const letters = (str, mode) => {
     arr.forEach((item) =>  (item in counter) ? counter[item]++ : counter[item] = 1);
 
     return arr.reduce((result, item) => {
-        if (counter[item] === 1) {
-            result.push(item);
-        }
+        counter[item] === 1 && result.push(item);
 
         return result;
     }, []).join('');
