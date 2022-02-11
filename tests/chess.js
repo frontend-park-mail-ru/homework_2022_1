@@ -58,4 +58,9 @@ QUnit.module('Тестируем функцию chess', function () {
 		assert.strictEqual(chess('-1'), null);
 	});
 
+	QUnit.test('Неправильный ввод', function (assert) {
+		assert.strictEqual(chess('text'), null);
+		assert.strictEqual(chess('some bad string without number'), null);
+	});
+
 });

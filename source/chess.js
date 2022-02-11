@@ -6,15 +6,15 @@
  * @returns {string | null}
  */
 const chess = (inputSize) => {
-    inputSize = +inputSize;
-    if (inputSize <= 1) {
+    let size = +inputSize;
+    if (isNaN(size) || size <= 1) {
         return null;
     }
 
     let strWithBegin = "";
     let strWithoutBegin = "";
 
-    for (let i = 0; i < inputSize; i++) {
+    for (let i = 0; i < size; i++) {
         if (i % 2) {
             strWithoutBegin += "*";
             strWithBegin += " ";
@@ -28,13 +28,9 @@ const chess = (inputSize) => {
     strWithoutBegin += "\n";
 
     let outputStr = "";
-    for (let i = 0; i < inputSize; i++) {
-        if (i % 2) {
-            outputStr += strWithoutBegin;
-        } else {
-            outputStr += strWithBegin;
-        }
-    }
+    Array.from(Array(size)).forEach((iter, index) => {
+        outputStr += (index % 2) ? strWithoutBegin : strWithBegin;
+    })
 
     return outputStr;
 }
