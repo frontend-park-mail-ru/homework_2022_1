@@ -20,7 +20,7 @@ const isValidType  = (element) => (Number.isInteger(element) || typeof element =
 const isAboveZero  = (element) => element > 0;
 
 const euclid = (...numbers) => {
-    if (numbers.length === 0) {
+    if (!numbers.length) {
         throw new TypeError('There are no arguments');
     }
 
