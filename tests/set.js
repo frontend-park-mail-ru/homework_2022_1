@@ -127,19 +127,19 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.throws(function () {
 				set(object, 1, 1)
-			}, 'The second argument si not a string');
+			}, 'The second argument is not a string');
 
 		assert.throws(function () {
 				set(object2, 1, 1)
-			}, 'The second argument si not a string');
+			}, 'The second argument is not a string');
 
 		assert.throws(function () {
 				set(object3, 1, 1)
-			}, 'The second argument si not a string');
+			}, 'The second argument is not a string');
 
 		assert.throws(function () {
 				set(object4, 1, 1)
-			}, 'The second argument si not a string');
+			}, 'The second argument is not a string');
 	});
 
 	QUnit.test('set работает правильно c плохими объектами', function (assert) {

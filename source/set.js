@@ -13,7 +13,7 @@ const set = (obj, path, value) => {
     }
 
     if (!(path instanceof String) && typeof(path) !== 'string') {
-        throw new TypeError('The second argument si not a string');
+        throw new TypeError('The second argument is not a string');
     }
 
     const newPath = path.split('.');
