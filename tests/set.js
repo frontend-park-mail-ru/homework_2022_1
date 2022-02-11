@@ -127,19 +127,19 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.throws(function () {
 				set(object, 1, 1)
-			}, 'bad path');
+			}, 'The second argument si not a string');
 
 		assert.throws(function () {
 				set(object2, 1, 1)
-			}, 'bad path');
+			}, 'The second argument si not a string');
 
 		assert.throws(function () {
 				set(object3, 1, 1)
-			}, 'bad path');
+			}, 'The second argument si not a string');
 
 		assert.throws(function () {
 				set(object4, 1, 1)
-			}, 'bad path');
+			}, 'The second argument si not a string');
 	});
 
 	QUnit.test('set работает правильно c плохими объектами', function (assert) {
@@ -151,15 +151,15 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.throws(function () {
 			set(obj1, 1, 1)
-		}, 'It s not an object');
+		}, 'The first argument is not an object');
 
 		assert.throws(function () {
 			set(obj2, 1, 1)
-		}, 'It s not an object');
+		}, 'The first argument is not an object');
 
 		assert.throws(function () {
 			set(obj3, 1, 1)
-		}, 'It s not an object');
+		}, 'The first argument is not an object');
 	});
 
 	QUnit.test('set правильно создаёт свойства у объектов', function (assert) {
