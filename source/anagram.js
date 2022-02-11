@@ -4,38 +4,43 @@
  * 
  * @param {string} word Слово, буквы которого будем сортировать
  */
-let sortWord = (word) => word.split('').sort().join('');
+const sortWord = (word) => word.split('').sort().join('');
+
+/**
+ * Накапливает в cur_result пары "отсортированный набор букв": "слова, которые 
+ * можно из них получить"
+ * Предназначена для использования в функции reduce
+ * 
+ * @param {array} cur_result Массив пар
+ * @param {string} word Текущее слово, которое проверится на анаграммы 
+ *
+ */
+const process = (cur_result, word) => {
+  const wordSorted = sortWord(word);
+  if (cur_result.hasOwnProperty(wordSorted)) {
+    cur_result[wordSorted].push(word);
+  } else {
+    cur_result[wordSorted] = [ word ];
+  }
+  return cur_result
+};
+
 
 /**
  *  Возвращает массив групп-анаграмм, полученный из переданного массива. Массив и группы отсортированы
  * 
- * @param {array} array Массив слов, который будет разбиваться на группы-анаграммы
+ * @param {array} wordList Массив слов, который будет разбиваться на группы-анаграммы
  */
-function anagram(array) {
-    let result = {};
+const anagram = (wordList) => {
+  
+  let anagramGroup = wordList.reduce(process, {});
+  if (anagramGroup) {
+    anagramGroup = Object.values(anagramGroup).filter((wordList) => wordList.length > 1).map(wordList => wordList.sort())
+  }
+  if (anagramGroup.length == 0) {
+    return null;
+  }
 
-    function process(word)
-    {
-        let wordSorted = sortWord(word);
-        if (result.hasOwnProperty(wordSorted))
-        {
-            result[wordSorted].push(word);
-        }
-        else
-        {
-            result[wordSorted] = [ word ];
-        }
-    }
+  return anagramGroup.sort((a, b) => a[0] > b[0] ? 1 : a[0] < b[0] ? -1 : 0);
+};
 
-    array.forEach(process); 
-    
-    if (result)
-    {
-        result = Object.values(result);
-        result = result.filter((array) => array.length >= 2)
-        result.map(array => array.sort())
-    }
-    result = result.length === 0 ? null : 
-        result.sort((a, b) => a[0] > b[0] ? 1 : a[0] < b[0] ? -1 : 0);
-    return result;
-}
