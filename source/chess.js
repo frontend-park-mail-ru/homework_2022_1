@@ -6,7 +6,7 @@
  * @returns {string | null}
  */
 const chess = (inputSize) => {
-    let size = +inputSize;
+    const size = +inputSize;
     if (isNaN(size) || size <= 1) {
         return null;
     }
