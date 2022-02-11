@@ -21,16 +21,11 @@
 */
 const zip = (...objs) => {
     if (objs.length <= 0) {
-        throw new Error("Nothing to merge");
+        throw new Error('Nothing to merge');
     }
-    if (
-        !objs.every(
-            (obj) =>
-                obj !== undefined && obj !== null &&
-                (obj.__proto__ === null || obj.__proto__.constructor === Object)
-        )
-    ) {
-        throw new TypeError("Only pure objects can be merged");
+
+    if (objs.some((obj) => !obj || obj.__proto__.constructor !== Object)) {
+        throw new TypeError('Only pure objects can be merged');
     }
 
     return objs.reduce((acc, cur) => ({ ...cur, ...acc }), {});

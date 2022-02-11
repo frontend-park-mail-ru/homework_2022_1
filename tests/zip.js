@@ -76,11 +76,11 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция не работает с пустым списком параметров', function (assert) {
-		assert.throws(zip, new Error("Nothing to merge"));
+		assert.throws(zip, new Error('Nothing to merge'));
 	});
 
 	QUnit.test('Функция не работает с примитивными типами', function (assert) {
-        const error = new TypeError("Only pure objects can be merged");
+		const error = new TypeError('Only pure objects can be merged');
 		assert.throws(() => zip('1234', 'zzzz5'), error, 'Функция не работает со строками');
 		assert.throws(() => zip(1), error, 'Функция не работает с целыми числами');
 		assert.throws(() => zip(1.1), error, 'Функция не работает с вещественными числами');
@@ -90,12 +90,12 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция не работает с null', function (assert) {
-        const error = new TypeError("Only pure objects can be merged");
+		const error = new TypeError('Only pure objects can be merged');
 		assert.throws(() => zip(null), error, 'Функция не работает с null, несмотря на то, что typeof null === \'object\'');
 	});
 
 	QUnit.test('Функция не работает с экземплярами классов', function (assert) {
-        const error = new TypeError("Only pure objects can be merged");
+		const error = new TypeError('Only pure objects can be merged');
 		assert.throws(() => zip([1, 2, 3, 4], ['z', 'z', 'z', 'z', 5]), error, 'Функция не работает с массивами');
 	});
 });
