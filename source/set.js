@@ -8,16 +8,9 @@
  * @returns {object} - new object
  */
 const set = (obj, path, value) => {
-    if (!(obj instanceof Object)) {
+    if (typeof(obj) !== 'object') {
         throw new Error('It s not an object');
     }
-
-    /*if (typeof(path) !== 'string'){
-        throw new Error('bad path');
-    }*/
-    /*if (Object.prototype.toString.call(path) !== '[object String]') {
-        throw new Error('bad path');
-    }*/
 
     if (!(path instanceof String) && typeof(path) !== 'string') {
         throw new Error('bad path');
@@ -29,13 +22,12 @@ const set = (obj, path, value) => {
         if (list.hasOwnProperty(key)) {
             list[key] = list[key];
         } else {
-            list[key] = {}
+            list[key] = {};
         }
         return list[key];
     }, obj);
 
-    let last = newPath.at(-1);
 
-    newObj[last] = value;
+    newObj[newPath.at(-1)] = value;
     return obj;
 }
