@@ -4,6 +4,7 @@
  * Inverse elements in array.
  * @param {Array<>} inputArray - Array for inversing
  * @param {number} offsetIndex - Index of unchangeable part of array (if negative, counts from end of array)
+ * @returns {Array<>} Inversed array
  * @example
  * // returns [3, 2, 1]
  * inverse([1, 2, 3]); 
@@ -26,10 +27,8 @@ const inverse = (inputArray, offsetIndex = 0) => {
         inputArray.reverse();
         return unchangalbeArrPart.concat(inputArray);
     }
-    else
-    {
-        const unchangalbeArrPart = inputArray.splice(offsetIndex);
-        inputArray.reverse();
-        return inputArray.concat(unchangalbeArrPart);
-    }
+    
+    const unchangalbeArrPart = inputArray.splice(offsetIndex);
+    inputArray.reverse();
+    return inputArray.concat(unchangalbeArrPart);
 }
