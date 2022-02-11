@@ -8,7 +8,7 @@
  * @returns {string}
  */
 const generateRepeatedStr = (line, repeatedNum, ending) => {
-    return `${line.repeat(repeatedNum)}${ending}\n`;
+    return `${line.repeat(repeatedNum)}${ending}`;
 }
 
 /**
@@ -22,12 +22,13 @@ const chess = (inputSize) => {
         return null;
     }
     const repeatedNum = size / 2;
-    const endingNeeded = size % 2;
+    const isEndingNeeded = size % 2;
 
-    const strWithBegin = generateRepeatedStr('* ', repeatedNum, (endingNeeded) ? '*' : '');
-    const strWithoutBegin = generateRepeatedStr(' *', repeatedNum, (endingNeeded) ? ' ' : '');
+    const strWithBegin = generateRepeatedStr('* ', repeatedNum, isEndingNeeded ? '*\n' : '\n');
+    const strWithoutBegin = generateRepeatedStr(' *', repeatedNum, isEndingNeeded ? ' \n' : '\n');
 
-    const outputStr = `${(strWithBegin + strWithoutBegin).repeat(repeatedNum)}${(endingNeeded) ? strWithBegin : ''}`;
+    const outputStr = generateRepeatedStr(strWithBegin + strWithoutBegin, repeatedNum,
+        isEndingNeeded ? strWithBegin : '');
 
     return outputStr;
 }
