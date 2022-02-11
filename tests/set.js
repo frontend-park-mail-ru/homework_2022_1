@@ -162,5 +162,44 @@ QUnit.module('Тестируем функцию set', function () {
 		}, 'It s not an object');
 	});
 
+	QUnit.test('set правильно создаёт свойства у объектов', function (assert) {
+		const object = {
+			deep: {
+				hested: {
+						field: 'baz'
+				}
+			}
+		};
 
+		const newObject = {
+			deep: {
+				hested: {
+					field: 'baz'
+				}
+			},
+			band: 1
+		};
+
+		const object2 = {
+			deep: 1,
+		};
+
+		const newObject2 = {
+			deep: 1,
+			band: 'good'
+		}
+
+		const object3 = {
+			deep: null,
+		};
+
+		const newObject3 = {
+			deep: null,
+			band: null
+		}
+
+		assert.deepEqual(set(object, '.band', 1), newObject);
+		assert.deepEqual(set(object2, '.band', 'good'), newObject2);
+		assert.deepEqual(set(object3, '.band', null), newObject3);
+	});
 });

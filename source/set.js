@@ -9,11 +9,11 @@
  */
 const set = (obj, path, value) => {
     if (typeof(obj) !== 'object') {
-        throw new Error('It s not an object');
+        throw new TypeError('The first argument is not an object');
     }
 
     if (!(path instanceof String) && typeof(path) !== 'string') {
-        throw new Error('bad path');
+        throw new TypeError('bad path');
     }
 
     const newPath = path.split('.');
