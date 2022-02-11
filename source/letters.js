@@ -11,28 +11,23 @@
  * */
 
 
-let letters = (str, mode) => {
-    let arr = str.split('');
+const letters = (str, mode) => {
+    const arr = str.split('');
 
     if (mode !== undefined) {
         const indexMethod =  mode ? "indexOf" : "lastIndexOf";
 
-        return arr = arr.filter((item, index) => arr[indexMethod](item) === index).join('');
+        return arr.filter((item, index) => arr[indexMethod](item) === index).join('');
     }
-
     let counter = {};
 
     arr.forEach((item) =>  (item in counter) ? counter[item]++ : counter[item] = 1);
 
-    let result = [];
-
-    arr.reduce((prev, item) => {
+    return arr.reduce((result, item) => {
         if (counter[item] === 1) {
             result.push(item);
         }
-    }, []);
 
-    str = result.join('');
-
-    return str;
+        return result;
+    }, []).join('');
 };
