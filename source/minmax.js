@@ -9,12 +9,9 @@ const minmax = (value) => {
     if (!(typeof(value) === 'string') && !(value instanceof String) || (value === '')) {
         return [undefined, undefined];
     }
-
     const splitValue = value.split(' ').map(string => parseFloat(string)).filter((item) => !Number.isNaN(item));
 
     return splitValue.reduce(([min = Infinity, max = -Infinity], current) => {
-        min = (min > current) ? current : min;
-        max = (max < current) ? current : max;
-        return [min, max];
+        return [(min > current) ? current : min, (max < current) ? current : max];
     }, [undefined, undefined])
 }
