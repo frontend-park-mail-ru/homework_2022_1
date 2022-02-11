@@ -45,4 +45,8 @@ QUnit.module('Тестируем функцию minmax', function () {
 		assert.deepEqual(minmax([123, 143, 5656]), [ undefined, undefined ]);
 	});
 
+	QUnit.test('minmax игнорирует объекты', function (assert) {
+		assert.deepEqual(minmax({name: "denis", age: 20}), [ undefined, undefined ]);
+	});
+
 });

@@ -6,27 +6,24 @@
  * @returns {Array<number>[minValue, maxValue]}
  */
 const minmax = (value) => {
-    let minmax = [undefined, undefined];
-    if (value === '') {
-        return minmax;
+    if (typeof (value) != 'string') {
+        return [undefined, undefined];;
     }
-    if (Array.isArray(value)) {
-        return minmax;
+    if (value === '') {
+        return [undefined, undefined];;
     }
 
     const splitValue = value.split(' ');
     let politeValue = splitValue.filter((item) => !isNaN(Number(item)));
+    politeValue = politeValue.map(string => parseFloat(string));
 
-    minmax = politeValue.reduce(([min, max], current) => {
-        let numberCurrent = Number(current);
-        if (!min || numberCurrent === -Infinity || min > numberCurrent) {
-            min = numberCurrent;
+    return politeValue.reduce(([min, max], current) => {
+        if (!min || min > current) {
+            min = current;
         }
-        if (!max || numberCurrent === Infinity || max < numberCurrent) {
-            max = numberCurrent;
+        if (!max || max < current) {
+            max = current;
         }
         return [min, max];
     }, [undefined, undefined])
-
-    return minmax;
 }
