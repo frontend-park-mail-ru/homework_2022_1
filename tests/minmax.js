@@ -47,6 +47,10 @@ QUnit.module('Тестируем функцию minmax', function () {
 
 	QUnit.test('minmax игнорирует объекты', function (assert) {
 		assert.deepEqual(minmax({name: "denis", age: 20}), [ undefined, undefined ]);
+		assert.deepEqual(minmax(new String('hi')), [ undefined, undefined ]);
 	});
 
+	QUnit.test('minmax не игнорирует строки через new', function (assert) {
+		assert.deepEqual(minmax(new String('12 hi 9')), [9, 12 ]);
+	});
 });

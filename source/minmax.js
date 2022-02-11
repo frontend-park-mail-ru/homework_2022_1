@@ -6,22 +6,29 @@
  * @returns {Array<number>[minValue, maxValue]}
  */
 const minmax = (value) => {
-    if (typeof (value) != 'string') {
-        return [undefined, undefined];;
-    }
-    if (value === '') {
-        return [undefined, undefined];;
+
+    if (!(Object.prototype.toString.call(value) === '[object String]') || value === '') {
+        return [undefined, undefined];
     }
 
     const splitValue = value.split(' ');
-    let politeValue = splitValue.filter((item) => !isNaN(Number(item)));
-    politeValue = politeValue.map(string => parseFloat(string));
 
-    return politeValue.reduce(([min, max], current) => {
-        if (!min || min > current) {
+    let politeValue = {
+        num: splitValue,
+        parseStr() {
+            this.num = this.num.map(string => parseFloat(string));
+        },
+        checkNaN() {
+            this.num = this.num.filter((item) => !Number.isNaN(item));
+        }
+    }
+    politeValue.parseStr();
+    politeValue.checkNaN()
+    return politeValue.num.reduce(([min= Infinity, max= -Infinity], current) => {
+        if (min > current) {
             min = current;
         }
-        if (!max || max < current) {
+        if (max < current) {
             max = current;
         }
         return [min, max];
