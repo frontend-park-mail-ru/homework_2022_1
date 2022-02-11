@@ -75,24 +75,27 @@ QUnit.module('Тестируем функцию zip', function () {
 		assert.deepEqual(zip({name: 'age'}, {value: 42}, {name: 'cost'}, {value: -6}), obj);
 	});
 
-	QUnit.test('Функция работает с пустым списком параметров', function (assert) {
-		assert.deepEqual(zip(), {});
+	QUnit.test('Функция не работает с пустым списком параметров', function (assert) {
+		assert.throws(zip, new Error("Nothing to merge"));
 	});
 
-	QUnit.test('Функция копирует временную объектную обёртку примитивных типов', function (assert) {
-		assert.deepEqual(zip('1234', 'zzzz5'), {0: '1', 1: '2', 2: '3', 3: '4', 4: '5'}, 'Результат слияния строк - array-like объект символов');
-		assert.deepEqual(zip(1), {}, 'Результат копирования целого числа - пустой объект');
-		assert.deepEqual(zip(1.1), {}, 'Результат копирования вещественного числа - пустой объект');
-		assert.deepEqual(zip(NaN), {}, 'Результат копирования NaN - пустой объект');
-		assert.deepEqual(zip(Infinity), {}, 'Результат копирования Infinity - пустой объект');
+	QUnit.test('Функция не работает с примитивными типами', function (assert) {
+        const error = new TypeError("Only pure objects can be merged");
+		assert.throws(() => zip('1234', 'zzzz5'), error, 'Функция не работает со строками');
+		assert.throws(() => zip(1), error, 'Функция не работает с целыми числами');
+		assert.throws(() => zip(1.1), error, 'Функция не работает с вещественными числами');
+		assert.throws(() => zip(NaN), error, 'Функция не работает с NaN');
+		assert.throws(() => zip(Infinity), error, 'Функция не работает с Infinity');
+		assert.throws(() => zip(undefined), error, 'Функция не работает с undefined');
 	});
 
-	QUnit.test('Функция интерпретирует null или undefined как пустые объекты', function (assert) {
-		assert.deepEqual(zip(null), {}, 'Результат копирования null - пустой объект');
-		assert.deepEqual(zip(undefined), {}, 'Результат копирования undefined - пустой объект');
+	QUnit.test('Функция не работает с null', function (assert) {
+        const error = new TypeError("Only pure objects can be merged");
+		assert.throws(() => zip(null), error, 'Функция не работает с null, несмотря на то, что typeof null === \'object\'');
 	});
 
-	QUnit.test('Функция копирует объектное представление массива', function (assert) {
-		assert.deepEqual(zip([1, 2, 3, 4], ['z', 'z', 'z', 'z', 5]), {0: 1, 1: 2, 2: 3, 3: 4, 4: 5}, 'Результат слияния массивов - array-like объект');
+	QUnit.test('Функция не работает с экземплярами классов', function (assert) {
+        const error = new TypeError("Only pure objects can be merged");
+		assert.throws(() => zip([1, 2, 3, 4], ['z', 'z', 'z', 'z', 5]), error, 'Функция не работает с массивами');
 	});
 });
