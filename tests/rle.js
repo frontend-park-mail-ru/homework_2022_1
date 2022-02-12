@@ -1,12 +1,13 @@
 'use strict';
 
 QUnit.module('Тестируем функцию rle', function () {
-	QUnit.test('rle работает правильно c корректными строками', function (assert) {
+	QUnit.test('rle работает правильно cо строками, в которых все последовательности одинаковых символов имеют длину меньше 9', function (assert) {
 		assert.strictEqual(rle('AAAB'), 'A3B');
 		assert.strictEqual(rle('BCCDDDAXXXX'), 'BC2D3AX4');
 		assert.strictEqual(rle('AVVVBBBVVXDHJFFFFDDDDDDHAAAAJJJDDSLSSSDDDD'), 'AV3B3V2XDHJF4D6HA4J3D2SLS3D4');
 		assert.strictEqual(rle('HHHHFCKKKKKKKKKVUUUUUUYDLLLDTNTNFTTTT'), 'H4FCK9VU6YDL3DTNTNFT4');
 		assert.strictEqual(rle('KKKDDDGGKKDMDNNNTJFJFKKKK'), 'K3D3G2K2DMDN3TJFJFK4');
+		assert.strictEqual(rle('K'), 'K');
 	});
 	QUnit.test('rle правильно преобразует строку, в которой есть последовательноть одинаковых символов длины больше 9', function (assert) {
 		assert.strictEqual(rle('AAAAAAAAAAAAAA'), 'A9A5');
