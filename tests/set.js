@@ -29,9 +29,9 @@ QUnit.module('Тестируем функцию set', function () {
 		const object4 = {
 			deep: null
 		};
-		assert.deepEqual(set({foo: 'bar'}, '.foo', 'baz'), {foo: 'baz'});
+		assert.deepEqual(set({ foo: 'bar' }, '.foo', 'baz'), { foo: 'baz' });
 		assert.deepEqual(set(object, '.deep.hested.field', 42), object2);
-		assert.deepEqual(set(object, '.deep.hested', {foo: 'bar'}), object3);
+		assert.deepEqual(set(object, '.deep.hested', { foo: 'bar' }), object3);
 		assert.deepEqual(set(object, '.deep', null), object4);
 	});
 
@@ -51,30 +51,30 @@ QUnit.module('Тестируем функцию set', function () {
 
 	QUnit.test('set работает правильно c массивами', function (assert) {
 		const object1 = {
-			foo: [ 1, 2, 3 ],
+			foo: [1, 2, 3],
 			bar: [
-				{foobar: '42'}
+				{ foobar: '42' }
 			]
 		};
 
 		const object2 = {
-			foo: [ 1, 2, 3 ],
+			foo: [1, 2, 3],
 			bar: [
-				{foobar: '42'}
+				{ foobar: '42' }
 			]
 		};
 
 		const new1 = {
-			foo: [ 42, 2, 3 ],
+			foo: [42, 2, 3],
 			bar: [
-				{foobar: '42'}
+				{ foobar: '42' }
 			]
 		};
 
 		const new2 = {
-			foo: [ 1, 2, 3 ],
+			foo: [1, 2, 3],
 			bar: [
-				{foobar: 'baz'}
+				{ foobar: 'baz' }
 			]
 		};
 
@@ -100,7 +100,7 @@ QUnit.module('Тестируем функцию set', function () {
 				nested: {
 					field: null
 				},
-				field : true
+				field: true
 			}
 		};
 
@@ -109,7 +109,7 @@ QUnit.module('Тестируем функцию set', function () {
 				nested: {
 					field: false
 				},
-				field : true
+				field: true
 			}
 		};
 
@@ -118,7 +118,7 @@ QUnit.module('Тестируем функцию set', function () {
 				nested: {
 					field: false
 				},
-				field : null
+				field: null
 			}
 		};
 
@@ -126,38 +126,38 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.deepEqual(set(object, '.deep.field', null), object2);
 	});
 
-    QUnit.test('set работает правильно c невалидными данными', function (assert) {
+	QUnit.test('set работает правильно c невалидными данными', function (assert) {
 
-		const class1 = new class{};
+		const class1 = new class { };
 		const func1 = () => { return true };
-		const func2 = function () {};
+		const func2 = function () { };
 		const error1 = Error('it is not an object!');
 		const error2 = Error('wrong path type!');
 		const error3 = Error('invalid path!');
 
 		assert.throws(
 			function () {
-				set(class1, '.foo12', 1)
+				set(class1, '.foo12', 1);
 			}, error1);
 
 		assert.throws(
 			function () {
-				set(func1, '.foo', 1)
+				set(func1, '.foo', 1);
 			}, error1);
 
 		assert.throws(
 			function () {
-				set(func2, '.foo', 1)
+				set(func2, '.foo', 1);
 			}, error1);
 
 		assert.throws(
 			function () {
-				set(4, '.foo', 1)
+				set(4, '.foo', 1);
 			}, error1);
 
 		assert.throws(
 			function () {
-				set(undefined, 'foo.', 1)
+				set(undefined, 'foo.', 1);
 			}, error1);
 
 		assert.throws(
@@ -167,7 +167,7 @@ QUnit.module('Тестируем функцию set', function () {
 
 		assert.throws(
 			function () {
-				set({}, 'foo', 1)
+				set({}, 'foo', 1);
 			}, error3);
 	});
 });
