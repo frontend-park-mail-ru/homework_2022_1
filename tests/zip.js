@@ -150,11 +150,28 @@ QUnit.module('Тестируем функцию zip', function () {
 			value: 2017,
 			month: 6,
 		};
-		assert.deepEqual(zip({a: obj1}, {a: obj2}), {a: obj1});
+		const obj3 = {
+			a: obj1,
+		};
+		const obj4 = {
+			a: obj2,
+		}
+		const obj5 = {
+			b: obj2,
+		}
+		const obj6 = {
+			a: obj1,
+			b: obj2,
+		}
+		const obj7 = {
+			a: obj2,
+			b: obj2,
+		}
+		assert.deepEqual(zip(obj3, obj4), obj3);
 
-		assert.deepEqual(zip({a: obj1}, {b: obj2}), {a: obj1, b: obj2});
+		assert.deepEqual(zip(obj3, obj5), obj6);
 
-		assert.deepEqual(zip({a: obj2}, {b: obj2}), {a: obj2, b: obj2});
+		assert.deepEqual(zip(obj4, obj5), obj7);
 	});
 	QUnit.test('Непредвиденные входные данные', function (assert) {
 		const samsaraObj = {
