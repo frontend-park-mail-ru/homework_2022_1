@@ -25,7 +25,7 @@ const format = (numbers, columnsAmount) => {
     if (
       !Array.isArray(numbers) ||
       !Number.isInteger(columnsAmount) ||
-      numbers.some(number => Number.isNaN(+number))
+      numbers.some(number => !Number.isInteger(number))
     ) {
         throw new Error('Данные некорректны');
     }
