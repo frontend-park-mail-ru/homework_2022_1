@@ -14,7 +14,6 @@
  * returns Error;
  */
 const set = (object, path, value) => {
-
   if (!object || object.constructor.name !== 'Object') {
     throw new Error('it is not an object!');
   }
@@ -27,17 +26,15 @@ const set = (object, path, value) => {
     throw new Error('invalid path!');
   }
 
-  const keys = path.split('.').filter((key) => {
-    return key !== ''
-  });
+  const keys = path.split('.').filter((key) => key !== '');
 
   const buffObject = keys.slice(0, -1).reduce((accumulator, key) => {
-    accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
+    accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {};
     return accumulator[key];
   }, object);
 
   const lastKey = keys.at(-1);
   buffObject[lastKey] = value;
 
-  return object
+  return object;
 }
