@@ -53,8 +53,8 @@ const setFormat = (numbers, columnsAmount, widths) => {
     return numbers.map((currentNumber, currentIndex) => {
         const currentColumn = currentIndex % columnsAmount;
         const numberStr = currentNumber.toString();
-        let format = ' '.repeat(widths[currentColumn] - numberStr.length) + numberStr;
-        if (currentColumn === columns - 1 && currentIndex !== numbers.length - 1) {
+        let format = `${' '.repeat(widths[currentColumn] - numberStr.length)}`.concat(`${numberStr}`);
+        if (currentColumn === columnsAmount - 1 && currentIndex !== numbers.length - 1) {
             format += '\n';
         }
         return format;
