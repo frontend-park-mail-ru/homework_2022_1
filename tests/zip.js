@@ -81,14 +81,14 @@ QUnit.module('Тестируем функцию zip', function () {
 			age: {
 				isSetted: false,
 			},
-		}
+		};
 
 		const obj2 = {
 			age: {
 				isSetted: true,
 			},
-		}
-		
+		};
+
 		assert.deepEqual(zip(obj1, obj2), obj1);
 
 		const worker = {
@@ -108,29 +108,38 @@ QUnit.module('Тестируем функцию zip', function () {
 				weight : 77, 
 				sex : "male",
 			},
-		}
-		assert.deepEqual(zip(human, {experience : 7}, {experienceOnCurrentPlace : 2}), worker);
+		};
+		const allWorkInfo = {
+			experience : 7,
+		};
+		const currJobInfo = {
+			experienceOnCurrentPlace : 2,
+		};
+		assert.deepEqual(zip(human, allWorkInfo, currJobInfo), worker);
 	});
 
 	QUnit.test('Функция не реагирует на то, являетси ли свойство объекта объектом, происходит поверхтностное сранение свойств', function (assert) {
-		const objA = {
+		const objComplex = {
 			a: {
 				b : 1
 			}
-		}
-		const objB = {
+		};
+		const objComplex2 = {
 			a: {
 				b : 2, 
 				c : 1
 			}
-		}
-		const objC = {
+		};
+		const objResult = {
 			a: {
 				b : 1
 			}, 
 			b: 2
-		}
-		assert.deepEqual(zip(objA, objB, {b: 2}), objC);
+		};
+		const objOrdinary = {
+			b: 2,
+		};
+		assert.deepEqual(zip(objComplex, objComplex2, objOrdinary), objResult);
 
 		const obj1 = {
 			name: 'data',
@@ -142,7 +151,9 @@ QUnit.module('Тестируем функцию zip', function () {
 			month: 6,
 		};
 		assert.deepEqual(zip({a: obj1}, {a: obj2}), {a: obj1});
+
 		assert.deepEqual(zip({a: obj1}, {b: obj2}), {a: obj1, b: obj2});
+
 		assert.deepEqual(zip({a: obj2}, {b: obj2}), {a: obj2, b: obj2});
 	});
 	QUnit.test('Непредвиденные входные данные', function (assert) {
