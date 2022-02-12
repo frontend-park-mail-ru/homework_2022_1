@@ -4,7 +4,7 @@
  * @function set
  * @param {object} object - object for modifying.
  * @param {string} path - the path to attribute of the object.
- * @param {object} value - the value of the attribute to set.
+ * @param {*} value - the value of the attribute to set.
  * @returns {object}
  * @example set({foo: 'bar'},'.foo','baz');
  * returns {foo: 'baz'}
@@ -15,26 +15,28 @@
  */
 const set = (object, path, value) => {
 
-    if( !object || object.constructor.name !== 'Object'){
+    if( !object || object.constructor.name !== 'Object') {
         throw new Error('it is not an object!');
     }
 
-    if (typeof path !== 'string'){
+    if (typeof path !== 'string') {
         throw new Error('wrong path type!');
     }
 
-    const keys = path.split('.'),
-          lastKey = keys.at(-1);
-
-    if ( lastKey === '' || keys.length === 1){
+    if(!path.includes('.')) {
         throw new Error('invalid path!');
     }
 
-    const buffObject = keys.slice(1,-1).reduce((accumulator,key) => {
+    const keys = path.split('.').filter( (key) => {
+        return key !== ''
+    });
+
+    const buffObject = keys.slice(0,-1).reduce((accumulator,key) => {
         accumulator[key] = accumulator.hasOwnProperty(key) ? accumulator[key] : {}
         return accumulator[key];
     }, object);
 
+    const lastKey = keys.at(-1);
     buffObject[lastKey] = value;
 
     return object
