@@ -31,6 +31,20 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(obj, '0.1.2.3'), undefined, 'Undefined!');
     });
 
+    QUnit.test('get работа с объектами без свойств', function (assert) {
+		const object = {
+			foo: {
+				bar: 42
+			}
+		};
+
+		assert.strictEqual(get(object, '.foobar'), undefined, 'Undefined!');
+		assert.strictEqual(get(object, '.foo.baz'), undefined, 'Undefined!');
+		assert.strictEqual(get(object, '.baz.0'), undefined, 'Undefined!');
+		assert.strictEqual(get(object, '.baz.length'), undefined, 'Undefined!');
+		assert.strictEqual(get(object, '.0.1.2'), undefined, 'Undefined!');
+	});
+
 
     QUnit.test('get работа с массивом', function (assert) {
         let obj = {
