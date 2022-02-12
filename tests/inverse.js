@@ -46,7 +46,7 @@ QUnit.module('Тестируем функцию inverse', function () {
 
 	});
 
-	QUnit.test('Функция не обрабатывает невалидные данные', function (assert) {
+	QUnit.test('Функция обрабатывает невалидные данные', function (assert) {
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], undefined), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], null), [ 5, 4, 3, 2, 1 ]);
 		assert.deepEqual(inverse(null, null), null);
