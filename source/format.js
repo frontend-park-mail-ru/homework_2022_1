@@ -3,8 +3,8 @@
 /**
  * Print numerical array in user's format style.
  * @function format
- * @param {object} numbers - input numerical array.
- * @param {number} columns - number of columns in the table.
+ * @param {int[]} numbers - input numerical array.
+ * @param {number} columnsAmount - number of columns in the table.
  * @returns {string}
  * @example format([1, 2, 3], 1);
  * returns 1
@@ -21,37 +21,37 @@
  *           3 4;
  */
 
-const format = (numbers, columns) => {
+const format = (numbers, columnsAmount) => {
     if (
       !Array.isArray(numbers) ||
-      Number.isNaN(+columns) ||
-      !numbers.every(number => !Number.isNaN(+number))
+      Number.isNaN(+columnsAmount) ||
+      numbers.some(number => Number.isNaN(+number))
     ) {
         throw new Error('Данные некорректны');
     }
 
     // подсчет ширины каждой колонки по наиболее длинному числу
-    const widthArray = new Array(columns).fill(0);
+    const widthArray = new Array(columnsAmount).fill(0);
     numbers.forEach((currentNumber, currentIndex) => {
-        const currentColumn = currentIndex % columns;
+        const currentColumn = currentIndex % columnsAmount;
         const width = Math.max(currentNumber.toString().length, widthArray[currentColumn]);
         widthArray[currentColumn] = (currentColumn === 0) ? width : width + 1;
     });
 
-    return setFormat(numbers, columns, widthArray);
+    return setFormat(numbers, columnsAmount, widthArray);
 }
 
 /**
  * Set format to array.
  * @function setFormat
- * @param {object} numbers - input numerical array.
- * @param {number} columns - number of columns in the table.
+ * @param {int[]} numbers - input numerical array.
+ * @param {number} columnsAmount - number of columns in the table.
  * @param {object} widths - array where each element is width of each column.
  * @returns {string}
  */
-const setFormat = (numbers, columns, widths) => {
+const setFormat = (numbers, columnsAmount, widths) => {
     return numbers.map((currentNumber, currentIndex) => {
-        const currentColumn = currentIndex % columns;
+        const currentColumn = currentIndex % columnsAmount;
         const numberStr = currentNumber.toString();
         let format = ' '.repeat(widths[currentColumn] - numberStr.length) + numberStr;
         if (currentColumn === columns - 1 && currentIndex !== numbers.length - 1) {
