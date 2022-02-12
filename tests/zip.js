@@ -76,7 +76,20 @@ QUnit.module('Тестируем функцию zip', function () {
 	});
 
 	QUnit.test('Функция правильно работает со свойствами, которые являются объектами', function (assert) {
-		assert.deepEqual(zip({age: {isSetted: false}}, {age: {isSetted: true}}), {age: {isSetted: false}});
+
+		const obj1 = {
+			age: {
+				isSetted: false,
+			},
+		}
+
+		const obj2 = {
+			age: {
+				isSetted: true,
+			},
+		}
+		
+		assert.deepEqual(zip(obj1, obj2), obj1);
 
 		const worker = {
 			data : {
@@ -88,19 +101,36 @@ QUnit.module('Тестируем функцию zip', function () {
 			experience : 7,
 			experienceOnCurrentPlace : 2,
 		};
-
-		assert.deepEqual(zip(
-			{data: {
+		const human = {
+			data: {
 				age : 32, 
 				height : 178, 
 				weight : 77, 
-				sex : "male"}}, 			
-			{experience : 7},
-			{experienceOnCurrentPlace : 2}), worker);
+				sex : "male",
+			},
+		}
+		assert.deepEqual(zip(human, {experience : 7}, {experienceOnCurrentPlace : 2}), worker);
 	});
 
 	QUnit.test('Функция не реагирует на то, являетси ли свойство объекта объектом, происходит поверхтностное сранение свойств', function (assert) {
-		assert.deepEqual(zip({a: {b : 1}}, {a: {b : 2, c : 1}}, {b: 2}), {a: {b : 1}, b: 2});
+		const objA = {
+			a: {
+				b : 1
+			}
+		}
+		const objB = {
+			a: {
+				b : 2, 
+				c : 1
+			}
+		}
+		const objC = {
+			a: {
+				b : 1
+			}, 
+			b: 2
+		}
+		assert.deepEqual(zip(objA, objB, {b: 2}), objC);
 
 		const obj1 = {
 			name: 'data',
@@ -135,11 +165,14 @@ QUnit.module('Тестируем функцию zip', function () {
 			15:"t",
 		};
 		assert.deepEqual(zip("Samsara's secret"), samsaraObj, 'Результат - массив символов');
+
 		assert.deepEqual(zip(100), {}, 'Результат - пустой объект');
 		assert.deepEqual(zip(1.3), {}, 'Результат - пустой объект');
-		assert.deepEqual(zip(undefined), {}, 'Результат - пустой объект');
+
 		assert.deepEqual(zip(NaN), {}, 'Результат - пустой объект');
 		assert.deepEqual(zip(Infinity), {}, 'Результат - пустой объект');
+
+		assert.deepEqual(zip(undefined), {}, 'Результат - пустой объект');
 		assert.deepEqual(zip(null), {}, 'Результат - пустой объект');
 	});
 });
