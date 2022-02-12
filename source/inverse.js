@@ -15,9 +15,17 @@
  * // returns [2, 1, 3]
  * inverse([1, 2, 3], -1);
  */
+
 const inverse = (inputArray, offsetIndex = 0) => {
-    if (!inputArray) return inputArray;
-    
+
+    if (!Array.isArray(inputArray)) {
+        throw new TypeError("Invalid array");
+    }
+
+    if (!Number.isInteger(offsetIndex)) {
+        throw new TypeError("Invalid offset");
+    }
+
     /** Check if index is default or invalid */
     if (!offsetIndex) return inputArray.reverse();
 
@@ -27,7 +35,7 @@ const inverse = (inputArray, offsetIndex = 0) => {
         inputArray.reverse();
         return unchangalbeArrPart.concat(inputArray);
     }
-    
+
     const unchangalbeArrPart = inputArray.splice(offsetIndex);
     inputArray.reverse();
     return inputArray.concat(unchangalbeArrPart);

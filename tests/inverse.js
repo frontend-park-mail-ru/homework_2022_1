@@ -43,13 +43,15 @@ QUnit.module('Тестируем функцию inverse', function () {
 		for (let i = 0; i < numOfElements; i++) {
 			assert.deepEqual(newArr[i], i);
 		}
-
 	});
 
-	QUnit.test('Функция обрабатывает невалидные данные', function (assert) {
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], undefined), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse([ 1, 2, 3, 4, 5 ], null), [ 5, 4, 3, 2, 1 ]);
-		assert.deepEqual(inverse(null, null), null);
-		assert.deepEqual(inverse(undefined, 15), undefined);
+	QUnit.test('Функция выбрасывает ошибку при некорректных входных данных', function (assert) {
+		const arrayError = new TypeError('Invalid array');
+		const offsetError = new TypeError('Invalid offset');
+
+		assert.throws(() => inverse(), arrayError);
+		assert.throws(() => inverse(true), arrayError);
+		assert.throws(() => inverse(1, 2), arrayError);
+		assert.throws(() => inverse([1, 2, 3], 'a'), offsetError);
 	});
 });
