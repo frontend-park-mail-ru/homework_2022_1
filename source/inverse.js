@@ -18,6 +18,7 @@
 
 const inverse = (inputArray, offsetIndex = 0) => {
 
+    /** Check input data is valid */
     if (!Array.isArray(inputArray)) {
         throw new TypeError("Invalid array");
     }
@@ -26,7 +27,7 @@ const inverse = (inputArray, offsetIndex = 0) => {
         throw new TypeError("Invalid offset");
     }
 
-    /** Check if index is default or invalid */
+    /** Check if index is default */
     if (!offsetIndex) return inputArray.reverse();
 
     if (offsetIndex > 0)

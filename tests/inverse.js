@@ -52,6 +52,10 @@ QUnit.module('Тестируем функцию inverse', function () {
 		assert.throws(() => inverse(), arrayError);
 		assert.throws(() => inverse(true), arrayError);
 		assert.throws(() => inverse(1, 2), arrayError);
-		assert.throws(() => inverse([1, 2, 3], 'a'), offsetError);
+		assert.throws(() => inverse([1, 2, 3, 4, 5], 'a'), offsetError);
+		assert.throws(() => inverse([ 1, 2, 3, 4, 5 ], null), offsetError);
+		assert.throws(() => inverse(null, null), arrayError);
+		assert.throws(() => inverse(undefined, 15), arrayError);
+
 	});
 });
