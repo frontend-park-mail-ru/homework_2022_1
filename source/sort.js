@@ -25,9 +25,9 @@ const sort = (str) => {
         throw Error('The argument can only be a string');
     }
 
-    return str.split(' ').reduce((prev, current, ind) => {
-        const new_word = current.toLowerCase().split('').sort(compare).join('');
-        prev.push(new_word[0].toUpperCase() + new_word.slice(1));
+    return str.split(' ').reduce((prev, current) => {
+        const newWord = current.toLowerCase().split('').sort(compare).join('');
+        prev.push(`${newWord[0].toUpperCase()}${newWord.slice(1)}`);
         return prev;
     }, []).sort(compare).join(' ');
 }
