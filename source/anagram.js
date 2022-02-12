@@ -34,9 +34,7 @@ const process = (cur_result, word) => {
 const anagram = (wordList) => {
   
   let anagramGroup = wordList.reduce(process, {});
-  if (anagramGroup) {
-    anagramGroup = Object.values(anagramGroup).filter((wordList) => wordList.length > 1).map(wordList => wordList.sort())
-  }
+  anagramGroup = Object.values(anagramGroup).filter((wordList) => wordList.length > 1).map(wordList => wordList.sort())
   if (anagramGroup.length == 0) {
     return null;
   }
