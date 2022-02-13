@@ -11,18 +11,20 @@ const createTree = (treeSize) => {
     /**
      * @function Высчитывает нужное количество символов '*' по номеру строки и добавляет в результат.
      * @param {number} lineNumber - номер отрисовываемой строки.
+     * @returns {string} Строка, содержащая нужное количество символов '*'.
      */
     const addStarsToLine = (lineNumber)  => {
-        finalString += '*'.repeat(lineNumber * 2 - 1);
+        return '*'.repeat(lineNumber * 2 - 1);
     }
 
     /**
      * @function Высчитывает нужное количество пробелов по номеру строки и добавляет в результат.
      * @param {number} lineNumber - номер отрисовываемой строки.
+     * @returns {string} Строка, содержащая нужное количество пробелов.
      */
     const addSpacesToLine = (lineNumber) => {
-        let maxCountSpaces = treeSize - 1;
-        finalString += ' '.repeat(maxCountSpaces - lineNumber);
+        const maxCountSpaces = treeSize - 1;
+        return ' '.repeat(maxCountSpaces - lineNumber);
     }
 
     /**
@@ -31,29 +33,18 @@ const createTree = (treeSize) => {
      */
     const addLine = (lineNumber) => {
 
-        addSpacesToLine(lineNumber);
-        addStarsToLine(lineNumber);
-        addSpacesToLine(lineNumber);
-
-        finalString += '\n';
+        return addSpacesToLine(lineNumber) + addStarsToLine(lineNumber)
+                                        + addSpacesToLine(lineNumber) + '\n';
     }
-
-    /**
-     * @function Добавляет корень дерева (представленный символом '|') с учетом пробелов справа и слева.
-     */
-    const addRoot = () => {
-        addSpacesToLine(1);
-        finalString += '|';
-        addSpacesToLine(1);
-        finalString += '\n';
-    }
-
 
     for (let i = 1; i < treeSize; ++i) {
-        addLine(i);
+        finalString += addLine(i);
     }
 
-    addRoot();
+    finalString += addSpacesToLine(1);
+    finalString += '|';
+    finalString += addSpacesToLine(1);
+    finalString += '\n';
 
     return finalString;
 }
@@ -64,8 +55,7 @@ const createTree = (treeSize) => {
  * @returns {string, null} Строка для вывода ASCII-дерева.
  */
 const tree = (treeSize) => {
-    if (treeSize < 3 || treeSize === undefined ||
-                !(treeSize % 1 === 0) || !treeSize) {
+    if (!treeSize || !Number.isInteger(Number(treeSize)) || treeSize < 3) {
         return null;
     }
 
