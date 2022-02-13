@@ -1,6 +1,42 @@
 'use strict';
 
 /**
+ * Check if the type is correct.
+ * @function isValidType
+ * @param element
+ * @returns {boolean}
+ * @example
+ * // returns false
+ * isValidType("str");
+ * @example
+ * // returns true
+ * isValidType(7);
+ * @example
+ * // returns true
+ * isValidType(2n);
+ */
+
+const isValidType  = (element) => (Number.isInteger(element) || typeof element == 'bigint');
+
+/**
+ * Check if number is greater than zero
+ * @function isAboveZero
+ * @param element
+ * @returns {boolean}
+ * @example
+ * // returns false
+ * isAboveZero(-2);
+ * @example
+ * // returns true
+ * isAboveZero(7);
+ * @example
+ * // returns true
+ * isAboveZero(2n);
+ */
+
+const isAboveZero  = (element) => element > 0;
+
+/**
  * Find GCD of natural numbers.
  * @function euclid
  * @param {...number} numbers - input array of natural numbers.
@@ -16,9 +52,6 @@
  * euclid(13, 26, 5);
  */
 
-const isValidType  = (element) => (Number.isInteger(element) || typeof element === 'bigint');
-const isAboveZero  = (element) => element > 0;
-
 const euclid = (...numbers) => {
     if (!numbers.length) {
         throw new TypeError('There are no arguments');
@@ -32,12 +65,13 @@ const euclid = (...numbers) => {
         throw new RangeError('The arguments must be natural numbers');
     }
 
-    const [initialValue , ...nextNumbers] = numbers
+    const [initialValue, ...nextNumbers] = numbers;
 
     return nextNumbers.reduce((accumulator, currentValue) => {
-        while (accumulator && currentValue) {
-            accumulator > currentValue ? accumulator %= currentValue : currentValue %= accumulator;
+        let buffCurrentValue = currentValue;
+        while (accumulator && buffCurrentValue) {
+            accumulator > buffCurrentValue ? accumulator %= buffCurrentValue : buffCurrentValue %= accumulator;
         }
-        return (accumulator + currentValue);
+        return (accumulator + buffCurrentValue);
     }, initialValue);
 }
