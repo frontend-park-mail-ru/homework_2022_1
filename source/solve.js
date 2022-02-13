@@ -1,3 +1,5 @@
+'use strict';
+
 // consider reading https://www.engr.mun.ca/~theo/Misc/exp%5fparsing.htm
 
 const DecimalPoint = '.';
