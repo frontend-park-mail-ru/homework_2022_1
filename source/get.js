@@ -3,9 +3,9 @@
 /**
  *  Получает путь к вложенному свойству объекта и возвращает значение этого свойства (или undefined, если свойства не существует)
  * 
- * @param {any} obj - объект, значения свойства которого возвращаем
+ * @param {*} obj - объект, значения свойства которого возвращаем
  * @param {string} pathToProperty - путь до вложенного свойства
- * @return {any | undefined} - возвращает значение свойства или undefined, если свойства нет
+ * @return {* | undefined} - возвращает значение свойства или undefined, если свойства нет
  */
 
 const get = (obj, pathToProperty) => {
@@ -17,14 +17,11 @@ const get = (obj, pathToProperty) => {
 
     const listOfProperties = pathToProperty.split('.').filter((elem) => elem != '');
 
-    listOfProperties.forEach(property => {
-        if (tempObj !== undefined) {
-            tempObj = tempObj[property];
-        }
-        else {
+    listOfProperties.forEach((property) => {
+        if (!tempObj) {
             return;
         }
+        tempObj = tempObj[property];
     })
-
     return tempObj;
 }
