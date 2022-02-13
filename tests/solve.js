@@ -11,5 +11,10 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('(x - 42) * (x + 42)', 42), 0);
 		assert.strictEqual(solve('x * (x - x * (x + 1))', 2), -8);
 		assert.strictEqual(solve('42 + x', -12), 30);
+		assert.strictEqual(solve('-1 - x', -1), 0);
+		assert.strictEqual(solve('--1 - -x', -1), 0);
+		assert.strictEqual(solve('2.5*2 + 5', 2.5), 10);
+		assert.strictEqual(solve('x/2/5 + 1', 10), 2);
+		assert.strictEqual(solve('(x/2)*5 + 1', 10), 26);
 	});
 });
