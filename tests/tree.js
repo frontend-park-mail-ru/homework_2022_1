@@ -52,13 +52,13 @@ QUnit.module('Тестируем функцию tree', function () {
 	
 	QUnit.test('Ёлочка высотой 7', function (assert) {
 		const expected =
-			'      *      \n' +
-			'     ***     \n' +
-			'    *****    \n' +
-			'   *******   \n' +
-			'  *********  \n' +
-			' *********** \n' +
-			'      |      \n';
+			'     *     \n' +
+			'    ***    \n' +
+			'   *****   \n' +
+			'  *******  \n' +
+			' ********* \n' +
+			'***********\n' +
+			'     |     \n';
 		assert.strictEqual(tree(7), expected);
 		assert.strictEqual(tree('7'), expected);
 	});
