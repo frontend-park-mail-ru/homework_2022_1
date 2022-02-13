@@ -13,6 +13,7 @@ const letters = (inputString, isFirstSymbolRepeated) => {
   if (typeof inputString !== 'string' && !(inputString instanceof String)) {
     throw TypeError(ARGUMENT_IS_NOT_STRING_ERROR);
   }
+
   if (typeof isFirstSymbolRepeated !== 'boolean' && isFirstSymbolRepeated !== undefined) {
     throw TypeError(ARGUMENT_IS_NOT_OPTIONAL_BOOLEAN_ERROR);
   }
