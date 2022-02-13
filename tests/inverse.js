@@ -48,11 +48,14 @@ QUnit.module('Тестируем функцию inverse', function () {
 
 
 	QUnit.test('Функция выбрасывает ошибку при некорректных входных данных', function (assert) {
-		const err = new Error('incorrect arguments :(');
+		const err = new Error('Incorrect arguments :(');
 
 		assert.throws(() => inverse(), err);
 		assert.throws(() => inverse(1), err);
 		assert.throws(() => inverse(1, 2), err);
+		assert.throws(() => inverse([1, 2, 3], Object), err);
 		assert.throws(() => inverse([1, 2, 3], 'x'), err);
+		assert.deepEqual(inverse([1, 2, 3], null), [3, 2, 1]);
+		assert.deepEqual(inverse([1, 2, 3], '1'), [1, 3, 2]);
 	});
 });
