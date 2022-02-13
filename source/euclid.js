@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Check if the type is correct.
+ * Check if the type is not correct.
  * @function isNotValidType
  * @param element
  * @returns {boolean}
@@ -19,7 +19,7 @@
 const isNotValidType  = (element) => !(Number.isInteger(element) || typeof element == 'bigint');
 
 /**
- * Check if number is greater than zero
+ * Check if number is not greater than zero
  * @function isNotAboveZero
  * @param element
  * @returns {boolean}
