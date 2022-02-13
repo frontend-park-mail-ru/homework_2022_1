@@ -2,39 +2,39 @@
 
 /**
  * Check if the type is correct.
- * @function isValidType
+ * @function isNotValidType
  * @param element
  * @returns {boolean}
  * @example
+ * // returns true
+ * isNotValidType("str");
+ * @example
  * // returns false
- * isValidType("str");
+ * isNotValidType(7);
  * @example
- * // returns true
- * isValidType(7);
- * @example
- * // returns true
- * isValidType(2n);
+ * // returns false
+ * isNotValidType(2n);
  */
 
-const isValidType  = (element) => (Number.isInteger(element) || typeof element == 'bigint');
+const isNotValidType  = (element) => !(Number.isInteger(element) || typeof element == 'bigint');
 
 /**
  * Check if number is greater than zero
- * @function isAboveZero
+ * @function isNotAboveZero
  * @param element
  * @returns {boolean}
  * @example
- * // returns false
+ * // returns true
  * isAboveZero(-2);
  * @example
- * // returns true
+ * // returns false
  * isAboveZero(7);
  * @example
- * // returns true
+ * // returns false
  * isAboveZero(2n);
  */
 
-const isAboveZero  = (element) => element > 0;
+const isNotAboveZero  = (element) => !(element > 0);
 
 /**
  * Find GCD of natural numbers.
@@ -57,11 +57,11 @@ const euclid = (...numbers) => {
         throw new TypeError('There are no arguments');
     }
 
-    if (!numbers.every(isValidType)) {
+    if (numbers.some(isNotValidType)) {
         throw new TypeError('The arguments must be natural numbers');
     }
 
-    if (!numbers.every(isAboveZero)) {
+    if (numbers.some(isNotAboveZero)) {
         throw new RangeError('The arguments must be natural numbers');
     }
 
