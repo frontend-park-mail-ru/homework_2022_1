@@ -5,14 +5,13 @@
  * @param {string} str Is the string that you want to convert. For example: 'ABBCCCC'
  * @returns {string|null} the transformed string. For example: 'AB2C4'
  */
-const rle = function (str) {
-  if (typeof str !== 'string' || arguments.length !== 1) {
+const rle = (str) => {
+  if (typeof str !== 'string') {
     return null;
   }
   let counter = 1;
-  let arrayStr = str.split('');
 
-  arrayStr = arrayStr.reduce((resStr, currentCharacter) => {
+  return str.split('').reduce((resStr, currentCharacter, index) => {
     const previousCharacter = resStr[resStr.length - 1];
 
     if (previousCharacter === currentCharacter) {
@@ -22,6 +21,9 @@ const rle = function (str) {
       }
 
       ++counter;
+      if (index === str.length - 1) {
+        return `${resStr}${counter}`;
+      }
       return resStr;
     }
 
@@ -33,10 +35,4 @@ const rle = function (str) {
     counter = 1;
     return `${resStr}${counterResult}${currentCharacter}`;
   });
-
-  arrayStr = String(arrayStr);
-  if (counter > 1) {
-    arrayStr += counter;
-  }
-  return (arrayStr);
 };
