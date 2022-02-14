@@ -6,12 +6,9 @@
  * @returns {number}
  */
 
-const euclid = function(...numbers){
-   let result = numbers.reduce(function(x, y) {
-        while (x && y){
-            x > y ? x %= y : y %= x;
-        }
-        return x + y;
-   });
-   return result;
-}
+const euclid = (...numbers) => numbers.reduce(function(x, y) {
+    while (x && y) {
+        x > y ? x %= y : y %= x;
+    }
+    return x + y;
+});
