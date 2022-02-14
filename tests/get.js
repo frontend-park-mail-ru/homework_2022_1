@@ -48,5 +48,35 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.length'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
 	});
+
+	QUnit.test('передаём в функцию get плохие значения', function (assert) {
+		let obj = {
+			mark: 'audi',
+			model: 'A3',
+			year: 2001,
+			price: {
+				light: 1000000,
+				hard: 2000000
+			}
+		}
+		assert.strictEqual(get(null, 'mark'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, 15), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '0.1.2.3'), undefined, 'Undefined!');
+	});
+
+
+	QUnit.test('get работа с массивом', function (assert) {
+		let obj = {
+			name: 'Alex',
+			subject: 'math',
+			marks: [4, 4, 5],
+			school: [
+				{first: 'MBOY'}
+			]
+		}
+		assert.strictEqual(get(obj, 'marks.1'), obj.marks[1], 'Write mark');
+		assert.strictEqual(get(obj, 'marks.length'), obj.marks.length, 'Write number of marks');
+		assert.strictEqual(get(obj, 'school.0.first'), obj.school[0].first , 'Write school');
+	});
 });
 
