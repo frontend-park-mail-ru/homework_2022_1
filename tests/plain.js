@@ -83,4 +83,12 @@ QUnit.module('Тестируем функцию plain', function () {
             budgetEducation: false
         }])
 	});
+
+	QUnit.test('Работает с невалидными значениями (собственный тест)', function (assert) {
+		assert.strictEqual(plain(13),null);
+		assert.strictEqual(plain("error"),null);
+		assert.strictEqual(plain(true),null);
+		assert.strictEqual(plain(null),null);
+
+	});
 });
