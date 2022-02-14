@@ -10,10 +10,11 @@ QUnit.module('Тестируем функцию get', function () {
                 }
             }
         };
-         assert.strictEqual(get(obj, 'age'), 47, 'First level!');
-         assert.strictEqual(get(obj, 'mother.name'), 'Luda ot verbluda', 'Second level!');
-         assert.strictEqual(get(obj, 'name.length'), obj.name.length, 'Write len(name)');
-         assert.strictEqual(get(obj, 'father.name'), undefined, 'Undefined!');
+        assert.strictEqual(get(obj, 'foo'), obj.foo);
+        assert.strictEqual(get(obj, 'deep.hested.field'), obj.deep.hested.field);
+        assert.deepEqual(get(obj, 'deep.hested'), obj.deep.hested);
+        assert.deepEqual(get(obj, 'deep'), obj.deep);
+        assert.deepEqual(get(obj, ''), undefined);
     });
 
     QUnit.test('передаём в функцию get плохие значения', function (assert) {
@@ -32,17 +33,17 @@ QUnit.module('Тестируем функцию get', function () {
     });
 
     QUnit.test('get работа с объектами без свойств', function (assert) {
-		const object = {
+		const obj = {
 			foo: {
 				bar: 42
 			}
 		};
 
-		assert.strictEqual(get(object, '.foobar'), undefined, 'Undefined!');
-		assert.strictEqual(get(object, '.foo.baz'), undefined, 'Undefined!');
-		assert.strictEqual(get(object, '.baz.0'), undefined, 'Undefined!');
-		assert.strictEqual(get(object, '.baz.length'), undefined, 'Undefined!');
-		assert.strictEqual(get(object, '.0.1.2'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.foobar'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.foo.baz'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.baz.0'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.baz.length'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.0.1.2'), undefined, 'Undefined!');
 	});
 
 
