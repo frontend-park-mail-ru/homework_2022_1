@@ -10,7 +10,7 @@ const rle = (str) => {
     return null;
   }
   let counter = 1;
-
+  const lastIndex = str.length - 1;
   return str.split('').reduce((resStr, currentCharacter, index) => {
     const previousCharacter = resStr[resStr.length - 1];
 
@@ -21,7 +21,7 @@ const rle = (str) => {
       }
 
       ++counter;
-      if (index === str.length - 1) {
+      if (index === lastIndex) {
         return `${resStr}${counter}`;
       }
       return resStr;
