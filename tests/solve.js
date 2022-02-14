@@ -16,5 +16,13 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.strictEqual(solve('2.5*2 + 5', 2.5), 10);
 		assert.strictEqual(solve('x/2/5 + 1', 10), 2);
 		assert.strictEqual(solve('(x/2)*5 + 1', 10), 26);
+
+		// for some reason it catches errors only when the function is executed in another function
+		assert.throws(() => solve('((x + 1)', 0));
+		assert.throws(() => solve('(x *) + 1', 0));
+		assert.throws(() => solve('(x /) - 1', 0));
+		assert.throws(() => solve('x +', 0));
+		assert.throws(() => solve('1 / (x*x - 2*x)', 2));
+		assert.throws(() => solve('', 0));
 	});
 });

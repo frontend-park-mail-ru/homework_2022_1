@@ -9,21 +9,40 @@ const SupportedOperators = '(+-*/)';
 const TokenTypeNumber = 'number';
 const TokenTypeOperator = 'operator';
 
+/** Class representing a token. */
 class Token {
+  /**
+   * Create a token.
+   * @param {string} type - The type of the token.
+   * @param {any} value - The value of the token.
+   */
   constructor(type, value) {
     this.type = type
     this.value = value
   }
 }
 
+/** Class representing an unary operator. */
 class UnaryOperator {
+  /**
+   * Create an unary operator.
+   * @param {string} op - The id of the operator.
+   * @param {string} expr - The expression to be applied with the operator.
+   */
   constructor(op, expr) {
     this.op = op;
     this.expr = expr;
   }
 }
 
+/** Class representing a binary operator. */
 class BinaryOperator {
+  /**
+   * Create a binary operator.
+   * @param {string} op - The id of the operator.
+   * @param {string} left - The left argument to the operator.
+   * @param {string} right - The right argument to the operator.
+   */
   constructor(op, left, right) {
     this.op = op;
     this.left = left;
@@ -31,11 +50,14 @@ class BinaryOperator {
   }
 }
 
-function isDigit(ch) {
-  return (ch >= '0') && (ch <= '9');
-}
+const isDigit = (ch) => (ch >= '0') && (ch <= '9');
 
+/** Class representing a lexer for math expressions. */
 class Lexer {
+  /**
+   * Create a lexer;
+   * @param {string} expr - The math expression to parse.
+   */
   constructor(expr) {
     this.index = 0;
     this.expr = expr;
@@ -60,13 +82,13 @@ class Lexer {
     if (SupportedOperators.indexOf(ch) >= 0) {
       return new Token(TokenTypeOperator, this.nextChar());
     }
-    return undefined;
+    return;
   }
 
   scanNumber() {
     let ch = this.peekChar();
     if (!isDigit(ch) && (ch !== DecimalPoint)) {
-      return undefined;
+      return;
     }
 
     let number = '';
@@ -97,16 +119,16 @@ class Lexer {
 
   next() {
     let token = this.scanNumber();
-    if (token !== undefined) {
+    if (token) {
       return token;
     }
 
     token = this.scanOperator();
-    if (token !== undefined) {
+    if (token) {
       return token;
     }
 
-    return undefined;
+    return;
   }
 
   peek() {
@@ -170,7 +192,7 @@ class Parser {
 
     if (this.matchOp(token, '(')) {
       this.lexer.next();
-      let expr = this.parseAdditive();
+      const expr = this.parseAdditive();
       if (!this.matchOp(this.lexer.next(), ')')) {
         throw new SyntaxError('expected closing bracket');
       }
@@ -188,7 +210,6 @@ class Evaluator {
 
   evaluate() {
     const tree = this.parser.parse();
-    console.log(`syntax tree for [${this.parser.lexer.expr}]`, tree);
     return this.exec(tree);
   }
 
@@ -208,6 +229,9 @@ class Evaluator {
         case '*':
           return left * right;
         case '/':
+          if (right == 0) {
+            throw new Error('division over zero');
+          }
           return left / right;
         default:
           throw new SyntaxError(`unknown operator [${node.operator}]`);
@@ -240,5 +264,14 @@ const solve = (expr, arg) => {
   const variableName = 'x';
   expr = expr.replaceAll(variableName, arg.toString()).replaceAll(' ', '');
   const evaluator = new Evaluator(expr);
-  return evaluator.evaluate();
+
+  let result = 0;
+  try {
+    result = evaluator.evaluate();
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+
+  return result;
 };
