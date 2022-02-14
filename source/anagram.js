@@ -20,7 +20,7 @@ const sortWord = (word) => word.split('').sort().join('');
 const splitOnAnagrams = (curResult, word) => {
   const wordSorted = sortWord(word);
   if (curResult.has(wordSorted)) {
-    let anagramGroup = curResult.get(wordSorted);
+    const anagramGroup = curResult.get(wordSorted);
     anagramGroup.push(word);
     curResult.set(wordSorted, anagramGroup);
   } else {
@@ -37,11 +37,13 @@ const splitOnAnagrams = (curResult, word) => {
  * @returns {string[][]} Массив групп-анаграмм
  */
 const anagram = (wordList) => {
-  if (!Array.isArray(wordList) || wordList.length == 0 || typeof(wordList[0]) != "string")
-    return null
-  let anagramGroup = wordList.reduce(splitOnAnagrams, new Map());
-
-  anagramGroup = Array.from(anagramGroup.values()).filter((wordList) => wordList.length > 1).map(wordList => wordList.sort());
+  if (!Array.isArray(wordList) || wordList.length == 0 || typeof wordList[0]  != 'string') {
+    return null;
+  }
+  const anagramGroup = Array.from(
+    wordList.reduce(splitOnAnagrams, new Map())
+    .values()).filter((wordList) => wordList.length > 1).
+    map(wordList => wordList.sort());
   if (anagramGroup.length == 0) {
     return null;
   }
