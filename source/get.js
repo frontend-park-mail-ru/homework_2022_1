@@ -15,11 +15,17 @@ const get = (object, path) => {
         return;
     }
     const keys = path.split('.');
+    keys.shift();
     let obj = object;
     keys.forEach(propertyValue => {
-        if (obj) {
+        if (obj && propertyValue) {
             obj = obj[propertyValue];
         }
     });
     return obj;
 }
+
+let obj = {
+    name: "value"
+}
+get(obj, '.')
