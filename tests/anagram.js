@@ -2,44 +2,63 @@
 
 QUnit.module('Тестируем функцию anagram', function () {
 	QUnit.test('Функция работает правильно', function (assert) {
-		const input = [
+		const positiveFirstInput = [
 			'кот', 'пила', 'барокко',
 			'стоп', 'ток', 'кошка',
 			'липа', 'коробка', 'пост'
 		];
 
-		const output = [
+		const positiveFirstOutput = [
 			[ 'барокко', 'коробка' ],
 			[ 'кот', 'ток' ],
 			[ 'липа', 'пила' ],
 			[ 'пост', 'стоп' ]
 		];
 
-		const secondInput = [ 
+		const positiveSecondInput = [ 
 			'abc', 'bca', 'cab', 
 			'def', 'dab'
 		];
 
-		const secondOutput = [
+		const positiveSecondOutput = [
 			[ 'abc', 'bca', 'cab' ]
-		]
+		];
 
-		const thirdInput = [
-		]
+		const positiveThirdInput = [
+		];
 
-		const thirdOutput = null;
+		const positiveThirdOutput = null;
 
-		const forthInput = [
+		const positiveForthInput = [
 			'abc', 'abc', 'abc'
 		];
 
-		const forthOutput = [
+		const positiveForthOutput = [
 			[ 'abc', 'abc', 'abc']
 		];
 
-		assert.deepEqual(anagram(input), output);
-		assert.deepEqual(anagram(secondInput), secondOutput);
-		assert.deepEqual(anagram(thirdInput), thirdOutput);
-		assert.deepEqual(anagram(forthInput), forthOutput);
+		const negativeFirstInput = [ 1, 2, 3]
+		
+		const negativeSecondInput = [ [ 'a', 'b'], ['c']]
+
+		const negativeThirdInput = true
+
+		const negativeFourthInput = undefined
+
+		const negativeFifthInput = null
+
+		const negativeOutput = null
+
+
+
+		assert.deepEqual(anagram(positiveFirstInput), positiveFirstOutput);
+		assert.deepEqual(anagram(positiveSecondInput), positiveSecondOutput);
+		assert.deepEqual(anagram(positiveThirdInput), positiveThirdOutput);
+		assert.deepEqual(anagram(positiveForthInput), positiveForthOutput);
+		assert.deepEqual(anagram(negativeFirstInput), negativeOutput);
+		assert.deepEqual(anagram(negativeSecondInput), negativeOutput);
+		assert.deepEqual(anagram(negativeThirdInput), negativeOutput);
+		assert.deepEqual(anagram(negativeFourthInput), negativeOutput);
+		assert.deepEqual(anagram(negativeFifthInput), negativeOutput);
 	});
 });
