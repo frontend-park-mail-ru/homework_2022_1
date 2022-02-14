@@ -10,7 +10,7 @@ const trunkHeight = 1
  * @returns {number} returns width.
  */
 const countWidth = (height) => {
-    return height * (treeGrowCoeff - 1) - trunkHeight;
+    return height * treeGrowCoeff - treeGrowCoeff - trunkHeight;
 }
 
 /**
@@ -70,7 +70,7 @@ const tree = (height) => {
     }
 
     for (let i = 0; i < trunkHeight; ++i) {
-        tree += getTrunk(width);
+        tree += getTrunk(width);        
     }
 
     return tree;
