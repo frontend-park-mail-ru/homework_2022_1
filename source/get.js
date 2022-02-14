@@ -24,8 +24,3 @@ const get = (object, path) => {
     });
     return obj;
 }
-
-let obj = {
-    name: "value"
-}
-get(obj, '.')
