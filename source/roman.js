@@ -24,13 +24,13 @@ const roman = (number) => {
         "I": 1
     }
 
-    if (typeof (number) == "number") {
+    if (typeof (number) === "number") {
         return numToRom(dataSet, number);
     }
-    if (typeof (number) == "string") {
-        return strToRes(dataSet, number)
+    if (typeof (number) === "string") {
+        return strToRes(dataSet, number);
     }
-    return ''
+    return '';
 }
 
 
@@ -44,7 +44,7 @@ const roman = (number) => {
 const strToRes = (dataSet, number) => {
     const reInt = /^[0-9]+$/;
     const reRoman = /^[MDCLXVI]+$/;
-    let upNumber = number.toUpperCase();
+    const upNumber = number.toUpperCase();
 
     if (reInt.test(upNumber)) {
         return numToRom(dataSet, number);
@@ -67,7 +67,7 @@ const romToNum = (dataSet, upNumber) => {
     let prevNum = dataSet[upNumber.charAt(0)];
 
     for (let i = 1; i < upNumber.length; i++) {
-        let currentNum = dataSet[upNumber.charAt(i)];
+        const currentNum = dataSet[upNumber.charAt(i)];
         result += currentNum <= prevNum ? prevNum : -prevNum;
         prevNum = currentNum;
     }
@@ -83,12 +83,9 @@ const romToNum = (dataSet, upNumber) => {
  */
 
 const numToRom = (dataSet, number) => {
-    let result = "";
-    Object.keys(dataSet).forEach(key => {
-            let currentNum = Math.floor(number / dataSet[key]);
-            number -= currentNum * dataSet[key];
-            result += key.repeat(currentNum);
-        }
-    )
-    return result;
+    return Object.keys(dataSet).reduce((acc, key) => {
+        const currentNum = Math.floor(number / dataSet[key]);
+        number -= currentNum * dataSet[key];
+        return acc + key.repeat(currentNum);
+    }, "");
 }
