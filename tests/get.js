@@ -3,13 +3,13 @@
 QUnit.module('Тестируем функцию get', function () {
         QUnit.test('get работает правильно c объектами с существующими свойствами', function (assert) {
                 const object = {
-                    foo: 'bar',
-                    deep: {
-                        hested: {
-                            field: 'baz'
+                        foo: 'bar',
+                        deep: {
+                            hested: {
+                                    field: 'baz'
+                            }
                         }
-                    }
-             };
+                };
 
                 assert.strictEqual(get(object, '.foo'), object.foo);
                 assert.strictEqual(get(object, '.deep.hested.field'), object.deep.hested.field);
@@ -21,11 +21,11 @@ QUnit.module('Тестируем функцию get', function () {
 
         QUnit.test('get работает правильно c массивами', function (assert) {
                 const object = {
-                    foo: 'bar',
-                    baz: [ 1, 2, 3 ],
-                    deep: [
-                        {foobar: '42'}
-                    ]
+                        foo: 'bar',
+                        baz: [ 1, 2, 3 ],
+                        deep: [
+                                {foobar: '42'}
+                        ]
                 };
 
                 assert.strictEqual(get(object, '.foo.0'), object.foo[ 0 ]);
@@ -37,9 +37,9 @@ QUnit.module('Тестируем функцию get', function () {
 
         QUnit.test('get работает правильно c объектами без свойств', function (assert) {
                 const object = {
-                    foo: {
-                        bar: 42
-                    }
+                        foo: {
+                                bar: 42
+                        }
                 };
 
                 assert.strictEqual(get(object, '.foobar'), undefined);
