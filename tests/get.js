@@ -49,3 +49,4 @@ QUnit.module('Тестируем функцию get', function () {
                 assert.strictEqual(get(object, '.0.1.2'), undefined);
             });
 });
+
