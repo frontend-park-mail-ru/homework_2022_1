@@ -1,34 +1,33 @@
 'use strict';
 
+const DATASET = {
+    "M": 1000,
+    "CM": 900,
+    "D": 500,
+    "CD": 400,
+    "C": 100,
+    "XC": 90,
+    "L": 50,
+    "XL": 40,
+    "X": 10,
+    "IX": 9,
+    "V": 5,
+    "IV": 4,
+    "I": 1
+}
+
 /**
  * @author Naumenko A.A.
  * @param {number, string} number - Переводимое число
  * @description Функция приобразования из римских цифр в десятичную систему и обратно
  */
 
-
 const roman = (number) => {
-    const dataSet = {
-        "M": 1000,
-        "CM": 900,
-        "D": 500,
-        "CD": 400,
-        "C": 100,
-        "XC": 90,
-        "L": 50,
-        "XL": 40,
-        "X": 10,
-        "IX": 9,
-        "V": 5,
-        "IV": 4,
-        "I": 1
-    }
-
     if (typeof (number) === "number") {
-        return numToRom(dataSet, number);
+        return numToRom(number);
     }
     if (typeof (number) === "string") {
-        return strToRes(dataSet, number);
+        return strToRes(number);
     }
     return '';
 }
@@ -36,38 +35,36 @@ const roman = (number) => {
 
 /**
  * @author Naumenko A.A.
- * @param dataSet - Таблица переводов
  * @param {string} number - Переводимое число
  * @description Функция приобразования строки в десятичное число или в римское
  */
 
-const strToRes = (dataSet, number) => {
+const strToRes = (number) => {
     const reInt = /^[0-9]+$/;
     const reRoman = /^[MDCLXVI]+$/;
     const upNumber = number.toUpperCase();
 
     if (reInt.test(upNumber)) {
-        return numToRom(dataSet, number);
+        return numToRom(number);
     }
     if (reRoman.test(upNumber)) {
-        return romToNum(dataSet, upNumber);
+        return romToNum(upNumber);
     }
     return ''
 }
 
 /**
  * @author Naumenko A.A.
- * @param dataSet - Таблица переводов
  * @param {string} upNumber - Переводимое число
  * @description Функция приобразования строки римских чисел в десятичное число (int)
  */
 
-const romToNum = (dataSet, upNumber) => {
+const romToNum = (upNumber) => {
     let result = 0;
-    let prevNum = dataSet[upNumber.charAt(0)];
+    let prevNum = DATASET[upNumber.charAt(0)];
 
     for (let i = 1; i < upNumber.length; i++) {
-        const currentNum = dataSet[upNumber.charAt(i)];
+        const currentNum = DATASET[upNumber.charAt(i)];
         result += currentNum <= prevNum ? prevNum : -prevNum;
         prevNum = currentNum;
     }
@@ -77,15 +74,15 @@ const romToNum = (dataSet, upNumber) => {
 
 /**
  * @author Naumenko A.A.
- * @param dataSet - Таблица переводов
- * @param {string} number - Переводимое число
- * @description Функция приобразования строки цифр в римское число (int)
+ * @param {string, number} number - Переводимое число
+ * @description Функция приобразования строки цифр в римское число
  */
 
-const numToRom = (dataSet, number) => {
-    return Object.keys(dataSet).reduce((acc, key) => {
-        const currentNum = Math.floor(number / dataSet[key]);
-        number -= currentNum * dataSet[key];
+const numToRom = (number) => {
+    let numberNew = number;
+    return Object.keys(DATASET).reduce((acc, key) => {
+        const currentNum = Math.floor(numberNew / DATASET[key]);
+        numberNew -= currentNum * DATASET[key];
         return acc + key.repeat(currentNum);
     }, "");
 }
