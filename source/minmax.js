@@ -3,7 +3,7 @@
 /**
  * find min and max value in string
  * @param {string} strNumbers
- * @return {[minValue, maxValue]}
+ * @returns {[minValue, maxValue]}
  */
 
 const minmax = (strNumbers) => {
