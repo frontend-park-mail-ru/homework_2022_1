@@ -50,7 +50,7 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(obj, '.0.1.2.3'), undefined, 'Undefined!');
     });
 
-    QUnit.test('get работает правильно c объектами без свойств', function (assert) {
+        QUnit.test('get работает правильно c объектами без свойств', function (assert) {
 		const object = {
 			foo: {
 				bar: 42
