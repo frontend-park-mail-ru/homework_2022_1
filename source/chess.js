@@ -6,9 +6,9 @@
  * @returns {string} Шахматная доска из звёздочек
  */
 const chess = (size) => {
-    let number = Number(size);
-    let repeatCount = Math.floor(size / 2) + 1;
-    let sliceUpperLimit = size % 2 - 2;
+    const number = Number(size);
+    const repeatCount = Math.floor(size / 2) + 1;
+    const sliceUpperLimit = size % 2 - 2;
     if (!Number.isInteger(number) || number <= 1) {
         return null;
     }
