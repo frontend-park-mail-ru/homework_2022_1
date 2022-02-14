@@ -35,6 +35,20 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(object, '.deep.0.foobar'), object.deep[ 0 ].foobar);
     });
 
+    QUnit.test('get работает правильно c объектами без свойств', function (assert) {
+        const object = {
+            foo: {
+                bar: 42
+            }
+        };
+
+        assert.strictEqual(get(object, '.foobar'), undefined);
+        assert.strictEqual(get(object, '.foo.baz'), undefined);
+        assert.strictEqual(get(object, '.baz.0'), undefined);
+        assert.strictEqual(get(object, '.baz.length'), undefined);
+        assert.strictEqual(get(object, '.0.1.2'), undefined);
+    });
+
     QUnit.test('передаём в функцию get плохие значения', function (assert) {
         let obj = {
             mark: 'audi',
@@ -49,18 +63,4 @@ QUnit.module('Тестируем функцию get', function () {
         assert.strictEqual(get(obj, 15), undefined, 'Undefined!');
         assert.strictEqual(get(obj, '.0.1.2.3'), undefined, 'Undefined!');
     });
-
-        QUnit.test('get работает правильно c объектами без свойств', function (assert) {
-		const object = {
-			foo: {
-				bar: 42
-			}
-		};
-
-		assert.strictEqual(get(object, '.foobar'), undefined);
-		assert.strictEqual(get(object, '.foo.baz'), undefined);
-		assert.strictEqual(get(object, '.baz.0'), undefined);
-		assert.strictEqual(get(object, '.baz.length'), undefined);
-		assert.strictEqual(get(object, '.0.1.2'), undefined);
-	});
 });
