@@ -10,7 +10,7 @@ const trunkHeight = 1
  * @returns {number} returns width.
  */
 const countWidth = (height) => {
-    return height * treeGrowCoeff - treeGrowCoeff - trunkHeight;
+    return height * treeGrowCoeff - treeGrowCoeff - 1;
 }
 
 /**
@@ -58,16 +58,21 @@ const tree = (height) => {
         return null;
     }
 
+    let arr = Array(height - 1).fill('')
+    
     const width = countWidth(height);  
-    let tree = '';
     let length = 1;
     let gap = (width - length) / 2;
-
-    for (let i = 0; i < height - 1; ++i) {
-        tree += getRow(gap, length);
+    
+    for (let i = 0; i < arr.length; ++i) {
+        arr[i] = getRow(gap, length);
         length += treeGrowCoeff;
         gap = (width - length) / 2;
     }
+
+    let tree = arr.reduce(function(prev, curr) {
+        return prev + curr;
+    });
 
     for (let i = 0; i < trunkHeight; ++i) {
         tree += getTrunk(width);        
