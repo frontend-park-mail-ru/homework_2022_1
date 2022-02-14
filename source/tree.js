@@ -1,14 +1,7 @@
 'use strict';
 
-/**
- * Check if is integer
- * @function isInt
- * @param {number} data - input data.
- * @returns {boolean} returns true if data is int.
- */
-const isInt = (data) => {
-    return Number(data) === parseInt(data);
-}
+const treeGrowCoeff = 2
+const trunkHeight = 1
 
 /**
  * Count tree width
@@ -17,7 +10,7 @@ const isInt = (data) => {
  * @returns {number} returns width.
  */
 const countWidth = (height) => {
-    return height * 2 - 3;
+    return height * (treeGrowCoeff - 1) - trunkHeight;
 }
 
 /**
@@ -27,7 +20,9 @@ const countWidth = (height) => {
  * @returns {number} returns width.
  */
 const getTrunk = (width) => {
-    return ' '.repeat((width - 1) / 2) + '|' + ' '.repeat((width - 1) / 2) + '\n';
+    const gapStr = ' '.repeat((width - 1) / 2)
+    const trunkStr = '|'
+    return `${gapStr}${trunkStr}${gapStr}\n`;
 }
 
 /**
@@ -38,7 +33,9 @@ const getTrunk = (width) => {
  * @returns {number} returns width.
  */
 const getRow = (gap, length) => {
-    return ' '.repeat(gap) + '*'.repeat(length) + ' '.repeat(gap) + '\n';
+    const gapStr = ' '.repeat(gap)
+    const treeLayer = '*'.repeat(length)
+    return `${gapStr}${treeLayer}${gapStr}\n`
 }
 
 /**
@@ -57,7 +54,7 @@ const getRow = (gap, length) => {
  */
 const tree = (height) => {
 
-    if (!isInt(height) || height < 3) {
+    if (!Number.isInteger(Number(height)) || height < 3) {
         return null;
     }
 
@@ -68,10 +65,13 @@ const tree = (height) => {
 
     for (let i = 0; i < height - 1; ++i) {
         tree += getRow(gap, length);
-        length += 2;
+        length += treeGrowCoeff;
         gap = (width - length) / 2;
     }
-    tree += getTrunk(width);
+
+    for (let i = 0; i < trunkHeight; ++i) {
+        tree += getTrunk(width);
+    }
 
     return tree;
 };
