@@ -13,7 +13,7 @@ const format = (numbers, columnNumbers) => {
     for (let j = 0; j < columnNumbers; j++) {
         let highestIndent = 0;
         for (let i = (0 + j); i < numbers.length; i += columnNumbers) {
-            highestIndent = (`${numbers[i]}`.length > highestIndent)? `${numbers[i]}`.length : highestIndent; 
+            highestIndent = (numbers[i].toString().length > highestIndent)? numbers[i].toString().length : highestIndent; 
         }
         highestMultiIndent[j] = highestIndent;
     }
@@ -22,7 +22,7 @@ const format = (numbers, columnNumbers) => {
         for (let j = 0; j < columnNumbers; j++) {
             if (numbers[i + j] !== undefined) {
                 let borderCase = (j == 0)? 0 : 1; 
-                output += (' '.repeat(highestMultiIndent[j] + borderCase - `${numbers[i + j]}`.length) + numbers[i + j]);
+                output += ' '.repeat(highestMultiIndent[j] + borderCase - numbers[i + j].toString().length) + numbers[i + j];
             }
         }
         if ((i + columnNumbers) < numbers.length) {
@@ -30,5 +30,5 @@ const format = (numbers, columnNumbers) => {
         }
     }
     
-    return (output);
+    return output;
 }
