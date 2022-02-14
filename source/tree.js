@@ -58,7 +58,7 @@ const tree = (height) => {
         return null;
     }
 
-    let arr = Array(height - 1).fill('')
+    const arr = Array(height - 1).fill('')
     
     const width = countWidth(height);  
     let length = 1;
@@ -70,9 +70,11 @@ const tree = (height) => {
         gap = (width - length) / 2;
     }
 
-    let tree = arr.reduce(function(prev, curr) {
-        return prev + curr;
-    });
+    const initialVal = '';
+    let tree = arr.reduce(
+        (prev, curr) =>  prev + curr, 
+        initialVal
+    );
 
     for (let i = 0; i < trunkHeight; ++i) {
         tree += getTrunk(width);        
