@@ -6,9 +6,10 @@
  * @returns {number}
  */
 
-const euclid = (...numbers) => numbers.reduce(function(x, y) {
+const euclid = (...numbers) => numbers.reduce((x, y) => {
     while (x && y) {
         x > y ? x %= y : y %= x;
     }
     return x + y;
 });
+
