@@ -59,9 +59,9 @@ QUnit.module('Тестируем функцию get', function () {
 				hard: 2000000
 			}
 		}
-		assert.strictEqual(get(null, 'mark'), undefined, 'Undefined!');
+		assert.strictEqual(get(null, '.mark'), undefined, 'Undefined!');
 		assert.strictEqual(get(obj, 15), undefined, 'Undefined!');
-		assert.strictEqual(get(obj, '0.1.2.3'), undefined, 'Undefined!');
+		assert.strictEqual(get(obj, '.0.1.2.3'), undefined, 'Undefined!');
 	});
 
 
@@ -74,9 +74,9 @@ QUnit.module('Тестируем функцию get', function () {
 				{first: 'MBOY'}
 			]
 		}
-		assert.strictEqual(get(obj, 'marks.1'), obj.marks[1], 'Write mark');
-		assert.strictEqual(get(obj, 'marks.length'), obj.marks.length, 'Write number of marks');
-		assert.strictEqual(get(obj, 'school.0.first'), obj.school[0].first , 'Write school');
+		assert.strictEqual(get(obj, '.marks.1'), obj.marks[1], 'Write mark');
+		assert.strictEqual(get(obj, '.marks.length'), obj.marks.length, 'Write number of marks');
+		assert.strictEqual(get(obj, '.school.0.first'), obj.school[0].first , 'Write school');
 	});
 });
 
