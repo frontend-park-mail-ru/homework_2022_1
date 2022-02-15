@@ -8,5 +8,17 @@
  */
 
 const plain = (arr) => {
-    return arr.reduce((acc, el) => Array.isArray(el) ? [...acc, ...plain(el)] : [...acc, el], []);
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] !== undefined) {
+            if (Array.isArray(arr[i])) {
+                arr.splice(i, 1, ...arr[i]);
+                i--;
+            }
+        } else {
+            arr.splice(i, 1);
+            i--;
+        }
+    }
+
+    return arr;
 }
