@@ -92,29 +92,27 @@ class Lexer {
     }
 
     let number = '';
-    if (ch !== DecimalPoint) {
-      number = this.nextChar();
-      while (true) {
-        ch = this.peekChar();
-        if (!isDigit(ch)) {
-          break;
-        }
-        number += this.nextChar();
-      }
+    if (this.peekChar() !== DecimalPoint) {
+      number += this.scanNumberPiece();
     }
 
-    if (ch === DecimalPoint) {
-      number += this.nextChar();
-      while (true) {
-        ch = this.peekChar();
-        if (!isDigit(ch)) {
-          break;
-        }
-        number += this.nextChar();
-      }
+    if (this.peekChar() === DecimalPoint) {
+      number += this.scanNumberPiece();
     }
 
     return new Token(TokenTypeNumber, number);
+  }
+
+  scanNumberPiece() {
+    let piece = this.nextChar();
+    while (true) {
+      const ch = this.peekChar();
+      if (!isDigit(ch)) {
+        break;
+      }
+      piece += this.nextChar();
+    }
+    return piece;
   }
 
   next() {
