@@ -16,4 +16,10 @@
 * @param {...*} objects  - any number of objects to merge
 * @returns {Object} Object with merged fields
 */
-const zip = (...objects) => objects.reduce((prevObj, nextObj) => ({...nextObj, ...prevObj}), {});
+const zip = (...objects) => {
+    if (objects.some((obj) => !obj || obj !== Object(obj))) {
+        // alert('Программа ожидает на вход массив объектов'); 
+        return {};
+    }
+    return Object.fromEntries(objects.map((obj) => Object.entries(obj)).reverse().flat())
+};

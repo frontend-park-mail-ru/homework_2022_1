@@ -192,7 +192,7 @@ QUnit.module('Тестируем функцию zip', function () {
 			14:"e",
 			15:"t",
 		};
-		assert.deepEqual(zip("Samsara's secret"), samsaraObj, 'Результат - массив символов');
+		assert.deepEqual(zip("Samsara's secret"), {}, 'Результат - массив символов');
 
 		assert.deepEqual(zip(100), {}, 'Результат - пустой объект');
 		assert.deepEqual(zip(1.3), {}, 'Результат - пустой объект');
