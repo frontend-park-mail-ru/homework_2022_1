@@ -24,40 +24,27 @@ const DICT_ROMAN_TO_INT = {
  * @returns {object} Реверснутый словарь.
  */
 const objectFlip = (obj) => {
-    const ret = {};
-    Object.keys(obj).forEach(key => {
-        ret[obj[key]] = key;
-    });
-    return ret;
+    return Object.keys(obj).reduce((REVERSE_DICT, key) => {
+        REVERSE_DICT[obj[key]] = key;
+        return REVERSE_DICT;
+    }, {})
 }
 
 const DICT_INT_TO_ROMAN = objectFlip(DICT_ROMAN_TO_INT);
 
 /**
  * @function Конвертирует число из десятичной системы счисления в римскую или наоборот.
- * @param {number|string} inputNumber - число в римской или десятичной системе сичсления.
+ * @param {number|string} inputNumber - число в римской или десятичной системе счисления.
  * @returns {number|string} Результат одной из двух конвертирующих функций.
  */
 const roman = (inputNumber) => {
-    if(typeof inputNumber === 'number') {
-        return(convertIntToRoman(inputNumber));
-    } else if(typeof inputNumber === 'string' && inputNumber !== '') {
-        if(isNumber(inputNumber)) {
-            return(convertIntToRoman(parseInt(inputNumber)));
-        }
-        return convertRomanToInt(inputNumber);
-    } else {
-        throw TypeError(TYPE_ERROR);
+    if(typeof inputNumber === 'number' || !isNaN(parseFloat(inputNumber))) {
+        return convertIntToRoman(Number(inputNumber));
     }
-}
-
-/**
- * @function Проверяет состоит ли строка из одних лишь чисел.
- * @param {string} checkingString - строка которую проверяем на наличие чисел.
- * @returns {boolean} Булевый результат проверки.
- */
-const isNumber = (checkingString) => {
-    return !isNaN(parseFloat(checkingString)) && !isNaN(checkingString - 0)
+    if(typeof inputNumber === 'string' && inputNumber !== '') {
+        return convertRomanToInt(inputNumber);
+    }
+    throw TypeError(TYPE_ERROR);
 }
 
 /**
@@ -87,8 +74,8 @@ const convertIntToRoman = (inputNumber) => {
 
 /**
  * @function Переводит число из римской в десятичную систему счисления.
- * @param {number} inputNumber - число в римской системе счесления.
- * @returns {string} Результат в десятичной системе счисления.
+ * @param {string} inputNumber - число в римской системе счесления.
+ * @returns {number} Результат в десятичной системе счисления.
  */
 const convertRomanToInt = (inputNumber) => {
     if(typeof inputNumber !== 'string') {
@@ -96,16 +83,13 @@ const convertRomanToInt = (inputNumber) => {
     }
 
     let buffInputNumber = inputNumber.toUpperCase();
-    let res = 0;
 
-    for (let i = 0; i < buffInputNumber.length - 1; ++i) {
-        if (DICT_ROMAN_TO_INT[buffInputNumber[i]] < DICT_ROMAN_TO_INT[buffInputNumber[i+1]]) {
-            res -= DICT_ROMAN_TO_INT[buffInputNumber[i]];
+    return buffInputNumber.split('').reduce(function(res, currentValue, i) {
+        if (DICT_ROMAN_TO_INT[currentValue] < DICT_ROMAN_TO_INT[buffInputNumber[i+1]]) {
+            res -= DICT_ROMAN_TO_INT[currentValue];
         } else {
-            res += DICT_ROMAN_TO_INT[buffInputNumber[i]];
+            res += DICT_ROMAN_TO_INT[currentValue];
         }
-    }
-
-    res += DICT_ROMAN_TO_INT[buffInputNumber[buffInputNumber.length - 1]];
-    return res;
+        return res
+    },0)
 }
