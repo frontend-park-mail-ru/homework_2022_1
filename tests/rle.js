@@ -9,6 +9,7 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle('HHHHFCKKKKKKKKKVUUUUUUYDLLLDTNTNFTTTT'), 'H4FCK9VU6YDL3DTNTNFT4');
 		assert.strictEqual(rle('KKKDDDGGKKDMDNNNTJFJFKKKK'), 'K3D3G2K2DMDN3TJFJFK4');
 		assert.strictEqual(rle('K'), 'K');
+		assert.strictEqual(rle(''), '');
 	});
 	QUnit.test('rle правильно преобразует строку, в которой есть последовательноть одинаковых символов длины больше 9', function (assert) {
 		assert.strictEqual(rle('AAAAAAAAAAAAAA'), 'A9A5');
@@ -26,6 +27,5 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle(null), null);
 		assert.strictEqual(rle(undefined), null);
 		assert.strictEqual(rle(confirm), null);
-		assert.strictEqual(rle(''), '');
 	});
 });
