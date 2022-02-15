@@ -125,6 +125,14 @@ QUnit.module('Тестируем функцию set', function () {
 			deep: null
 		};
 
+		const object5 = {
+			deep: {
+				hested: {
+					foo: 'bar'
+				}
+			}
+		};
+
 		assert.throws(function () {
 				set(object, 1, 1)
 			}, 'The second argument is not a string');
@@ -140,6 +148,18 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.throws(function () {
 				set(object4, 1, 1)
 			}, 'The second argument is not a string');
+
+		assert.throws(function () {
+			set(object5, null, 1)
+		}, 'The second argument is not a string');
+
+		assert.throws(function () {
+			set(object5, 'depfanfa', 1)
+		}, 'The path is wrong');
+
+		assert.throws(function () {
+			set(object5, '', 1)
+		}, 'The path is wrong');
 	});
 
 	QUnit.test('set работает правильно c плохими объектами', function (assert) {
