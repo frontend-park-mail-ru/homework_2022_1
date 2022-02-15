@@ -9,30 +9,7 @@ const SupportedOperators = '(+-*/)';
 const TokenTypeNumber = 'number';
 const TokenTypeOperator = 'operator';
 
-const PrecedenceMap = {
-  '+': 1,
-  '-': 1,
-  '*': 2,
-  '/': 2
-}
-
-const OperatorsMap = {
-  '+': (a, b) => (a + b),
-  '-': (a, b) => (a - b),
-  '*': (a, b) => (a * b),
-  '/': (a, b) => {
-    if (b === 0) {
-      throw new Error('division by zero');
-    }
-    return a / b;
-  },
-}
-
-// --------------------- Context Free Grammar Solution --------------------- //
-
-/** Class representing a token.
- * Token is a unit (building block) of an expression.
-*/
+/** Class representing a token. */
 class Token {
   /**
    * Create a token.
@@ -242,12 +219,23 @@ class Evaluator {
     }
 
     if (node instanceof BinaryOperator) {
-      if (!OperatorsMap[node.op]) {
-        throw new SyntaxError(`unknown operator [${node.operator}]`);
-      }
       const left = this.exec(node.left);
       const right = this.exec(node.right);
-      return OperatorsMap[node.op](left, right);
+      switch (node.op) {
+        case '+':
+          return left + right;
+        case '-':
+          return left - right;
+        case '*':
+          return left * right;
+        case '/':
+          if (right == 0) {
+            throw new Error('division over zero');
+          }
+          return left / right;
+        default:
+          throw new SyntaxError(`unknown operator [${node.operator}]`);
+      }
     }
 
     if (node instanceof UnaryOperator) {
@@ -266,87 +254,6 @@ class Evaluator {
   }
 }
 
-// --------------------- Reeverse Polish Notation Solution --------------------- //
-
-class RPN {
-  constructor(expr) {
-    this.rpn = [];
-    this.opStack = [];
-    this.lexer = new Lexer(expr);
-  }
-
-  getRPN() {
-    console.log(`getting rpn for [${this.lexer.expr}]`);
-    let token = this.lexer.next();
-    while (token) {
-      switch (token.type) {
-        case TokenTypeNumber:
-          this.handleTokenTypeNumber(token.value);
-          break;
-        case TokenTypeOperator:
-          this.handleTokenTypeOperator(token.value);
-          break;
-      }
-      token = this.lexer.next();
-    }
-
-    while (this.opStack.length > 0) {
-      const op = this.opStack.pop();
-      if (op === '(') {
-        throw new SyntaxError('mismatching brackets');
-      }
-      this.rpn.push(op);
-    }
-
-    return this.rpn;
-  }
-
-  handleTokenTypeNumber(number) {
-    this.rpn.push(number);
-  }
-
-  handleTokenTypeOperator(op) {
-    if (op === '(') {
-      this.opStack.push(op);
-    } else if (op === ')') {
-      while (this.opStack.at(-1) !== '(') {
-        this.rpn.push(this.opStack.pop());
-      }
-      this.opStack.pop();
-    } else {
-      let topOp = this.opStack.at(-1);
-      while (topOp !== '(' && PrecedenceMap[topOp] >= PrecedenceMap[op]) {
-        this.rpn.push(this.opStack.pop());
-        topOp = this.opStack.at(-1);
-      }
-      this.opStack.push(op);
-    }
-  }
-}
-
-const calculateRPN = (expr) => {
-  console.log(expr);
-  const stack = [];
-
-  // unary operators are not processed correctly :(
-  expr.forEach(op => {
-    if (OperatorsMap[op]) {
-      if (stack.length == 1) {
-        if (op === '-') {
-          stack.push(-stack.pop());
-        }
-      } else {
-        // passing two last elements from the stack
-        stack.push(OperatorsMap[op](...stack.splice(-2)));
-      }
-    } else {
-      stack.push(parseFloat(op));
-    }
-  });
-
-  return stack.pop();
-}
-
 /**
  * Evaluates one variable expression with a given argument.
  * @param {string} expr - The expression to evaluate.
@@ -356,17 +263,6 @@ const calculateRPN = (expr) => {
 const solve = (expr, arg) => {
   const variableName = 'x';
   expr = expr.replaceAll(variableName, arg.toString()).replaceAll(' ', '');
-
-  // const evaluator = new Evaluator(expr);
-  // let result = 0;
-  // try {
-  //   result = evaluator.evaluate();
-  // } catch (err) {
-  //   console.log(err);
-  //   throw err;
-  // }
-  // return result;
-
-  const rpn = new RPN(expr);
-  return calculateRPN(rpn.getRPN());
+  const evaluator = new Evaluator(expr);
+  return evaluator.evaluate();
 };

@@ -2,7 +2,8 @@
 
 QUnit.module('Тестируем функцию solve', function () {
 	QUnit.test('solve работает правильно ', function (assert) {
-		assert.strictEqual(solve('x + 1', -1), 0);
+		assert.strictEqual(solve('-+(-x) + 1', -1), 0);
+		assert.strictEqual(solve('-x + 1', -1), 2);
 		assert.strictEqual(solve('2 + x - 1', 5), 6);
 		assert.strictEqual(solve('2 * x - 1', 5), 9);
 		assert.strictEqual(solve('2 * ( x - 1 )', 5), 8);
