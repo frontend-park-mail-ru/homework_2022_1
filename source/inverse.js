@@ -9,14 +9,14 @@
 
 const inverse = (arr, arg = 0) => {
     /** input validation */
-    arg = Number(arg); 
-    if (!Array.isArray(arr) || !Number.isInteger(arg)) {
+    const argClear = Number(arg);
+    if (!Array.isArray(arr) || !Number.isInteger(argClear)) {
         throw new Error('Incorrect arguments :(');
     }
 
     /** find border of array for reverse */
-    const left = Math.max(arg, 0);
-    const right = Math.min(arr.length + arg, arr.length);
+    const left = Math.max(argClear, 0);
+    const right = Math.min(arr.length + argClear, arr.length);
 
     /** reverse array */
     return arr.map((item, index, arr) => {
