@@ -9,6 +9,9 @@ const rle = (str) => {
   if (typeof str !== 'string') {
     return null;
   }
+  if (str == '') {
+    return '';
+  }
   let counter = 1;
   const lastIndex = str.length - 1;
   return str.split('').reduce((resStr, currentCharacter, index) => {
