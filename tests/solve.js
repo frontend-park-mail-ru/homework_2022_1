@@ -25,5 +25,11 @@ QUnit.module('Тестируем функцию solve', function () {
 		assert.throws(() => solve('x +', 0));
 		assert.throws(() => solve('1 / (x*x - 2*x)', 2));
 		assert.throws(() => solve('', 0));
+
+		assert.throws(() => solve(undefined, 0));
+		assert.throws(() => solve(new class { }, 0));
+		assert.throws(() => solve(42, 0));
+		assert.throws(() => solve('z', undefined));
+		assert.throws(() => solve(13, '32'));
 	});
 });

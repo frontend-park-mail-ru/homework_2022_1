@@ -303,6 +303,14 @@ class RPNEvaluator {
  * @returns {number} - The result of evaluation.
  */
 const solve = (expr, arg) => {
+  if (typeof expr !== 'string') {
+    throw new TypeError('[expr] is expected to be a string')
+  }
+
+  if (typeof arg !== 'number') {
+    throw new TypeError('[arg] is expected to be a number')
+  }
+
   const variableName = 'x';
   expr = expr.replaceAll(variableName, arg.toString()).replaceAll(' ', '');
 
