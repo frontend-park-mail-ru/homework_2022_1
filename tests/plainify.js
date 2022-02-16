@@ -144,11 +144,12 @@ QUnit.module('Тестируем функцию plainify', function () {
 	});
 
 	QUnit.test('Проверка ответа на некорретный ввод', function (assert) {
-		assert.deepEqual(plainify(null), null);
-		assert.deepEqual(plainify(undefined), undefined);
-		assert.deepEqual(plainify('somestring'), 'somestring');
-		assert.deepEqual(plainify(5), 5);
-		assert.deepEqual(plainify(true), true);
-		assert.deepEqual(plainify([1, 2, 3]), [1, 2, 3]);
+		const err = new Error('Unsupported argument');
+		assert.throws(function () {plainify(null);}, err);
+		assert.throws(function () {plainify(undefined);}, err);
+		assert.throws(function () {plainify('somestring');}, err);
+		assert.throws(function () {plainify(5);}, err);
+		assert.throws(function () {plainify(true);}, err);
+		assert.throws(function () {plainify([1, 2, 3]);}, err);
 	});
 });
