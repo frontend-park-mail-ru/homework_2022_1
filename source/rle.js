@@ -7,16 +7,14 @@
 const rle = (strNormal) => {
     if (typeof strNormal !== 'string')
         return '-1';
+    if (!/^[a-zA-Z]+$/.test(strNormal))
+        return '-1';
     const strSplit = strNormal.split('');
     let count = 1;
     let strRes = '';
     strRes = strSplit.reduce((strRes, curCh, index) => {
         if (strRes[strRes.length - 1] === curCh) {
             ++count;
-            if (count === 10) {
-                count = 1;
-                return `${strRes}9${curCh}`;
-            }
             if (index === strSplit.length - 1)
                 return `${strRes}${count}`;
             return strRes;
