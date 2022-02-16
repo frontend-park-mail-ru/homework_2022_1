@@ -24,7 +24,7 @@ const format = (numbers, columnNumbers) => {
     for (let i = 0; i < numbers.length; i += columnNumbers) {
         for (let j = 0; j < columnNumbers; j++) {
                 if (numbers[i + j] !== undefined) {
-                    let borderCase = j && 1;
+                    const borderCase = j && 1;
                     output += ' '.repeat(highestMultiIndent[j] + borderCase - numbers[i + j].toString().length) + numbers[i + j];
                 }
         }
