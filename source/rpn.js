@@ -85,10 +85,18 @@ class Lexer {
     this.prevToken = undefined;
   }
 
+  /**
+    * Get the current character of expr without shifting forward.
+    * @return {string} The current character.
+    */
   peekChar() {
     return (this.index < this.length ? this.expr.charAt(this.index) : TerminalChar);
   }
 
+  /**
+    * Get the current character of expr with shifting forward.
+    * @return {string} The current character.
+    */
   nextChar() {
     let ch = TerminalChar;
     if (this.index < this.length) {
@@ -98,6 +106,10 @@ class Lexer {
     return ch;
   }
 
+  /**
+    * Look for a symbol in the expression starting from this.index.
+    * @return {Token} The symbol if found.
+    */
   scanSymbol() {
     let ch = this.peekChar();
     if (isSymbol(ch)) {
@@ -107,6 +119,10 @@ class Lexer {
     return;
   }
 
+  /**
+    * Look for an operator in the expression starting from this.index.
+    * @return {Token} The operator if found.
+    */
   scanOperator() {
     let ch = this.peekChar();
     if (isOperator(ch)) {
@@ -119,6 +135,10 @@ class Lexer {
     return;
   }
 
+  /**
+    * Look for a number in the expression starting from this.index.
+    * @return {Token} The number if found.
+    */
   scanNumber() {
     let ch = this.peekChar();
     if (!isDigit(ch) && (ch !== DecimalPoint)) {
@@ -137,6 +157,10 @@ class Lexer {
     return new Token(TokenTypeNumber, number);
   }
 
+  /**
+    * Look for a number piece (integer or floating part) in the expression starting from this.index.
+    * @return {string} The symbol.
+    */
   scanNumberPiece() {
     let piece = this.nextChar();
     while (true) {
@@ -149,12 +173,20 @@ class Lexer {
     return piece;
   }
 
+  /**
+    * Get the token wrapper and shift forward (keeps track of previous token).
+    * @return {Token} The token if exists.
+    */
   next() {
     const token = this.#next();
     this.prevToken = token;
     return token;
   }
 
+  /**
+    * Get the next token internals.
+    * @return {Token} The token if exists.
+    */
   #next() {
     let token = this.scanNumber();
     if (token) {
@@ -174,6 +206,10 @@ class Lexer {
     return;
   }
 
+  /**
+    * Get the token wrapper without shifting forward (keeps track of previous token).
+    * @return {Token} The token if exists.
+    */
   peek() {
     const index = this.index;
     const token = this.next();
@@ -181,12 +217,17 @@ class Lexer {
     return token;
   }
 
+  /**
+    * Reset the lexer with an expression.
+    * @param {string} expr - An expression.
+    */
   reset(expr) {
     this.index = 0;
     this.expr = expr;
   }
 }
 
+/** Class representing a RPN constructor */
 class RPN {
   constructor(expr) {
     this.rpn = [];
@@ -195,6 +236,10 @@ class RPN {
     this.lexer = new Lexer(expr);
   }
 
+  /**
+    * Get the RPN.
+    * @return {Object[]} The token if exists.
+    */
   getRPN() {
     let token = this.lexer.next();
     while (token) {
@@ -228,10 +273,17 @@ class RPN {
     return this.rpn;
   }
 
+  /**
+    * Handle token type number.
+    */
   handleTokenTypeNumber(number) {
     this.rpn.push(number);
   }
 
+
+  /**
+    * Handle token type symbol.
+    */
   handleTokenTypeSymbol(symbol) {
     switch (symbol) {
       case '(':
@@ -248,20 +300,27 @@ class RPN {
     }
   }
 
-  handleTokenTypeUnaryOperator(up) {
-    this.rpn.push(up);
+  /**
+    * Handle token type unary operator.
+    */
+  handleTokenTypeUnaryOperator(op) {
+    this.rpn.push(op);
   }
 
-  handleTokenTypeBinaryOperator(bp) {
-    let topBp = this.opStack.at(-1);
-    while (topBp instanceof BinaryOperator && topBp.precedence >= bp.precedence) {
+  /**
+    * Handle token type binary operator.
+    */
+  handleTokenTypeBinaryOperator(op) {
+    let topOp = this.opStack.at(-1);
+    while (topOp instanceof BinaryOperator && topOp.precedence >= op.precedence) {
       this.rpn.push(this.opStack.pop());
-      topBp = this.opStack.at(-1);
+      topOp = this.opStack.at(-1);
     }
-    this.opStack.push(bp);
+    this.opStack.push(op);
   }
 }
 
+/** Class representing an RPN Evaluator */
 class RPNEvaluator {
   constructor(expr) {
     this.expr = expr;
@@ -269,6 +328,10 @@ class RPNEvaluator {
     this.stack = [];
   }
 
+  /**
+    * Evaluate the RPN expression.
+    * @return {Number} The result of evaluation.
+    */
   evaluate() {
     while (this.index < this.expr.length) {
       this.#evaluate();
@@ -276,6 +339,9 @@ class RPNEvaluator {
     return this.stack.pop();
   }
 
+  /**
+    * Eevaluate the RPN expression.
+    */
   #evaluate() {
     const op = this.expr[this.index];
     ++this.index;
