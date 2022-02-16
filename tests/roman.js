@@ -2,12 +2,12 @@
 
 QUnit.module('Тестируем функцию roman', function () {
 	QUnit.test('roman правильно переводит из римской системы счисления', function (assert) {
-		// assert.strictEqual(roman('I'), 1);
-		// assert.strictEqual(roman('V'), 5);
-		// assert.strictEqual(roman('C'), 100);
-		// assert.strictEqual(roman('M'), 1000);
-		// assert.strictEqual(roman('l'), 50);
-		// assert.strictEqual(roman('d'), 500);
+		assert.strictEqual(roman('I'), 1);
+		assert.strictEqual(roman('V'), 5);
+		assert.strictEqual(roman('C'), 100);
+		assert.strictEqual(roman('M'), 1000);
+		assert.strictEqual(roman('l'), 50);
+		assert.strictEqual(roman('d'), 500);
 
 		assert.strictEqual(roman('iv'), 4);
 		assert.strictEqual(roman('iiii'), 4);
