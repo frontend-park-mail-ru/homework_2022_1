@@ -70,7 +70,7 @@ const romToNum = (upNumber) => {
         acc += currentNum <= prevNum ? prevNum : -prevNum;
         prevNum = currentNum;
         return acc;
-    }, 0)
+    }, 0);
 
     result += prevNum;
     return result;
