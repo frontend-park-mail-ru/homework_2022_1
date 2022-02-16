@@ -1,7 +1,12 @@
 'use strict';
 
+/**
+ * Returns plain-like object given an object with nested properties.
+ * @param {Object} obj - Object with nested properties
+ * @returns {Object} Plain-like object
+ */
 const plainify = (obj) => {
-    if (obj == null || obj == undefined) return obj;
+    if (typeof obj != 'object' || Array.isArray(obj) || obj == null) return obj;
     let res = {};
     for (const k in obj)
     {
