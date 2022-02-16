@@ -1,17 +1,16 @@
 'use strict';
 
-function plainify(obj, parent, out = {}){
-    for (let k in obj)
+const plainify = (obj) => {
+    if (obj == null || obj == undefined) return obj;
+    let res = {};
+    for (const k in obj)
     {
-        let prop = parent ? parent + '.' + k : k;
-        if (typeof obj[k] == 'object')
+        if (obj[k] != null && typeof obj[k] == 'object' && !Array.isArray(obj[k]))
         {
-            plainify(obj[k], prop, out);
+            const tmp = plainify(obj[k]);
+            for (const k2 in tmp) res[k+'.'+k2] = tmp[k2];
         }
-        else
-        {
-            out[prop] = obj[k];
-        }
+        else res[k] = obj[k];
     }
-    return out;
+    return res
 }
