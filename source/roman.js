@@ -1,19 +1,19 @@
 'use strict';
 
 const DATASET = {
-    "M": 1000,
-    "CM": 900,
-    "D": 500,
-    "CD": 400,
-    "C": 100,
-    "XC": 90,
-    "L": 50,
-    "XL": 40,
-    "X": 10,
-    "IX": 9,
-    "V": 5,
-    "IV": 4,
-    "I": 1
+    'M': 1000,
+    'CM': 900,
+    'D': 500,
+    'CD': 400,
+    'C': 100,
+    'XC': 90,
+    'L': 50,
+    'XL': 40,
+    'X': 10,
+    'IX': 9,
+    'V': 5,
+    'IV': 4,
+    'I': 1
 }
 
 /**
@@ -23,10 +23,11 @@ const DATASET = {
  */
 
 const roman = (number) => {
-    if (typeof (number) === "number") {
+    if (typeof number === 'number') {
         return numToRom(number);
     }
-    if (typeof (number) === "string") {
+
+    if (typeof number === 'string') {
         return strToRes(number);
     }
     return '';
@@ -47,10 +48,11 @@ const strToRes = (number) => {
     if (reInt.test(upNumber)) {
         return numToRom(number);
     }
+
     if (reRoman.test(upNumber)) {
         return romToNum(upNumber);
     }
-    return ''
+    return '';
 }
 
 /**
@@ -60,14 +62,16 @@ const strToRes = (number) => {
  */
 
 const romToNum = (upNumber) => {
-    let result = 0;
+    let result;
     let prevNum = DATASET[upNumber.charAt(0)];
 
-    for (let i = 1; i < upNumber.length; i++) {
-        const currentNum = DATASET[upNumber.charAt(i)];
-        result += currentNum <= prevNum ? prevNum : -prevNum;
+    result = upNumber.slice(1).split('').reduce((acc, key) => {
+        const currentNum = DATASET[key];
+        acc += currentNum <= prevNum ? prevNum : -prevNum;
         prevNum = currentNum;
-    }
+        return acc;
+    }, 0)
+
     result += prevNum;
     return result;
 }
@@ -80,9 +84,10 @@ const romToNum = (upNumber) => {
 
 const numToRom = (number) => {
     let numberNew = number;
+
     return Object.keys(DATASET).reduce((acc, key) => {
         const currentNum = Math.floor(numberNew / DATASET[key]);
         numberNew -= currentNum * DATASET[key];
         return acc + key.repeat(currentNum);
-    }, "");
+    }, '');
 }
