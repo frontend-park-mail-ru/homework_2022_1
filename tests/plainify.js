@@ -144,7 +144,7 @@ QUnit.module('Тестируем функцию plainify', function () {
 	});
 
 	QUnit.test('Проверка ответа на некорретный ввод', function (assert) {
-		const err = new Error('Unsupported argument');
+		const err = new TypeError('Unsupported argument');
 		assert.throws(function () {plainify(null);}, err);
 		assert.throws(function () {plainify(undefined);}, err);
 		assert.throws(function () {plainify('somestring');}, err);

@@ -5,21 +5,15 @@
  * @param {object} obj - Object with nested properties
  * @returns {object} Plain-like object
  */
-const plainify = (obj) => {
+const plainify = (obj, ks = []) => {
     if (typeof obj !== 'object' || Array.isArray(obj) || !obj)
     {
-        throw new Error("Unsupported argument");
+        throw new TypeError("Unsupported argument");
     }
-    let res = {};
-    Object.keys(obj).forEach((k1) => {
-        if (obj[k1] && typeof obj[k1] === 'object' && !Array.isArray(obj[k1]))
-        {
-            const tmp = plainify(obj[k1]);
-            Object.keys(tmp).forEach((k2) => {
-                res[k1+'.'+k2] = tmp[k2];
-            });
-        }
-        else res[k1] = obj[k1];
-    });
-    return res;
+    return Object.keys(obj).reduce((acc, k1) => {
+        return Object.assign(acc,
+            (obj[k1] && typeof obj[k1] === 'object' && !Array.isArray(obj[k1]))
+            ? plainify(obj[k1], ks.concat(k1))
+            : {[ks.concat(k1).join('.')]: obj[k1]}
+        )}, {})
 }
