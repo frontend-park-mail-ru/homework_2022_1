@@ -33,18 +33,18 @@ QUnit.module('Тестируем функцию minmax', function () {
         assert.deepEqual(minmax('1, -5.8 или 10, хотя 34 + -5.3 и 73'), [-5.8, 73]);
     });
 
-    QUnit.test('minmax ищет цифры вкллюченные в слово', function (assert) {
-        assert.deepEqual(minmax('см12 4'), [4, 12]);
+    QUnit.test('minmax игнорирует цифры включенные в слово', function (assert) {
+        assert.deepEqual(minmax('см1 2 4'), [2, 4]);
     });
 
     QUnit.test('minmax без чисел', function (assert) {
-        assert.deepEqual(minmax('\s'), [NaN, NaN]);
+        assert.deepEqual(minmax('\s'), [undefined, undefined]);
     });
     QUnit.test('minmax не объекты через new', function (assert) {
-        assert.deepEqual(minmax(String('йцу 12 7')), [0, 12]);
+        assert.deepEqual(minmax(String('йцу 12 7')), [7, 12]);
     });
 
     QUnit.test('minmax игнорирует специальные символы', function (assert) {
-        assert.deepEqual(minmax(';$  /  ### 0 #%'), [NaN, NaN]);
+        assert.deepEqual(minmax(';$  /  ### 0 #%'), [0, 0]);
     });
 });
