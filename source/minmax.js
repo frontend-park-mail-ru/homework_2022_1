@@ -16,7 +16,7 @@ const minmax = (strNumbers) => {
     });
     if (arr_digits.length) {
         return [Math.min.apply(null, arr_digits),
-            Math.max.apply(null, arr_digits)]
+            Math.max.apply(null, arr_digits)];
     }
-    return [undefined, undefined]
+    return [undefined, undefined];
 }
