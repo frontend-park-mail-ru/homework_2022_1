@@ -1,15 +1,16 @@
-
 'use strict';
+
 /**
  * The function implements rle encoding
  * @param {string} strNormal string for encoding. e.g : 'AAAABBB'
  * @returns {string} encoded string. e.g: 'A3B3'
  */
+
 const rle = (strNormal) => {
     if (typeof strNormal !== 'string') {
         return '-1';
     }
-    if (!/^[a-zA-Z]+$/.test(strNormal)) {
+    if (!/^[A-Z]+$/.test(strNormal)) {
         return '-1';
     }
     const strSplit = strNormal.split('');

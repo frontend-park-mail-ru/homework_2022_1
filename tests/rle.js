@@ -14,5 +14,6 @@ QUnit.module('Тестируем функцию rle', function () {
 		assert.strictEqual(rle(true), '-1');
 		assert.strictEqual(rle('$2123#'), '-1');
 		assert.strictEqual(rle('111333'), '-1');
+		assert.strictEqual(rle('sdasdasd'), '-1');
 	});
 });
