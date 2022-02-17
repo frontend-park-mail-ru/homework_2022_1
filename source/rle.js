@@ -16,7 +16,7 @@ const rle = (strNormal) => {
     const strSplit = strNormal.split('');
     let count = 1;
     let strRes = '';
-    return strRes = strSplit.reduce((strRes, curCh, index) => {
+    return strSplit.reduce((strRes, curCh, index) => {
         if (strRes[strRes.length - 1] === curCh) {
             ++count;
             if (index === strSplit.length - 1) {
