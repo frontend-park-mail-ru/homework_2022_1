@@ -10,17 +10,19 @@
  * @returns {* | undefined} - if path is correct than return value of property else return undefined
  */
 const get = (object, path) => {
-    if (typeof (object) !== 'object' || !object
-        || !(path instanceof String) && typeof (path) !== 'string') {
+    if (typeof object !== 'object' ||
+        !object ||
+        !(path instanceof String) && typeof path !== 'string' ||
+        path.search('.') === -1) {
+
         return;
     }
     const keys = path.split('.');
     keys.shift();
-    let obj = object;
-    keys.forEach(propertyValue => {
-        if (obj && propertyValue) {
-            obj = obj[propertyValue];
+    keys.forEach((propertyValue) => {
+        if (object && propertyValue) {
+            object = object[propertyValue];
         }
     });
-    return obj;
+    return object;
 }
