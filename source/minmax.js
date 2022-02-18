@@ -7,20 +7,20 @@
  */
 
 const minmax = (strNumbers) => {
-    if (!(typeof strNumbers === 'string')) {
+    if (typeof strNumbers != 'string') {
         return [undefined, undefined];
     }
     const numbers = strNumbers.split(' ').map(parseFloat);
     const arrDigits = [];
-    numbers.forEach((item) => {
-        if (!isNaN(item)) {
-            arrDigits.push(item);
+    numbers.forEach((number) => {
+        if (!isNaN(number)) {
+            arrDigits.push(number);
         }
     });
     if (arrDigits.length) {
         return [
-            Math.min.apply(null, arrDigits),
-            Math.max.apply(null, arrDigits)
+            Math.min(...arrDigits),
+            Math.max(...arrDigits)
         ];
     }
     return [undefined, undefined];
