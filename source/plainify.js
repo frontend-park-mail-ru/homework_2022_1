@@ -10,18 +10,19 @@ const plainify = (obj) => {
     {
         throw new TypeError('Unsupported argument');
     }
-    return Object.entries(obj).reduce((acc, kv) => {
-        var [k1, o1] = kv;
+    return Object.entries(obj).reduce((acc, prop) => {
+        var [prop_key, prop_val] = prop;
         let res = {};
-        if (o1 && typeof o1 === 'object' && !Array.isArray(o1))
+        if (prop_val && typeof prop_val === 'object' && !Array.isArray(prop_val))
         {
-            const tmp = plainify(o1);
-            Object.entries(tmp).forEach((kv2) => {
-                res[k1+'.'+kv2[0]] = kv2[1];
+            Object.entries(plainify(prop_val)).forEach((prop_deep) => {
+                res[prop_key+'.'+prop_deep[0]] = prop_deep[1];
             });
         }
         else
-            res[k1] = o1;
-        return Object.assign(acc, res)
+        {
+            res[prop_key] = prop_val;
+        }
+        return {...acc, ...res}
     }, {})
 }
