@@ -7,7 +7,7 @@
  */
 
 const minmax = (strNumbers) => {
-    if (typeof strNumbers != 'string') {
+    if (typeof strNumbers !== 'string') {
         return [undefined, undefined];
     }
     const numbers = strNumbers.split(' ').map(parseFloat);
@@ -24,4 +24,4 @@ const minmax = (strNumbers) => {
         ];
     }
     return [undefined, undefined];
-}
+};

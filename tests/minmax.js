@@ -60,5 +60,6 @@ QUnit.module('Тестируем функцию minmax', function () {
         assert.deepEqual(minmax(null), [undefined, undefined]);
         assert.deepEqual(minmax(Symbol("id")), [undefined, undefined]);
         assert.deepEqual(minmax(Math), [undefined, undefined]);
+        assert.deepEqual(minmax(undefined), [undefined, undefined]);
     });
 });
