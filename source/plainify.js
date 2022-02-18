@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Returns plain-like object given an object with nested properties.
  * @param {object} obj - Object with nested properties
