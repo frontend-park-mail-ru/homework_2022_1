@@ -10,7 +10,7 @@ const plainify = (obj) => {
         throw new TypeError('Unsupported argument');
     }
     return Object.entries(obj).reduce((acc, prop) => {
-        var [propKey, propVal] = prop;
+        let [propKey, propVal] = prop;
         let res = {};
         if (propVal && typeof propVal === 'object' && !Array.isArray(propVal)) {
             Object.entries(plainify(propVal)).forEach((propDeep) => {
