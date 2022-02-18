@@ -39,12 +39,18 @@ QUnit.module('Тестируем функцию minmax', function () {
 
     QUnit.test('minmax без чисел', function (assert) {
         assert.deepEqual(minmax('\s'), [undefined, undefined]);
+        assert.deepEqual(minmax('йцукенгшщшгнекуцй'), [undefined, undefined]);
     });
-    QUnit.test('minmax не объекты через new', function (assert) {
-        assert.deepEqual(minmax(String('йцу 12 7')), [7, 12]);
+    QUnit.test('minmax не работает с объектами, через new', function (assert) {
+        assert.deepEqual(minmax(new String('йцукпий11')), [undefined, undefined]);
     });
 
     QUnit.test('minmax игнорирует специальные символы', function (assert) {
         assert.deepEqual(minmax(';$  /  ### 0 #%'), [0, 0]);
+    });
+
+    QUnit.test('minmax игнорирует другие объекты', function (assert) {
+        assert.deepEqual(minmax(1222, 345), [undefined, undefined]);
+         assert.deepEqual(minmax({name: "json"}), [undefined, undefined]);
     });
 });

@@ -7,16 +7,21 @@
  */
 
 const minmax = (strNumbers) => {
+    if (!(typeof strNumbers === 'string')) {
+        return [undefined, undefined];
+    }
     const numbers = strNumbers.split(' ').map(parseFloat);
-    let arr_digits = [];
+    const arrDigits = [];
     numbers.forEach((item) => {
         if (!isNaN(item)) {
-            arr_digits.push(item);
+            arrDigits.push(item);
         }
     });
-    if (arr_digits.length) {
-        return [Math.min.apply(null, arr_digits),
-            Math.max.apply(null, arr_digits)];
+    if (arrDigits.length) {
+        return [
+            Math.min.apply(null, arrDigits),
+            Math.max.apply(null, arrDigits)
+        ];
     }
     return [undefined, undefined];
 }
